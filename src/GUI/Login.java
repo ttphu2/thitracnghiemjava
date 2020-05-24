@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Frame;
+package GUI;
 
 //import DTO.CheckLogin;
 //import Util.SingletonServiceUtil;
