@@ -80,6 +80,7 @@ public class AbstractDao <ID extends Serializable,T> implements GenericDao<ID,T>
           //  log.error(e.getMessage(),e);
           System.out.println("Save that bai");
             throw e;
+         
         }finally {
             session.close();
         }

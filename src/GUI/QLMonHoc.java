@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import BUS.MonHocBUS;
+import BUSImpl.MonHocBUSImpl;
 import DAO.MonHocDAO;
 import DAOImpl.MonHocDAOImpl;
 import DTO.MonHocDTO;
@@ -15,6 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -33,6 +36,7 @@ DefaultTableModel tableModel;
         initComponents();
         addTable();
     }
+    
     
     private void addTable(){    // cai dat cho bang 
        // listSubjects = new GetDB().getListSubject();
@@ -213,18 +217,17 @@ DefaultTableModel tableModel;
     }//GEN-LAST:event_tfNameActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        MonHocDTO subject = new MonHocDTO(Integer.parseInt(tfID.getText()),tfName.getText());
-        
-       // CheckDB check = new CheckDB();
-       // int id = subject.getMaMonHoc();
-      //  if (!check.CheckSubjectAdd(id)){
-            //UpdateDB up = new UpdateDB();
-           // up.dbSubject(subject);
-           dao.save(MonHocBeanUtil.dto2Entity(subject));
-            listSubjects.add(subject);
-            
+        MonHocDTO subject = new MonHocDTO(Integer.parseInt(tfID.getText()),tfName.getText());        
+          MonHocBUS bus=new MonHocBUSImpl();
+          try{
+         bus.saveMonHoc(subject);
+            listSubjects.add(subject);            
             JOptionPane.showMessageDialog(rootPane, "Thêm môn học thành công !");
             showRow();
+          }catch(ConstraintViolationException e){
+              JOptionPane.showMessageDialog(rootPane, "Thêm môn học thất bại !");
+          }
+            
        // } else JOptionPane.showMessageDialog(rootPane, "Mã môn học đã tồn tại!");
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -243,6 +246,8 @@ DefaultTableModel tableModel;
             int index = tbList.getSelectedRow();
             TableModel model = tbList.getModel();
             int id = Integer.parseInt(model.getValueAt(index, 0).toString());
+            MonHocBUS bus=new MonHocBUSImpl();
+            bus.deleteMonHoc(id);
             //DeleteDB del = new DeleteDB();
           //  del.deleteSubject(id);
             JOptionPane.showMessageDialog(rootPane," Xóa thành công !");

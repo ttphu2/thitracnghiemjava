@@ -1,5 +1,7 @@
 package DAO;
 
+import DAOImpl.ChuongMonHocDAOImpl;
+import DAOImpl.MonHocDAOImpl;
 import DAOImpl.NguoiDungDAOImpl;
 import DAOImpl.VaiTroDAOImpl;
 
@@ -8,8 +10,8 @@ import DAOImpl.VaiTroDAOImpl;
 public class SingletonDaoUtil {
     private static NguoiDungDAOImpl nguoiDungDAOImpl=null;
     private static VaiTroDAOImpl vaiTroDAOImpl=null;
-//    private static ListenGuidelineDaoImpl listenGuidelineDaoImpl=null;
-//    private static CommentDaoImpl commentDaoImpl=null;
+    private static ChuongMonHocDAOImpl chuongMonHocDAOImpl=null;
+    private static MonHocDAOImpl monHocDAOImpl=null;
 //    private static ExaminationDaoImpl examinationDaoImpl=null;
 //    private static ExaminationQuestionDaoImpl examinationQuestionDaoImpl=null;
 //    private static ExerciseDaoImpl exerciseDaoImpl=null;
@@ -28,18 +30,17 @@ public class SingletonDaoUtil {
         }
         return vaiTroDAOImpl;
     }
-//    public static ListenGuidelineDaoImpl getListenGuidelineDaoInstance(){
-//        if(listenGuidelineDaoImpl==null){
-//            listenGuidelineDaoImpl=new ListenGuidelineDaoImpl();
-//        }
-//        return listenGuidelineDaoImpl;
-//    }
-//    public static CommentDaoImpl getCommentDaoInstance(){
-//        if(commentDaoImpl==null){
-//            commentDaoImpl=new CommentDaoImpl();
-//        }
-//        return commentDaoImpl;
-//    }
+    public static ChuongMonHocDAOImpl getChuongMonHocDAOInstance(){
+        if(chuongMonHocDAOImpl==null){
+            chuongMonHocDAOImpl=new ChuongMonHocDAOImpl();
+       }
+        return chuongMonHocDAOImpl;
+    }
+    public static MonHocDAOImpl getMonHocDAOInstance(){
+        if(monHocDAOImpl==null){
+            monHocDAOImpl=new MonHocDAOImpl();
+        }        return monHocDAOImpl;
+    }
 //    public static ExaminationDaoImpl getExaminationDaoInstance(){
 //        if(examinationDaoImpl==null){
 //            examinationDaoImpl=new ExaminationDaoImpl();
