@@ -180,14 +180,6 @@ public class CauHoiEntity {
     public void setChuongMonHocEntity(ChuongMonHocEntity chuongMonHocEntity) {
         this.chuongMonHocEntity = chuongMonHocEntity;
     }
-     public static void main(String[] args){
-        
-        List<CauHoiEntity> entity= new ArrayList<CauHoiEntity>();
-        CauHoiDAO vaitro=new CauHoiDAOImpl();
-       entity= vaitro.findAll();
-       
-           System.out.println(entity.get(0).getNguoiDungEntity().getTenDayDu());
-       
-    }
+     
     
 }

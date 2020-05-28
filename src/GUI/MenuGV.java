@@ -312,6 +312,12 @@ public class MenuGV extends javax.swing.JFrame {
         pnlDashBoard.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 250, 100));
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel11MouseClicked(evt);
+            }
+        });
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel26.setBackground(new java.awt.Color(57, 129, 215));
@@ -630,6 +636,10 @@ public class MenuGV extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jPanel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel11MouseClicked
+        new QLSinhVien(this,true).setVisible(true);
+    }//GEN-LAST:event_jPanel11MouseClicked
 
     /**
      * @param args the command line arguments

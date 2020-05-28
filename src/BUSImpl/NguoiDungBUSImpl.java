@@ -9,12 +9,14 @@ import Entity.NguoiDungEntity;
 import Util.NguoiDungBeanUtil;
 import java.sql.Timestamp;
 import java.util.*;
+import javax.swing.JTable;
+import org.hibernate.exception.ConstraintViolationException;
 
 public class NguoiDungBUSImpl implements NguoiDungBUS {
 
 
-    public Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
-        Object[] objects = SingletonDaoUtil.getNguoiDungDAOInstance().findByProperty(property, sortExpression, sortDirection, offset, limit,"");
+    public Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit,String whereClause) {
+        Object[] objects = SingletonDaoUtil.getNguoiDungDAOInstance().findByProperty(property, sortExpression, sortDirection, offset, limit,whereClause);
         List<NguoiDungDTO> userDTOS = new ArrayList<NguoiDungDTO>();
         for (NguoiDungEntity item : (List<NguoiDungEntity>) objects[1]) {
             NguoiDungDTO userDTO = NguoiDungBeanUtil.entity2Dto(item);
@@ -31,7 +33,7 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
 
     }
 
-    public Integer saveUser(NguoiDungDTO userDTO) {
+    public Integer saveUser(NguoiDungDTO userDTO) throws ConstraintViolationException {
         Timestamp createdDate = new Timestamp(System.currentTimeMillis());
         userDTO.setNgayTao(createdDate);
         NguoiDungEntity entity = NguoiDungBeanUtil.dto2Entity(userDTO);
@@ -50,7 +52,7 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
     public List<NguoiDungDTO> findSinhVien() {
         Map<String,Object> property= new HashMap<String, Object>();
         property.put("maVaiTro", "1");     
-        Object[] objects =  this.findByProperty(property, null, null, null, null);
+        Object[] objects =  this.findByProperty(property, null, null, null, null,"");
         // List<NguoiDungDTO> list= (List<NguoiDungDTO>) objects[1];
        return (List<NguoiDungDTO>) objects[1];
       
@@ -131,6 +133,8 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
 //        }
 //
 //    }
+
+    
 
     
 }

@@ -117,14 +117,14 @@ public class AbstractDao <ID extends Serializable,T> implements GenericDao<ID,T>
         try{
             StringBuilder sql= new StringBuilder("from ");
             sql.append(this.getPersistenceClassName()).append(" where 1=1 ").append(nameQuery[0]);
-
+            if (whereClause != null) {
+                sql.append(whereClause);
+            }
             if(sortExpression!=null&&sortDirection!=null){
             sql.append(" order by ").append(sortExpression);
             sql.append(" "+(sortDirection.equals(Constant.SORT_ASC)?"asc":"desc"));
             }
-            if (whereClause != null) {
-                sql.append(whereClause);
-            }
+            
             Query query1 = session.createQuery(sql.toString());
             setParameterToQuery(nameQuery,query1);
             size=query1.list().size();

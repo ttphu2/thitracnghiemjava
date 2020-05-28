@@ -16,6 +16,9 @@ public class NguoiDungBeanUtil {
         dto.setMatKhau(entity.getMatKhau());
         dto.setNgaySinh(entity.getNgaySinh());
         dto.setNgayTao(entity.getNgayTao());
+        dto.setSoDienThoai(entity.getSoDienThoai());
+        dto.setGioiTinh(entity.getGioiTinh());
+        dto.setEmail(entity.getEmail());
         dto.setVaiTroDTO(VaiTroBeanUtil.entity2Dto(entity.getVaiTroEntity()));
         return dto;
 
@@ -30,6 +33,9 @@ public class NguoiDungBeanUtil {
         entity.setMatKhau(dto.getMatKhau());
         entity.setNgaySinh(dto.getNgaySinh());
         entity.setNgayTao(dto.getNgayTao());
+        entity.setSoDienThoai(dto.getSoDienThoai());
+        entity.setGioiTinh(dto.getGioiTinh());
+        entity.setEmail(dto.getEmail());
        entity.setVaiTroEntity(VaiTroBeanUtil.dto2Entity(dto.getVaiTroDTO()));       
         return entity;
 

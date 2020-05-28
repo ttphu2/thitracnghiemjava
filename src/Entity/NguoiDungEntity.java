@@ -40,7 +40,12 @@ public class NguoiDungEntity {
     
     @Column(name = "ngaytao")
     private Timestamp ngayTao;
-    
+    @Column(name = "sodienthoai")
+     private String soDienThoai;
+    @Column(name = "gioitinh")
+    private String gioiTinh;
+    @Column(name = "email")
+    private String email;
     @ManyToOne
     @JoinColumn(name = "mavaitro")
     private VaiTroEntity vaiTroEntity;
@@ -119,16 +124,40 @@ public class NguoiDungEntity {
     public void setNgayTao(Timestamp ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
-    public static void main(String[] args){
-        
-        List<NguoiDungEntity> entity= new ArrayList<NguoiDungEntity>();
-        NguoiDungDAO vaitro=new NguoiDungDAOImpl();
-       entity= vaitro.findAll();
-       
-           System.out.println(entity.get(0).getVaiTroEntity().getTenVaiTro());
-       
+
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<CauHoiEntity> getCauHoiEntitys() {
+        return cauHoiEntitys;
+    }
+
+    public void setCauHoiEntitys(List<CauHoiEntity> cauHoiEntitys) {
+        this.cauHoiEntitys = cauHoiEntitys;
+    }
+    
+    
     
 
 }

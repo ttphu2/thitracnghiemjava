@@ -23,6 +23,9 @@ public class NguoiDungDTO implements Serializable{
     private String tenDayDu;
     private Date ngaySinh;
     private Timestamp ngayTao;
+    private String soDienThoai;
+    private String gioiTinh;
+    private String email;
     private VaiTroDTO vaiTroDTO;
     private List<CauHoiDTO> cauHoiDTOs;
 
@@ -104,6 +107,30 @@ public class NguoiDungDTO implements Serializable{
 
     public void setCauHoiDTOs(List<CauHoiDTO> cauHoiDTOs) {
         this.cauHoiDTOs = cauHoiDTOs;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     
