@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Set;
+
 
 public class CauHoiDTO {  
     private Integer maCauHoi;   
@@ -12,10 +14,29 @@ public class CauHoiDTO {
     private String dapAn3;  
     private String dapAn4;    
     private String dapAnDung;       
-    private String doKho;     
+    private Integer doKho;     
     private String loaicauhoi;
     private NguoiDungDTO nguoiDungDTO;     
     private ChuongMonHocDTO chuongMonHocDTO;
+    private String dapAnNguoiDung;
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+    
+    public String getDapAnNguoiDung() {
+        return dapAnNguoiDung;
+    }
+
+    public void setDapAnNguoiDung(String dapAnNguoiDung) {
+        this.dapAnNguoiDung = dapAnNguoiDung;
+    }
+   
 
     public Integer getMaCauHoi() {
         return maCauHoi;
@@ -97,11 +118,11 @@ public class CauHoiDTO {
         this.dapAnDung = dapAnDung;
     }
 
-    public String getDoKho() {
+    public Integer getDoKho() {
         return doKho;
     }
 
-    public void setDoKho(String doKho) {
+    public void setDoKho(Integer doKho) {
         this.doKho = doKho;
     }
 

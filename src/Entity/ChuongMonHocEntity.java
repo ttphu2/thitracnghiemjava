@@ -38,6 +38,9 @@ public class ChuongMonHocEntity {
     
      @OneToMany(mappedBy = "chuongMonHocEntity",fetch = FetchType.LAZY)
     private List<CauHoiEntity> cauHoiEntitys;
+     
+     @OneToMany(mappedBy = "chuongMonHocEntity1",fetch = FetchType.LAZY)
+    private List<DeThiEntity> deThiEntitys;
 
     public Integer getMaChuong() {
         return maChuong;
@@ -62,12 +65,21 @@ public class ChuongMonHocEntity {
     public void setMonHocEntity(MonHocEntity monHocEntity) {
         this.monHocEntity = monHocEntity;
     }
-    public static void main(String[] args){
-        List<MonHocEntity> entity= new ArrayList<MonHocEntity>();
-        MonHocDAO vaitro=new  MonHocDAOImpl();
-       entity= vaitro.findAll();
-       
-           System.out.println(entity.get(0).getTenMonHoc());
-       
+
+    public List<CauHoiEntity> getCauHoiEntitys() {
+        return cauHoiEntitys;
     }
+
+    public void setCauHoiEntitys(List<CauHoiEntity> cauHoiEntitys) {
+        this.cauHoiEntitys = cauHoiEntitys;
+    }
+
+    public List<DeThiEntity> getDeThiEntitys() {
+        return deThiEntitys;
+    }
+
+    public void setDeThiEntitys(List<DeThiEntity> deThiEntitys) {
+        this.deThiEntitys = deThiEntitys;
+    }
+    
 }

@@ -1,6 +1,10 @@
 package DAO;
 
+import DAOImpl.CauHoiDAOImpl;
 import DAOImpl.ChuongMonHocDAOImpl;
+import DAOImpl.DeThiDAOImpl;
+import DAOImpl.KetQuaDAOImpl;
+import DAOImpl.KyThiDAOImpl;
 import DAOImpl.MonHocDAOImpl;
 import DAOImpl.NguoiDungDAOImpl;
 import DAOImpl.VaiTroDAOImpl;
@@ -12,10 +16,10 @@ public class SingletonDaoUtil {
     private static VaiTroDAOImpl vaiTroDAOImpl=null;
     private static ChuongMonHocDAOImpl chuongMonHocDAOImpl=null;
     private static MonHocDAOImpl monHocDAOImpl=null;
-//    private static ExaminationDaoImpl examinationDaoImpl=null;
-//    private static ExaminationQuestionDaoImpl examinationQuestionDaoImpl=null;
-//    private static ExerciseDaoImpl exerciseDaoImpl=null;
-//    private static ExerciseQuestionDaoImpl exerciseQuestionDaoImpl=null;
+    private static DeThiDAOImpl deThiDAOImpl=null;
+    private static CauHoiDAOImpl cauHoiDAOImpl=null;
+    private static KetQuaDAOImpl ketQuaDAOImpl=null;
+    private static KyThiDAOImpl kyThiDAOImpl=null;
 //    private static ResultDaoImpl resultDaoImpl = null;
 
     public static NguoiDungDAOImpl getNguoiDungDAOInstance(){
@@ -41,30 +45,30 @@ public class SingletonDaoUtil {
             monHocDAOImpl=new MonHocDAOImpl();
         }        return monHocDAOImpl;
     }
-//    public static ExaminationDaoImpl getExaminationDaoInstance(){
-//        if(examinationDaoImpl==null){
-//            examinationDaoImpl=new ExaminationDaoImpl();
-//        }
-//        return examinationDaoImpl;
-//    }
-//    public static ExaminationQuestionDaoImpl getExaminationQuestionDaoInstance(){
-//        if(examinationQuestionDaoImpl==null){
-//            examinationQuestionDaoImpl=new ExaminationQuestionDaoImpl();
-//        }
-//        return examinationQuestionDaoImpl;
-//    }
-//    public static ExerciseDaoImpl getExerciseDaoInstance(){
-//        if(exerciseDaoImpl==null){
-//            exerciseDaoImpl=new ExerciseDaoImpl();
-//        }
-//        return exerciseDaoImpl;
-//    }
-//    public static ExerciseQuestionDaoImpl getExerciseQuestionDaoInstance(){
-//        if(exerciseQuestionDaoImpl==null){
-//            exerciseQuestionDaoImpl=new ExerciseQuestionDaoImpl();
-//        }
-//        return exerciseQuestionDaoImpl;
-//    }
+    public static DeThiDAOImpl getDeThiDAOInstance(){
+        if(deThiDAOImpl==null){
+            deThiDAOImpl=new DeThiDAOImpl();
+        }
+        return deThiDAOImpl;
+    }
+    public static CauHoiDAOImpl getCauHoiDAOInstance(){
+       if(cauHoiDAOImpl==null){
+            cauHoiDAOImpl=new CauHoiDAOImpl();
+       }
+        return cauHoiDAOImpl;
+   }
+    public static KetQuaDAOImpl getKetQuaDAOInstance(){
+      if(ketQuaDAOImpl==null){
+           ketQuaDAOImpl=new KetQuaDAOImpl();
+        }
+        return ketQuaDAOImpl;
+    }
+   public static KyThiDAOImpl getKyThiDAOImplInstance(){
+       if(kyThiDAOImpl==null){
+           kyThiDAOImpl=new KyThiDAOImpl();
+       }
+        return kyThiDAOImpl;
+   }
 //    public static ResultDaoImpl getResultDaoInstance() {
 //        if (resultDaoImpl == null) {
 //            resultDaoImpl = new ResultDaoImpl();

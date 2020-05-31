@@ -53,5 +53,7 @@ Contributor(s):
         <mapping class="Entity.MonHocEntity" />
           <mapping class="Entity.ChuongMonHocEntity" />
            <mapping class="Entity.CauHoiEntity" />
+             <mapping class="Entity.DeThiEntity" />
+             <mapping class="Entity.KyThiEntity" />
   </session-factory>
 </hibernate-configuration>

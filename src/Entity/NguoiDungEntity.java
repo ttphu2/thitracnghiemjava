@@ -50,9 +50,33 @@ public class NguoiDungEntity {
     @JoinColumn(name = "mavaitro")
     private VaiTroEntity vaiTroEntity;
     
-    @OneToMany(mappedBy = "nguoiDungEntity",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nguoiDungEntity",fetch = FetchType.LAZY) // tac gia cau hoi
     private List<CauHoiEntity> cauHoiEntitys;
+    
+    @OneToMany(mappedBy = "nguoiDungEntity1",fetch = FetchType.LAZY) // tac gia de thi
+    private List<DeThiEntity> deThiEntitys;
+    
+    @OneToMany(mappedBy = "nguoiDung",fetch = FetchType.LAZY)
+    private List<KetQuaEntity> ketQuaEntitys;
 
+    public List<KetQuaEntity> getKetQuaEntitys() {
+        return ketQuaEntitys;
+    }
+
+    public void setKetQuaEntitys(List<KetQuaEntity> ketQuaEntitys) {
+        this.ketQuaEntitys = ketQuaEntitys;
+    }
+    
+
+    public List<DeThiEntity> getDeThiEntitys() {
+        return deThiEntitys;
+    }
+
+    public void setDeThiEntitys(List<DeThiEntity> deThiEntitys) {
+        this.deThiEntitys = deThiEntitys;
+    }
+
+    
     public VaiTroEntity getVaiTroEntity() {
         return vaiTroEntity;
     }

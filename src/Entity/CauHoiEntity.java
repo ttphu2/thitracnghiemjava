@@ -8,13 +8,19 @@ package Entity;
 import DAO.CauHoiDAO;
 import DAOImpl.CauHoiDAOImpl;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -54,7 +60,7 @@ public class CauHoiEntity {
     private String dapAnDung;
     
     @Column(name = "dokho")
-    private String doKho;
+    private Integer doKho;
     
     @Column(name = "loaicauhoi")
     private String loaicauhoi;
@@ -66,6 +72,21 @@ public class CauHoiEntity {
     @ManyToOne
     @JoinColumn(name = "machuong")
     private ChuongMonHocEntity chuongMonHocEntity;
+    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(name = "chitietdethi", 
+    joinColumns = { @JoinColumn(name = "macauhoi") }, 
+    inverseJoinColumns = {@JoinColumn(name = "madethi") })
+  private Set<DeThiEntity> listDeThi = new HashSet<>();
+
+    public Set<DeThiEntity> getListDeThi() {
+        return listDeThi;
+    }
+
+    public void setListDeThi(Set<DeThiEntity> listDeThi) {
+        this.listDeThi = listDeThi;
+    }
+
 
     public Integer getMaCauHoi() {
         return maCauHoi;
@@ -149,13 +170,15 @@ public class CauHoiEntity {
         this.dapAnDung = dapAnDung;
     }
 
-    public String getDoKho() {
+    public Integer getDoKho() {
         return doKho;
     }
 
-    public void setDoKho(String doKho) {
+    public void setDoKho(Integer doKho) {
         this.doKho = doKho;
     }
+
+    
 
     public String getLoaicauhoi() {
         return loaicauhoi;
