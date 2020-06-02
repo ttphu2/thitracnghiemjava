@@ -37,7 +37,7 @@ public class QLSinhVien extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         paint_table();
-        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null,"");
+        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
         userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
         cod.showTable(userDTOS, table);
 
@@ -335,34 +335,37 @@ public class QLSinhVien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
-//        Object[] options = {"Xóa  ", "Thôi không xóa "};
-//        int n = JOptionPane.showOptionDialog(rootPane,
-//            "Chắc chắn muốn xóa ? ",
-//            "Question",
-//            JOptionPane.YES_NO_OPTION,
-//            JOptionPane.QUESTION_MESSAGE,
-//            null,
-//            options,
-//            options[0]);
-//        if (n == JOptionPane.YES_OPTION) {
-//            //
-//            Student s = new Student();
-//            s.setStudentID(Integer.parseInt(tfID.getText()));
-//            DeleteDB del = new DeleteDB();
-//            del.DelStudent(s);
-//            list.remove(s);
-//            model = (DefaultTableModel) jTable2.getModel();
-//            model.removeRow(index);
-//            JOptionPane.showMessageDialog(rootPane,"Xoá thành công");
-//            //
-//        } else if (n == JOptionPane.NO_OPTION) {
-//            return;
-//        } else {
-//        }
-//System.out.println(table.getSelectedRow());
-//cod.remove(table.getSelectedRow(), table);
-///int[] a=table.getSelectedRows();
-//System.out.println(a[1]+" "+a[0]);
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+        int n = JOptionPane.showOptionDialog(rootPane,
+                "Chắc chắn muốn xóa ? ",
+                "Question",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            int[] cacLuaChon = table.getSelectedRows();
+            List<Integer> ids = new ArrayList<Integer>();
+            for (int i = 0; i < cacLuaChon.length; i++) {
+                ids.add(userDTOS.get(cacLuaChon[i]).getMaNguoiDung());
+
+            }
+            Integer checkDelete = SingletonBusUtil.getNguoiDungBUSInstance().deleteUsers(ids);
+            if (checkDelete == ids.size()) {
+                Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
+                userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
+                cod.showTable(userDTOS, table);
+                JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Xoá thất bại");
+            }
+
+            //
+        } else if (n == JOptionPane.NO_OPTION) {
+            return;
+        } else {
+        }
 
 
     }//GEN-LAST:event_buttonXoaActionPerformed
@@ -371,21 +374,20 @@ public class QLSinhVien extends javax.swing.JDialog {
         Map<String, Object> property = new HashMap<String, Object>();
         String tuNgay = null;
         String denNgay = null;
-        String whereClause="";
+        String whereClause = "";
         if (jDateNgaySinh1.getDate() != null) {
             tuNgay = convertJavaDateToSqlDate(jDateNgaySinh1.getDate()).toString();
             if (jDateNgaySinh2.getDate() != null) {
                 denNgay = convertJavaDateToSqlDate(jDateNgaySinh2.getDate()).toString();
-                whereClause="AND ngaysinh BETWEEN '"+tuNgay+"' AND '"+denNgay+"'";
-            }else{
+                whereClause = "AND ngaysinh BETWEEN '" + tuNgay + "' AND '" + denNgay + "'";
+            } else {
                 property.put("ngaySinh", tuNgay);
             }
-            
+
         }
-        
+
         if (!"".equals(tfIdStu.getText())) {
             try {
-
                 NguoiDungDTO temp = SingletonBusUtil.getNguoiDungBUSInstance().findById(Integer.parseInt(tfIdStu.getText()));
                 userDTOS = new ArrayList<NguoiDungDTO>();
                 if (temp != null) {
@@ -415,25 +417,25 @@ public class QLSinhVien extends javax.swing.JDialog {
             int temp = cbSapXep.getSelectedIndex();
             switch (temp) {
                 case 1:
-                    sapXepTheo="maNguoiDung";
+                    sapXepTheo = "maNguoiDung";
                     break;
-                case 2: 
-                    sapXepTheo="tenDangNhap";
+                case 2:
+                    sapXepTheo = "tenDangNhap";
                     break;
                 case 3:
-                    sapXepTheo="ngayTao";
+                    sapXepTheo = "ngayTao";
                     break;
                 case 4:
-                    sapXepTheo="ho";
+                    sapXepTheo = "ho";
                     break;
                 case 5:
-                    sapXepTheo="ten";
+                    sapXepTheo = "ten";
                     break;
                 case 6:
-                    sapXepTheo="ngaySinh";
+                    sapXepTheo = "ngaySinh";
                     break;
-                default: 
-                    sapXepTheo=null;
+                default:
+                    sapXepTheo = null;
                     break;
             }
 
@@ -446,11 +448,10 @@ public class QLSinhVien extends javax.swing.JDialog {
         if (!"None".equals(cbChieuSapXep.getSelectedItem().toString())) {
             chieuSapXep = Integer.toString(cbChieuSapXep.getSelectedIndex());
         }
-        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(property, sapXepTheo, chieuSapXep, null, null,whereClause);
+        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(property, sapXepTheo, chieuSapXep, null, null, whereClause);
         userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
         cod.showTable(userDTOS, table);
 
-        // fix lai SapXepTheo
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -497,13 +498,13 @@ public class QLSinhVien extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonXoa1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    tfIdStu.setText("");
-    tfNameStu.setText("");
-    jDateNgaySinh1.setDate(null);
-    jDateNgaySinh2.setDate(null);
-    cbChieuSapXep.setSelectedIndex(0);
-    cbGioiTinh.setSelectedIndex(0);
-    cbSapXep.setSelectedIndex(0);
+        tfIdStu.setText("");
+        tfNameStu.setText("");
+        jDateNgaySinh1.setDate(null);
+        jDateNgaySinh2.setDate(null);
+        cbChieuSapXep.setSelectedIndex(0);
+        cbGioiTinh.setSelectedIndex(0);
+        cbSapXep.setSelectedIndex(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -581,7 +582,7 @@ private void paint_table() {
         table.getTableHeader().setOpaque(false);
         table.getTableHeader().setBackground(new Color(60, 127, 177));
         table.getTableHeader().setForeground(new Color(255, 255, 255));
-        table.setRowHeight(50);
+        table.setRowHeight(30);
         table.setShowGrid(true); // de the hien duong vien mac dich
         //table.setShowHorizontalLines(true);// de the hien duong vien ngang
         //table.setShowVerticalLines(true);// de the hien duong vien doc

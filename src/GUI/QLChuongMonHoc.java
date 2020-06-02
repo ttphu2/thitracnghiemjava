@@ -7,6 +7,7 @@ package GUI;
 
 import BUS.ChuongMonHocBUS;
 import BUS.MonHocBUS;
+import BUS.SingletonBusUtil;
 import BUSImpl.ChuongMonHocBUSImpl;
 import BUSImpl.MonHocBUSImpl;
 import DAO.ChuongMonHocDAO;
@@ -35,7 +36,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     /**
      * Creates new form QLChuongMonHoc
      */
-    private List<ChuongMonHocDTO> list=new ArrayList<ChuongMonHocDTO>();
+    private List<ChuongMonHocDTO> list=SingletonBusUtil.getChuongMonHocBUSInstance().findAll();
      DefaultTableModel model;
      
     public QLChuongMonHoc(java.awt.Frame parent, boolean modal) {
@@ -48,24 +49,15 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         
     }
     public void setCbSubject(){
-        ArrayList <MonHocDTO> listSubjectName=new ArrayList<MonHocDTO>();
-        MonHocDAO dao= new MonHocDAOImpl();
-        List<MonHocEntity> list=dao.findAll();      
-      
-        for(MonHocEntity item:list){
-           MonHocDTO dto1=MonHocBeanUtil.entity2Dto(item);
-           listSubjectName.add(dto1);
-       }
+        List <MonHocDTO> listSubjectName=SingletonBusUtil.getMonHocBUSInstance().findAll();
+       
         for(int i=0; i< listSubjectName.size(); i++){
             cbSubject.addItem(listSubjectName.get(i).getTenMonHoc());
             
         }
         
     }
-     public void addTable(){
-         ChuongMonHocBUS bus=new ChuongMonHocBUSImpl();
-         list=bus.findAll();
-        
+     public void addTable(){                
         model = (DefaultTableModel) jTable1.getModel();
         model.setColumnIdentifiers(new Object[]{
             "Mã chủ đề", "Tên chủ đề", "Môn học"
@@ -222,8 +214,8 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(txTopicName, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txTopicName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,15 +232,20 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+       
+        if(txTopicID.getText().equals("")|| txTopicName.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng kiểm tra lại thông tin !!!");
+            return;
+        }
+            
         ChuongMonHocDTO dto= new ChuongMonHocDTO();
         dto.setMaChuong(Integer.parseInt(txTopicID.getText()));
         dto.setTenChuong(txTopicName.getText());
 
         Object selected = cbSubject.getSelectedItem();
         String subjectName = selected.toString();
-        ChuongMonHocBUS bus=new ChuongMonHocBUSImpl();
-        MonHocBUS bus1 = new MonHocBUSImpl();
-        List <MonHocDTO> listSubjectName=bus1.findAll();
+                          
+        List <MonHocDTO> listSubjectName=SingletonBusUtil.getMonHocBUSInstance().findAll();
        
         int id = 0;
         for (MonHocDTO sj: listSubjectName){
@@ -263,12 +260,12 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         dto.setMonHocDTO(monhoc);
         
           try{      
-        bus.saveChuongMonHoc(dto);       
+        SingletonBusUtil.getChuongMonHocBUSInstance().saveChuongMonHoc(dto);       
         list.add(dto);
         showResult();
-        JOptionPane.showMessageDialog(rootPane, "Thêm môn học thành công !");
+        JOptionPane.showMessageDialog(rootPane, "Thêm chương môn học thành công !");
           }catch(ConstraintViolationException e){
-              JOptionPane.showMessageDialog(rootPane, "Thêm môn học thất bại vui lòng kiểm tra lại mã môn học!");
+              JOptionPane.showMessageDialog(rootPane, "Thêm chương môn học thất bại vui lòng kiểm tra lại mã môn học!");
           }
        
         // TODO add your handling code here:
@@ -293,8 +290,8 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
             try{
                 int SelectRow = jTable1.getSelectedRow();
                 int id = Integer.parseInt(model.getValueAt(SelectRow, 0).toString()) ;
-                ChuongMonHocBUS bus=new ChuongMonHocBUSImpl();
-                bus.deleteChuongMonHoc(id);
+                
+                SingletonBusUtil.getChuongMonHocBUSInstance().deleteChuongMonHoc(id);
                 model.removeRow(SelectRow);
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(rootPane, "Xóa không thành công !");

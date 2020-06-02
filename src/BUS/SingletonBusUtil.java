@@ -1,7 +1,9 @@
 package BUS;
 
 import BUS.*;
+import BUSImpl.CauHoiBUSImpl;
 import BUSImpl.ChuongMonHocBUSImpl;
+import BUSImpl.DeThiBUSImpl;
 import BUSImpl.KetQuaBUSImpl;
 import BUSImpl.KyThiBUSImpl;
 import BUSImpl.MonHocBUSImpl;
@@ -16,8 +18,8 @@ public class SingletonBusUtil {
     private static VaiTroBUSImpl vaiTroBUSImpl=null;
     private static ChuongMonHocBUSImpl chuongMonHocBUSImpl=null;
     private static MonHocBUSImpl monHocBUSImpl=null;
- //   private static DeThiBUSImpl deThiBUSImpl=null;
- //   private static CauHoiBUSImpl cauHoiBUSImpl=null;
+    private static DeThiBUSImpl deThiBUSImpl=null;
+    private static CauHoiBUSImpl cauHoiBUSImpl=null;
     private static KetQuaBUSImpl ketQuaBUSImpl=null;
     private static KyThiBUSImpl kyThiBUSImpl=null;
 
@@ -44,18 +46,18 @@ public class SingletonBusUtil {
             monHocBUSImpl=new MonHocBUSImpl();
         }        return monHocBUSImpl;
     }
-//    public static DeThiBUSImpl getDeThiBUSInstance(){
-//        if(deThiBUSImpl==null){
-//            deThiBUSImpl=new DeThiBUSImpl();
-//        }
-//        return deThiBUSImpl;
-//    }
-//    public static CauHoiBUSImpl getCauHoiBUSInstance(){
-//       if(cauHoiBUSImpl==null){
-//            cauHoiBUSImpl=new CauHoiBUSImpl();
-//       }
-//        return cauHoiBUSImpl;
-//   }
+    public static DeThiBUSImpl getDeThiBUSInstance(){
+        if(deThiBUSImpl==null){
+            deThiBUSImpl=new DeThiBUSImpl();
+        }
+        return deThiBUSImpl;
+    }
+    public static CauHoiBUSImpl getCauHoiBUSInstance(){
+       if(cauHoiBUSImpl==null){
+            cauHoiBUSImpl=new CauHoiBUSImpl();
+       }
+        return cauHoiBUSImpl;
+   }
     public static KetQuaBUSImpl getKetQuaBUSInstance(){
       if(ketQuaBUSImpl==null){
            ketQuaBUSImpl=new KetQuaBUSImpl();

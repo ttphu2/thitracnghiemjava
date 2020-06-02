@@ -6,6 +6,7 @@
 package GUI;
 
 import BUS.MonHocBUS;
+import BUS.SingletonBusUtil;
 import BUSImpl.MonHocBUSImpl;
 import DAO.MonHocDAO;
 import DAOImpl.MonHocDAOImpl;
@@ -24,9 +25,9 @@ import org.hibernate.exception.ConstraintViolationException;
  * @author hocgioinhatlop
  */
 public class QLMonHoc extends javax.swing.JDialog {
-private List<MonHocDTO> listSubjects=new ArrayList<MonHocDTO>();
+private List<MonHocDTO> listSubjects=SingletonBusUtil.getMonHocBUSInstance().findAll();
 DefaultTableModel tableModel;
- MonHocDAO dao= new MonHocDAOImpl();
+// MonHocDAO dao= new MonHocDAOImpl();
           
     /**
      * Creates new form QLMonHoc
@@ -40,11 +41,8 @@ DefaultTableModel tableModel;
     
     private void addTable(){    // cai dat cho bang 
        // listSubjects = new GetDB().getListSubject();
-       List<MonHocEntity> list=dao.findAll();      
-       for(MonHocEntity item:list){
-           MonHocDTO dto=MonHocBeanUtil.entity2Dto(item);
-           listSubjects.add(dto);
-       }
+      // List<MonHocDTO> list=;      
+      
         
         tableModel = (DefaultTableModel)tbList.getModel();
         tableModel.setColumnIdentifiers(new Object[]{  // ten bang
@@ -218,9 +216,9 @@ DefaultTableModel tableModel;
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         MonHocDTO subject = new MonHocDTO(Integer.parseInt(tfID.getText()),tfName.getText());        
-          MonHocBUS bus=new MonHocBUSImpl();
+        
           try{
-         bus.saveMonHoc(subject);
+         SingletonBusUtil.getMonHocBUSInstance().saveMonHoc(subject);
             listSubjects.add(subject);            
             JOptionPane.showMessageDialog(rootPane, "Thêm môn học thành công !");
             showRow();
@@ -246,8 +244,8 @@ DefaultTableModel tableModel;
             int index = tbList.getSelectedRow();
             TableModel model = tbList.getModel();
             int id = Integer.parseInt(model.getValueAt(index, 0).toString());
-            MonHocBUS bus=new MonHocBUSImpl();
-            bus.deleteMonHoc(id);
+           
+            SingletonBusUtil.getMonHocBUSInstance().deleteMonHoc(id);
             //DeleteDB del = new DeleteDB();
           //  del.deleteSubject(id);
             JOptionPane.showMessageDialog(rootPane," Xóa thành công !");

@@ -14,7 +14,7 @@ public interface NguoiDungBUS {
     Integer saveUser(NguoiDungDTO userDTO) throws ConstraintViolationException;
     NguoiDungDTO updateUser(NguoiDungDTO userDTO);
     List<NguoiDungDTO> findSinhVien();
-    
+    Integer deleteUsers(List<Integer> ids);
    // CheckLogin checkLogin(String name, String password);
    // void ValidateImportUser(List<UserImportDTO> userImportDTOS);
    // void saveUserImport(List<UserImportDTO> userImportDTOS);

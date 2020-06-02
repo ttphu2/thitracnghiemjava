@@ -134,6 +134,12 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
 //
 //    }
 
+    @Override
+    public Integer deleteUsers(List<Integer> ids) {
+        Integer result = SingletonDaoUtil.getNguoiDungDAOInstance().delete(ids);
+        return result;
+    }
+
     
 
     

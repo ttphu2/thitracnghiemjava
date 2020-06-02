@@ -58,41 +58,21 @@ public class SinhVienTable {
        
     }
 
-    public void remove(int row,JTable table) {
+    public void remove(int[] rows,JTable table) {
       
         ModelTable model = new ModelTable(listObj, TenCot);
-        model.removeRow(row);
-        table.setModel((TableModel) model);
-        initModel(model, table);
+        for(int i=0;i<rows.length;i++){
+             model.removeRow(rows[i]);
+             table.setModel((TableModel) model);
+             initModel(model, table);
+        }
+       
         
-//        table.setModel((TableModel) model);
-////        table.getColumnModel().getColumn(0).setCellRenderer(new ControlPerson.ImageRenderer());
-//      /*  table.getColumnModel().getColumn(0).setMaxWidth(10);
-//        table.getColumnModel().getColumn(0).setMinWidth(0);
-//        table.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(10);
-//        table.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-//      //  CheckBoxRenderer checkBoxRenderer = new CheckBoxRenderer();*/
-//      //  table.getColumnModel().getColumn(5).setCellRenderer(checkBoxRenderer);
-//        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+
     }
     public void showResult(JTable table) {
-        
-        /*listObj.add(new Object[]{
-                    
-                    item.getMaNguoiDung(),
-                    item.getTen(),
-                    item.getHo(),
-                    item.getTenDayDu(),
-                    item.getTenDangNhap(),
-                    item.getNgaySinh(),
-                    item.getGioiTinh(),
-                    item.getSoDienThoai(),
-                    item.getEmail(),
-                   "SINH VIÊN"
-                    
-                    });*/
-               
+                      
         ModelTable model = new ModelTable(listObj, TenCot);
          initModel(model, table);
         
