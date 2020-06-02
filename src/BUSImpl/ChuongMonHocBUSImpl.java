@@ -44,5 +44,17 @@ public class ChuongMonHocBUSImpl implements ChuongMonHocBUS{
         }
         return list;
     }
+
+    @Override
+    public List<ChuongMonHocDTO> findByMonHoc(Object value) {
+      List<ChuongMonHocDTO> list=new ArrayList<ChuongMonHocDTO>();
+         List<ChuongMonHocEntity> entitys= SingletonDaoUtil.getChuongMonHocDAOInstance().findEqualUnique("monHocEntity.maMonHoc",value);
+        for(ChuongMonHocEntity item: entitys){
+            ChuongMonHocDTO dto= ChuongMonHocBeanUtil.entity2Dto(item);
+            list.add(dto);
+            
+        }
+        return list;
+    }
     
 }

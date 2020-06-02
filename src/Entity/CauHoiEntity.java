@@ -63,7 +63,7 @@ public class CauHoiEntity {
     private Integer doKho;
     
     @Column(name = "loaicauhoi")
-    private String loaicauhoi;
+    private String loaiCauHoi;
 
     @ManyToOne
     @JoinColumn(name = "tacgia")
@@ -178,15 +178,17 @@ public class CauHoiEntity {
         this.doKho = doKho;
     }
 
+    public String getLoaiCauHoi() {
+        return loaiCauHoi;
+    }
+
+    public void setLoaiCauHoi(String loaiCauHoi) {
+        this.loaiCauHoi = loaiCauHoi;
+    }
+
     
 
-    public String getLoaicauhoi() {
-        return loaicauhoi;
-    }
-
-    public void setLoaicauhoi(String loaicauhoi) {
-        this.loaicauhoi = loaicauhoi;
-    }
+   
 
     public NguoiDungEntity getNguoiDungEntity() {
         return nguoiDungEntity;

@@ -16,4 +16,5 @@ public interface ChuongMonHocBUS {
      Integer saveChuongMonHoc(ChuongMonHocDTO chuongMonHocDTO);
     Integer deleteChuongMonHoc(Integer ID);
     List<ChuongMonHocDTO> findAll();
+     List<ChuongMonHocDTO> findByMonHoc(Object value);
 }

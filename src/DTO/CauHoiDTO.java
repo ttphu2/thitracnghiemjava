@@ -15,7 +15,7 @@ public class CauHoiDTO {
     private String dapAn4;    
     private String dapAnDung;       
     private Integer doKho;     
-    private String loaicauhoi;
+    private String loaiCauHoi;
     private NguoiDungDTO nguoiDungDTO;     
     private ChuongMonHocDTO chuongMonHocDTO;
     private String dapAnNguoiDung;
@@ -126,13 +126,15 @@ public class CauHoiDTO {
         this.doKho = doKho;
     }
 
-    public String getLoaicauhoi() {
-        return loaicauhoi;
+    public String getLoaiCauHoi() {
+        return loaiCauHoi;
     }
 
-    public void setLoaicauhoi(String loaicauhoi) {
-        this.loaicauhoi = loaicauhoi;
+    public void setLoaiCauHoi(String loaiCauHoi) {
+        this.loaiCauHoi = loaiCauHoi;
     }
+
+    
 
     public NguoiDungDTO getNguoiDungDTO() {
         return nguoiDungDTO;

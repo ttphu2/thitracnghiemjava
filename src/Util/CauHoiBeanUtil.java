@@ -29,7 +29,7 @@ public class CauHoiBeanUtil {
                 dto.setDapAn4(entity.getDapAn4());
                 dto.setDapAnDung(entity.getDapAnDung());
                 dto.setDoKho(entity.getDoKho());
-                dto.setLoaicauhoi(entity.getLoaicauhoi());
+                dto.setLoaiCauHoi(entity.getLoaiCauHoi());
                 dto.setNguoiDungDTO(NguoiDungBeanUtil.entity2Dto(entity.getNguoiDungEntity()));
                 dto.setChuongMonHocDTO(ChuongMonHocBeanUtil.entity2Dto(entity.getChuongMonHocEntity()));
                           
@@ -49,7 +49,7 @@ public class CauHoiBeanUtil {
                 entity.setDapAn4(dto.getDapAn4());
                 entity.setDapAnDung(dto.getDapAnDung());
                 entity.setDoKho(dto.getDoKho());
-                 entity.setLoaicauhoi(dto.getLoaicauhoi());
+                 entity.setLoaiCauHoi(dto.getLoaiCauHoi());
                 entity.setNguoiDungEntity(NguoiDungBeanUtil.dto2Entity(dto.getNguoiDungDTO()));
                 entity.setChuongMonHocEntity(ChuongMonHocBeanUtil.dto2Entity(dto.getChuongMonHocDTO()));		
 		return entity;

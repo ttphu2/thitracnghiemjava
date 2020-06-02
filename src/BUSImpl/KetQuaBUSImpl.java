@@ -18,8 +18,9 @@ public class KetQuaBUSImpl implements KetQuaBUS {
 	public KetQuaDTO saveResult(String userName, Integer maBaiThi, List<CauHoiDTO> listCauHoi) {
 		KetQuaDTO result = new KetQuaDTO();
 		if (userName != null && maBaiThi != null && listCauHoi != null) {
-			NguoiDungEntity user = SingletonDaoUtil.getNguoiDungDAOInstance().findEqualUnique("name", userName);
-			DeThiEntity examination = SingletonDaoUtil.getDeThiDAOInstance().findbyID(maBaiThi);
+			List<NguoiDungEntity> list = SingletonDaoUtil.getNguoiDungDAOInstance().findEqualUnique("name", userName);
+			NguoiDungEntity user=list.get(0);                                            
+                        DeThiEntity examination = SingletonDaoUtil.getDeThiDAOInstance().findbyID(maBaiThi);
 			KetQuaEntity resultEntity = new KetQuaEntity();
 			calculateListenAndReadScore(resultEntity, listCauHoi,examination);// tinh toan diem thi
 			initDataToResultEntity(resultEntity, user, examination);
