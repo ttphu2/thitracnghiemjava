@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b4a1c617-00ba-41b0-a546-159e7a08e9b2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     nguoidung.`manguoidung` AS nguoidung_manguoidung,
+     
+     nguoidung.`tendangnhap` AS nguoidung_tendangnhap,
+     nguoidung.`matkhau` AS nguoidung_matkhau,
+     
+     nguoidung.`ten` AS nguoidung_ten,
+     
+     nguoidung.`ho` AS nguoidung_ho,
+     
+     nguoidung.`tendaydu` AS nguoidung_tendaydu,
+     
+     nguoidung.`ngaysinh` AS nguoidung_ngaysinh,
+     
+     nguoidung.`ngaytao` AS nguoidung_ngaytao,
+    
+  
+     nguoidung.`email` AS nguoidung_email,
+     nguoidung.`gioitinh` AS nguoidung_gioitinh,
+     nguoidung.`sodienthoai` AS nguoidung_sodienthoai,
+     nguoidung.`mavaitro` AS nguoidung_mavaitro
+FROM
+     `nguoidung` nguoidung
+WHERE
+     mavaitro = 1]]>
+	</queryString>
+	<field name="manguoidung" class="java.lang.Long"/>
+	<field name="tendangnhap" class="java.lang.String"/>
+	<field name="matkhau" class="java.lang.String"/>
+	<field name="ten" class="java.lang.String"/>
+	<field name="ho" class="java.lang.String"/>
+	<field name="tendaydu" class="java.lang.String"/>
+	<field name="ngaysinh" class="java.sql.Date"/>
+	<field name="ngaytao" class="java.sql.Timestamp"/>
+	<field name="mavaitro" class="java.lang.Long"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="gioitinh" class="java.lang.String"/>
+	<field name="sodienthoai" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="64" y="271" width="412" height="313" uuid="58ebcde8-1a6f-4325-9c19-0fe22e0ae1fd"/>
+				<imageExpression><![CDATA["C:\\Users\\hocgioinhatlop\\OneDrive\\Documents\\NetBeansProjects\\Thitracnghiem\\src\\img\\logoSGU.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-17" y="0" width="590" height="79" forecolor="#FFFFFF" backcolor="#5DC877" uuid="bd0d17d7-e16e-47cb-ba76-06ae54b8a7f7"/>
+				<textElement textAlignment="Center">
+					<font size="36" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Danh sách sinh viên]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="25" width="100" height="20" uuid="5301baab-29c7-42a1-a8b0-4a7d8d10921d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MSSV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="25" width="90" height="20" uuid="e98c29c1-c808-44f7-9d1d-f7ea226c6ab3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Họ và tên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="25" width="90" height="20" uuid="a16b4dee-96b3-46ad-8fec-9fc2b41b58e3"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày sinh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="25" width="131" height="20" uuid="81715fbd-57c3-4125-9b69-799be52cd670"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên đăng nhập]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="100" height="20" forecolor="#000000" uuid="be253558-f566-4c28-a77a-483abf0f281c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{manguoidung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="20" width="100" height="20" forecolor="#000000" uuid="e97330aa-ed1c-4c85-a605-d12ead4eed9c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tendaydu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="20" width="100" height="20" forecolor="#000000" uuid="fbd9d5cb-59a8-4abe-9069-f620b40477c2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tendangnhap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="20" width="100" height="20" uuid="5008fd2c-7257-4b79-8881-d6c1cedc3c94"/>
+				<textFieldExpression><![CDATA[($F{ngaysinh}.getDate())+"/"+($F{ngaysinh}.getMonth()+1)+"/"+($F{ngaysinh}.getYear()+1900)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="8" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

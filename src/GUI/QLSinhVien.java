@@ -11,17 +11,35 @@ import BUSImpl.NguoiDungBUSImpl;
 import Constant.Constant;
 import DTO.NguoiDungDTO;
 import DTO.VaiTroDTO;
+import Report.JasperRp;
+import Report.UtilConnect;
 import Table.SinhVienTable;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.ObjectNotFoundException;
 
 /**
@@ -121,7 +139,7 @@ public class QLSinhVien extends javax.swing.JDialog {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 140, 30));
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Xem điểm thi ");
+        jButton2.setText("Xuất thống kê");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -456,7 +474,32 @@ public class QLSinhVien extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // new ListStudent().setVisible(true);
+        
+        Connection conn;
+        conn = UtilConnect.getConnection();
+        try {
+
+            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\hocgioinhatlop\\OneDrive\\Documents\\NetBeansProjects\\Thitracnghiem\\src\\Report\\sinhvien.jrxml");
+            String query = "select * from nguoidung where mavaitro=1";
+            JRDesignQuery updateQuery = new JRDesignQuery();
+            updateQuery.setText(query);
+            jdesign.setQuery(updateQuery);
+            JasperReport jsreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jsreport, null, conn);
+            JasperViewer jv= new JasperViewer(jprint,false);
+           JDialog dialog = new JDialog(this);//the owner
+            dialog.setContentPane(jv.getContentPane());
+            dialog.setSize(jv.getSize());
+            dialog.setTitle("Danh sách");
+
+            dialog.setVisible(true);
+//            JasperViewer.viewReport(jprint);
+//            JasperViewer.
+        } catch (JRException ex) {
+            Logger.getLogger(JasperRp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFocusGained

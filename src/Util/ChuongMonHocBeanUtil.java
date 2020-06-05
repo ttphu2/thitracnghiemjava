@@ -19,6 +19,7 @@ public class ChuongMonHocBeanUtil {
 		ChuongMonHocDTO dto = new ChuongMonHocDTO();
 		dto.setMaChuong(entity.getMaChuong());
 		dto.setTenChuong(entity.getTenChuong());
+                dto.setSoTiet(entity.getSoTiet());
                 dto.setMonHocDTO(MonHocBeanUtil.entity2Dto(entity.getMonHocEntity()));
 		return dto;
 	}
@@ -26,6 +27,7 @@ public class ChuongMonHocBeanUtil {
 		ChuongMonHocEntity entity = new ChuongMonHocEntity();
 		entity.setMaChuong(dto.getMaChuong());
 		entity.setTenChuong(dto.getTenChuong());
+                entity.setSoTiet(dto.getSoTiet());
                 entity.setMonHocEntity(MonHocBeanUtil.dto2Entity(dto.getMonHocDTO()));		
 		return entity;
 	}

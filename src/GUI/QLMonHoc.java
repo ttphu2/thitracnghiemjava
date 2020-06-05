@@ -46,11 +46,11 @@ DefaultTableModel tableModel;
         
         tableModel = (DefaultTableModel)tbList.getModel();
         tableModel.setColumnIdentifiers(new Object[]{  // ten bang
-            "Mã Môn", "Tên Môn"
+            "Mã Môn", "Tên Môn", "Số Tín Chỉ"
         });
         for(MonHocDTO s : listSubjects){
             tableModel.addRow(new Object[]{
-                s.getMaMonHoc(),s.getTenMonHoc()
+                s.getMaMonHoc(),s.getTenMonHoc(),s.getSoTinChi()
             });
         }
     }
@@ -71,6 +71,8 @@ DefaultTableModel tableModel;
         tbList = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         tfID = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tfSoTinChi = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,6 +150,17 @@ DefaultTableModel tableModel;
             }
         });
 
+        jLabel5.setText("Số tín chỉ:");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        tfSoTinChi.setAutoscrolls(false);
+        tfSoTinChi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tfSoTinChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSoTinChiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,25 +171,32 @@ DefaultTableModel tableModel;
                 .addGap(57, 57, 57))
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel5)))
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfName)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSoTinChi, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfName)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(92, 92, 92)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +217,11 @@ DefaultTableModel tableModel;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSoTinChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(btnDel)))
@@ -215,7 +239,7 @@ DefaultTableModel tableModel;
     }//GEN-LAST:event_tfNameActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        MonHocDTO subject = new MonHocDTO(Integer.parseInt(tfID.getText()),tfName.getText());        
+        MonHocDTO subject = new MonHocDTO(Integer.parseInt(tfID.getText()),tfName.getText(),Integer.parseInt(tfSoTinChi.getText()));        
         
           try{
          SingletonBusUtil.getMonHocBUSInstance().saveMonHoc(subject);
@@ -278,6 +302,10 @@ DefaultTableModel tableModel;
         // TODO add your handling code here:
     }//GEN-LAST:event_tfIDActionPerformed
 
+    private void tfSoTinChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSoTinChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSoTinChiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,17 +356,19 @@ DefaultTableModel tableModel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbList;
     private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfSoTinChi;
     // End of variables declaration//GEN-END:variables
 
 
 private void showRow(){ // show mon hoc moi them 
         MonHocDTO s = listSubjects.get(listSubjects.size()-1);
         tableModel.addRow(new Object[]{
-             s.getMaMonHoc(), s.getTenMonHoc()
+             s.getMaMonHoc(), s.getTenMonHoc(),s.getSoTinChi()
         });
     }
 

@@ -31,6 +31,9 @@ public class ChuongMonHocEntity {
     private Integer maChuong;
     @Column(name="tenchuong")
     private String tenChuong;
+    @Column(name="sotiet")
+    private Integer soTiet;
+    
     
     @ManyToOne
     @JoinColumn(name = "mamonhoc")
@@ -42,6 +45,15 @@ public class ChuongMonHocEntity {
      @OneToMany(mappedBy = "chuongMonHocEntity1",fetch = FetchType.LAZY)
     private List<DeThiEntity> deThiEntitys;
 
+    public Integer getSoTiet() {
+        return soTiet;
+    }
+
+    public void setSoTiet(Integer soTiet) {
+        this.soTiet = soTiet;
+    }
+
+     
     public Integer getMaChuong() {
         return maChuong;
     }

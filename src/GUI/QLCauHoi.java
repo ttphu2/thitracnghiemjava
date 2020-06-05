@@ -67,9 +67,8 @@ public class QLCauHoi extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        buttonXoa = new javax.swing.JButton();
+        btnTinhSoCauHoi = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        buttonThem = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         tfMaTacGia = new javax.swing.JTextField();
@@ -92,6 +91,7 @@ public class QLCauHoi extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        buttonXoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,18 +101,18 @@ public class QLCauHoi extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(602, 440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonXoa.setBackground(new java.awt.Color(93, 200, 119));
-        buttonXoa.setForeground(new java.awt.Color(255, 255, 255));
-        buttonXoa.setText("Xóa");
-        buttonXoa.setContentAreaFilled(false);
-        buttonXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonXoa.setOpaque(true);
-        buttonXoa.addActionListener(new java.awt.event.ActionListener() {
+        btnTinhSoCauHoi.setBackground(new java.awt.Color(93, 200, 119));
+        btnTinhSoCauHoi.setForeground(new java.awt.Color(255, 255, 255));
+        btnTinhSoCauHoi.setText("Số lượng câu hỏi");
+        btnTinhSoCauHoi.setContentAreaFilled(false);
+        btnTinhSoCauHoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTinhSoCauHoi.setOpaque(true);
+        btnTinhSoCauHoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonXoaActionPerformed(evt);
+                btnTinhSoCauHoiActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 139, 31));
+        jPanel1.add(btnTinhSoCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 139, 31));
 
         jButton1.setBackground(new java.awt.Color(93, 200, 119));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,20 +125,7 @@ public class QLCauHoi extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 140, 30));
-
-        buttonThem.setBackground(new java.awt.Color(93, 200, 119));
-        buttonThem.setForeground(new java.awt.Color(255, 255, 255));
-        buttonThem.setText("Thêm");
-        buttonThem.setContentAreaFilled(false);
-        buttonThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonThem.setOpaque(true);
-        buttonThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonThemActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 139, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm nâng cao"));
@@ -355,7 +342,20 @@ public class QLCauHoi extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(table);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 790, 250));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 790, 250));
+
+        buttonXoa.setBackground(new java.awt.Color(93, 200, 119));
+        buttonXoa.setForeground(new java.awt.Color(255, 255, 255));
+        buttonXoa.setText("Xóa");
+        buttonXoa.setContentAreaFilled(false);
+        buttonXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonXoa.setOpaque(true);
+        buttonXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXoaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 139, 31));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 570));
 
@@ -363,40 +363,20 @@ public class QLCauHoi extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
-        Object[] options = {"Xóa  ", "Thôi không xóa "};
-        int n = JOptionPane.showOptionDialog(rootPane,
-            "Chắc chắn muốn xóa ? ",
-            "Question",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options,
-            options[0]);
-        if (n == JOptionPane.YES_OPTION) {
-//            int[] cacLuaChon = table.getSelectedRows();
-//            List<Integer> ids = new ArrayList<Integer>();
-//            for (int i = 0; i < cacLuaChon.length; i++) {
-//                ids.add(userDTOS.get(cacLuaChon[i]).getMaNguoiDung());
-//
-//            }
-//            Integer checkDelete = SingletonBusUtil.getNguoiDungBUSInstance().deleteUsers(ids);
-//            if (checkDelete == ids.size()) {
-//                Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
-//                userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
-//                cod.showTable(userDTOS, table);
-//                JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "Xoá thất bại");
-//            }
-
-            //
-        } else if (n == JOptionPane.NO_OPTION) {
-            return;
-        } else {
+    private void btnTinhSoCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTinhSoCauHoiActionPerformed
+      int de=0,kho=0,tb=0;
+        for(CauHoiDTO item:cauHoiDTOS){
+           if(item.getDoKho()==1){
+               de++;
+           }else if(item.getDoKho()==2){
+               tb++;
+           }else{
+               kho++;
+           }
         }
+        JOptionPane.showMessageDialog(null,"Số lượng câu hỏi dễ là: "+de+"\n Số lượng câu hỏi trung bình là:"+tb+"\n Số lượng câu hỏi khó là:"+kho);
 
-    }//GEN-LAST:event_buttonXoaActionPerformed
+    }//GEN-LAST:event_btnTinhSoCauHoiActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Map<String, Object> property = new HashMap<String, Object>();        
@@ -418,7 +398,7 @@ public class QLCauHoi extends javax.swing.JDialog {
             return;
         }
         if (!"".equals(tfMaTacGia.getText())) {
-           whereClause="AND nguoiDungEntity.maNguoiDung="+tfMaTacGia.getText();
+           whereClause="AND nguoiDungEntity.maNguoiDung="+tfMaTacGia.getText()+" ";
 
         }
         
@@ -450,24 +430,26 @@ public class QLCauHoi extends javax.swing.JDialog {
 
         }
 
-//        if (!"None".equals(cbMonHoc.getSelectedItem().toString())) {
-//            property.put("gioiTinh", cbGioiTinh.getSelectedItem().toString());
-//        }
-//        
-//        String chieuSapXep = "1";
-//        if (!"None".equals(cbChieuSapXep.getSelectedItem().toString())) {
-//            chieuSapXep = Integer.toString(cbChieuSapXep.getSelectedIndex());
-//        }
-//        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(property, sapXepTheo, chieuSapXep, null, null, whereClause);
-//        userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
-//        cod.showTable(userDTOS, table);
+        if (!"None".equals(cbMonHoc.getSelectedItem().toString())) {
+        
+         if(!"None".equals(cbMonHoc.getSelectedItem().toString()))
+         {
+            whereClause=whereClause+"AND chuongMonHocEntity.tenChuong='"+cbChuongMonHoc.getSelectedItem().toString()+"' "; 
+         }else{
+            whereClause=whereClause+"AND chuongMonHocEntity.monHocEntity.tenMonHoc='"+cbMonHoc.getSelectedItem().toString()+"' ";
+         }
+        }
+        
+        String chieuSapXep = "1";
+        if (!"None".equals(cbChieuSapXep.getSelectedItem().toString())) {
+            chieuSapXep = Integer.toString(cbChieuSapXep.getSelectedIndex());
+        }
+        Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(property, sapXepTheo, chieuSapXep, null, null, whereClause);
+        cauHoiDTOS = (ArrayList<CauHoiDTO>) objects[1];
+       
+        cod.showTable(cauHoiDTOS, table);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
-        new FormNguoiDung(this, true).setVisible(true);;
-        cod.showResult(table);
-    }//GEN-LAST:event_buttonThemActionPerformed
 
     private void tfMaTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMaTacGiaActionPerformed
         // TODO add your handling code here:
@@ -530,6 +512,10 @@ public class QLCauHoi extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbLoaiCauHoiActionPerformed
 
+    private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonXoaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -573,7 +559,7 @@ public class QLCauHoi extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonThem;
+    private javax.swing.JButton btnTinhSoCauHoi;
     private javax.swing.JButton buttonXoa;
     private javax.swing.JButton buttonXoa1;
     private javax.swing.JComboBox<String> cbChieuSapXep;

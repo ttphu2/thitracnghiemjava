@@ -17,13 +17,15 @@ public class MonHocBeanUtil {
 		MonHocDTO dto = new MonHocDTO();
 		dto.setMaMonHoc(entity.getMaMonHoc());
 		dto.setTenMonHoc(entity.getTenMonHoc());
+                dto.setSoTinChi(entity.getSoTinChi());
              //   dto.setChuongMonHocList(entity.getChuongMonHocList());
 		return dto;
 	}
 	public static MonHocEntity dto2Entity(MonHocDTO dto) {
 		MonHocEntity entity = new MonHocEntity();
 		entity.setMaMonHoc(dto.getMaMonHoc());
-		entity.setTenMonHoc(dto.getTenMonHoc());		
+		entity.setTenMonHoc(dto.getTenMonHoc());
+                entity.setSoTinChi(dto.getSoTinChi());
 		return entity;
 	}
 }

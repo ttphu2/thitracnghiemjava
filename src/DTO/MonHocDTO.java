@@ -15,15 +15,26 @@ import java.util.List;
 public class MonHocDTO implements Serializable{
      private Integer maMonHoc;
      private String tenMonHoc;
+     private Integer soTinChi;
       private List<ChuongMonHocDTO> chuongMonHocList;
 
     public MonHocDTO() {
     }
 
-    public MonHocDTO(Integer maMonHoc, String tenMonHoc) {
+    public MonHocDTO(Integer maMonHoc, String tenMonHoc,Integer soTinChi) {
         this.maMonHoc = maMonHoc;
         this.tenMonHoc = tenMonHoc;
+        this.soTinChi=soTinChi;
     }
+
+    public Integer getSoTinChi() {
+        return soTinChi;
+    }
+
+    public void setSoTinChi(Integer soTinChi) {
+        this.soTinChi = soTinChi;
+    }
+    
      
     public Integer getMaMonHoc() {
         return maMonHoc;

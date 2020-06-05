@@ -60,19 +60,19 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
      public void addTable(){                
         model = (DefaultTableModel) jTable1.getModel();
         model.setColumnIdentifiers(new Object[]{
-            "Mã chủ đề", "Tên chủ đề", "Môn học"
+            "Mã chủ đề", "Tên chủ đề", "Môn học","Số tiết"
         });
         
         for(ChuongMonHocDTO tp : list){
             model.addRow(new Object[]{
-                tp.getMaChuong(),tp.getTenChuong(),tp.getMonHocDTO().getTenMonHoc()
+                tp.getMaChuong(),tp.getTenChuong(),tp.getMonHocDTO().getTenMonHoc(),tp.getSoTiet()
             });
         }
     }
      private void showResult(){
         
         ChuongMonHocDTO topic = list.get(list.size() - 1);
-        model.addRow(new Object[]{ topic.getMaChuong(), topic.getTenChuong(), cbSubject.getSelectedItem()});
+        model.addRow(new Object[]{ topic.getMaChuong(), topic.getTenChuong(), cbSubject.getSelectedItem(),topic.getSoTiet()});
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,6 +96,8 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txTopicID = new javax.swing.JTextField();
         cbSubject = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        txSoTiet = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -159,20 +161,32 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
             }
         });
 
+        jLabel6.setText("Số tiết :");
+
+        txSoTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txSoTietActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txSoTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btThem, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btXoa, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,11 +229,15 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txTopicName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txSoTiet)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(btThem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btXoa)))
@@ -241,7 +259,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         ChuongMonHocDTO dto= new ChuongMonHocDTO();
         dto.setMaChuong(Integer.parseInt(txTopicID.getText()));
         dto.setTenChuong(txTopicName.getText());
-
+        dto.setSoTiet(Integer.parseInt(txSoTiet.getText()));
         Object selected = cbSubject.getSelectedItem();
         String subjectName = selected.toString();
                           
@@ -317,6 +335,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         //  int ID = Integer.parseInt(model.getValueAt(SelectRow, 0).toString()) ;
         txTopicID.setText(model.getValueAt(SelectRow, 0).toString());
         txTopicName.setText(model.getValueAt(SelectRow, 1).toString());
+        txSoTiet.setText(model.getValueAt(SelectRow, 2).toString());
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
@@ -324,6 +343,10 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     private void cbSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubjectActionPerformed
       
     }//GEN-LAST:event_cbSubjectActionPerformed
+
+    private void txSoTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txSoTietActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txSoTietActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,8 +400,10 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txSoTiet;
     private javax.swing.JTextField txTopicID;
     private javax.swing.JTextField txTopicName;
     // End of variables declaration//GEN-END:variables

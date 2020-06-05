@@ -17,11 +17,27 @@ public class ChuongMonHocDTO implements Serializable{
     private Integer maChuong;    
     private String tenChuong;    
     private MonHocDTO monHocDTO;
+    private Integer soTiet;
     private List<CauHoiDTO> cauHoiDTOS;
 
     public ChuongMonHocDTO() {
     }
 
+    public ChuongMonHocDTO(Integer maChuong, String tenChuong, MonHocDTO monHocDTO, Integer soTiet) {
+        this.maChuong = maChuong;
+        this.tenChuong = tenChuong;
+        this.monHocDTO = monHocDTO;
+        this.soTiet = soTiet;
+    }
+
+    public Integer getSoTiet() {
+        return soTiet;
+    }
+
+    public void setSoTiet(Integer soTiet) {
+        this.soTiet = soTiet;
+    }
+    
     public Integer getMaChuong() {
         return maChuong;
     }
