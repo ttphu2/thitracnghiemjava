@@ -38,5 +38,15 @@ public Object[] findByProperty(Map<String, Object> property, String sortExpressi
         return dto;
 
     }
+
+    @Override
+    public Integer saveCauHoi(CauHoiDTO cauHoiDTO) {
+      return  SingletonDaoUtil.getCauHoiDAOInstance().save(CauHoiBeanUtil.dto2Entity(cauHoiDTO)).getMaCauHoi();
+    }
+     @Override
+    public Integer deleteCauHois(List<Integer> ids) {
+        Integer result = SingletonDaoUtil.getCauHoiDAOInstance().delete(ids);
+        return result;
+    }
     
 }

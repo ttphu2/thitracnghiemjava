@@ -45,6 +45,7 @@ public class ChuongMonHocEntity {
      @OneToMany(mappedBy = "chuongMonHocEntity1",fetch = FetchType.LAZY)
     private List<DeThiEntity> deThiEntitys;
 
+     
     public Integer getSoTiet() {
         return soTiet;
     }

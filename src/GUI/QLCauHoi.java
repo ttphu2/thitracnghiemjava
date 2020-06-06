@@ -92,6 +92,7 @@ public class QLCauHoi extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         buttonXoa = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -112,11 +113,11 @@ public class QLCauHoi extends javax.swing.JDialog {
                 btnTinhSoCauHoiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTinhSoCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 139, 31));
+        jPanel1.add(btnTinhSoCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 180, 139, 31));
 
         jButton1.setBackground(new java.awt.Color(93, 200, 119));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Tìm kiếm ");
+        jButton1.setText("Tìm kiếm");
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setOpaque(true);
@@ -125,7 +126,7 @@ public class QLCauHoi extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 140, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm nâng cao"));
@@ -229,7 +230,7 @@ public class QLCauHoi extends javax.swing.JDialog {
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, 20));
 
         cbLoaiCauHoi.setBackground(new java.awt.Color(250, 250, 250));
-        cbLoaiCauHoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Nam", "Nữ" }));
+        cbLoaiCauHoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "TRACNGHIEM", "NGHE", "HINHANH" }));
         cbLoaiCauHoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbLoaiCauHoiActionPerformed(evt);
@@ -355,7 +356,20 @@ public class QLCauHoi extends javax.swing.JDialog {
                 buttonXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 139, 31));
+        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 139, 31));
+
+        jButton2.setBackground(new java.awt.Color(93, 200, 119));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Thêm câu hỏi");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setOpaque(true);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 570));
 
@@ -431,15 +445,17 @@ public class QLCauHoi extends javax.swing.JDialog {
         }
 
         if (!"None".equals(cbMonHoc.getSelectedItem().toString())) {
-        
-         if(!"None".equals(cbMonHoc.getSelectedItem().toString()))
+            
+         if(!"None".equals(cbChuongMonHoc.getSelectedItem().toString()))
          {
             whereClause=whereClause+"AND chuongMonHocEntity.tenChuong='"+cbChuongMonHoc.getSelectedItem().toString()+"' "; 
          }else{
-            whereClause=whereClause+"AND chuongMonHocEntity.monHocEntity.tenMonHoc='"+cbMonHoc.getSelectedItem().toString()+"' ";
+             whereClause=whereClause+"AND chuongMonHocEntity.monHocEntity.tenMonHoc='"+cbMonHoc.getSelectedItem().toString()+"' ";
          }
         }
-        
+        if(!"None".equals(cbLoaiCauHoi.getSelectedItem().toString())){
+            property.put("loaiCauHoi", cbLoaiCauHoi.getSelectedItem().toString());
+        }
         String chieuSapXep = "1";
         if (!"None".equals(cbChieuSapXep.getSelectedItem().toString())) {
             chieuSapXep = Integer.toString(cbChieuSapXep.getSelectedIndex());
@@ -486,6 +502,9 @@ public class QLCauHoi extends javax.swing.JDialog {
         cbChieuSapXep.setSelectedIndex(0);
         cbMonHoc.setSelectedIndex(0);
         cbSapXep.setSelectedIndex(0);
+        cbLoaiCauHoi.setSelectedIndex(0);
+        tfMaTacGia.setText("");
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tfMaCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMaCauHoiActionPerformed
@@ -513,8 +532,48 @@ public class QLCauHoi extends javax.swing.JDialog {
     }//GEN-LAST:event_cbLoaiCauHoiActionPerformed
 
     private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
-        // TODO add your handling code here:
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+        int n = JOptionPane.showOptionDialog(rootPane,
+                "Chắc chắn muốn xóa ? ",
+                "Question",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            int[] cacLuaChon = table.getSelectedRows();
+            List<Integer> ids = new ArrayList<Integer>();
+            for (int i = 0; i < cacLuaChon.length; i++) {
+                ids.add(cauHoiDTOS.get(cacLuaChon[i]).getMaCauHoi());
+
+            }
+            Integer checkDelete = SingletonBusUtil.getCauHoiBUSInstance().deleteCauHois(ids);
+            if (checkDelete == ids.size()) {
+                Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
+                cauHoiDTOS = (ArrayList<CauHoiDTO>) objects[1];
+                cod.showTable(cauHoiDTOS, table);
+                JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Xoá thất bại");
+            }
+
+            //
+        } else if (n == JOptionPane.NO_OPTION) {
+            return;
+        } else {
+        }
+
+
+        
     }//GEN-LAST:event_buttonXoaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       new FormCauHoi(this,true).setVisible(true);
+       Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
+       cauHoiDTOS = (ArrayList<CauHoiDTO>) objects[1];
+       cod.showTable(cauHoiDTOS, table);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -568,6 +627,7 @@ public class QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JComboBox<String> cbSapXep;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

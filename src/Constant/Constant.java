@@ -5,6 +5,8 @@
  */
 package Constant;
 
+import java.io.File;
+
 /**
  *
  * @author hocgioinhatlop
@@ -16,4 +18,5 @@ public class Constant {
     private static final String DELETE = "delete";
     public static final String SORT_ASC = "1";
     public static final String SORT_DESC = "2";
+    public static final String FILEADDRESS=System.getProperty("user.dir")+File.separator+"Fileuploads";
 }

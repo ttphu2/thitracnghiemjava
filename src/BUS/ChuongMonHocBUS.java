@@ -17,4 +17,5 @@ public interface ChuongMonHocBUS {
     Integer deleteChuongMonHoc(Integer ID);
     List<ChuongMonHocDTO> findAll();
      List<ChuongMonHocDTO> findByMonHoc(Object value);
+    // ChuongMonHocDTO findByTenChu
 }

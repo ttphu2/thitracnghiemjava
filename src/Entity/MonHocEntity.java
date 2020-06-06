@@ -27,8 +27,10 @@ public class MonHocEntity {
     private Integer maMonHoc;
       @Column(name = "tenmonhoc")
     private String tenMonHoc;
+      
      @Column(name = "sotinchi")
     private Integer soTinChi;
+     
     @OneToMany(mappedBy = "monHocEntity",fetch = FetchType.LAZY)
     private List<ChuongMonHocEntity> chuongMonHocList;
 
