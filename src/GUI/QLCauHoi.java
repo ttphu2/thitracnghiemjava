@@ -10,14 +10,24 @@ import Constant.Constant;
 import DTO.CauHoiDTO;
 import DTO.ChuongMonHocDTO;
 import DTO.MonHocDTO;
+import DTO.NguoiDungDTO;
 import Table.CauHoiTable;
+import Util.ExcelPoiUtil;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.hibernate.ObjectNotFoundException;
 
 /**
@@ -93,6 +103,7 @@ public class QLCauHoi extends javax.swing.JDialog {
         table = new javax.swing.JTable();
         buttonXoa = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -371,6 +382,14 @@ public class QLCauHoi extends javax.swing.JDialog {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, 30));
 
+        jButton4.setText("Import");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 570));
 
         setSize(new java.awt.Dimension(846, 612));
@@ -574,6 +593,59 @@ public class QLCauHoi extends javax.swing.JDialog {
        cauHoiDTOS = (ArrayList<CauHoiDTO>) objects[1];
        cod.showTable(cauHoiDTOS, table);
     }//GEN-LAST:event_jButton2ActionPerformed
+        JFileChooser fileDialog= new JFileChooser();
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
+        int result = fileDialog.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File f = fileDialog.getSelectedFile();
+            String fileLocation = f.getAbsolutePath();
+            String fileName = f.getName();
+
+            List<CauHoiDTO> excelValues= new ArrayList<CauHoiDTO>();
+            Workbook workbook;
+            try {
+                workbook = ExcelPoiUtil.getWorkBook(fileName, fileLocation);
+                Sheet sheet = workbook.getSheetAt(0);
+                
+                for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                    Row row = sheet.getRow(i);
+                 //   CauHoiDTO cauHoiDTO = readDataFromExcel(row);
+                    CauHoiDTO cauHoiDTO = new CauHoiDTO();
+                    cauHoiDTO.setHinhAnh(ExcelPoiUtil.getCellValue(row.getCell(0)));
+                    cauHoiDTO.setNghe(ExcelPoiUtil.getCellValue(row.getCell(1)));
+                    cauHoiDTO.setCauHoi(ExcelPoiUtil.getCellValue(row.getCell(2)));
+                    cauHoiDTO.setDoanVan(ExcelPoiUtil.getCellValue(row.getCell(3)));
+                    cauHoiDTO.setDapAn1(ExcelPoiUtil.getCellValue(row.getCell(4)));
+                    cauHoiDTO.setDapAn2(ExcelPoiUtil.getCellValue(row.getCell(5)));
+                    cauHoiDTO.setDapAn3(ExcelPoiUtil.getCellValue(row.getCell(6)));
+                    cauHoiDTO.setDapAn4(ExcelPoiUtil.getCellValue(row.getCell(7)));
+                    cauHoiDTO.setDapAnDung(ExcelPoiUtil.getCellValue(row.getCell(8)));
+                    cauHoiDTO.setDoKho(Integer.parseInt(ExcelPoiUtil.getCellValue(row.getCell(9))));
+                    cauHoiDTO.setLoaiCauHoi(ExcelPoiUtil.getCellValue(row.getCell(10)));
+                    MonHocDTO monHoc=new MonHocDTO();               
+                    ChuongMonHocDTO temp=new ChuongMonHocDTO();
+                    temp.setMonHocDTO(monHoc);
+                    temp.setMaChuong(Integer.parseInt(ExcelPoiUtil.getCellValue(row.getCell(12))));
+                    cauHoiDTO.setChuongMonHocDTO(temp);     
+                    int idtacgia=Integer.parseInt(ExcelPoiUtil.getCellValue(row.getCell(11)));
+                    NguoiDungDTO nguoiDung=SingletonBusUtil.getNguoiDungBUSInstance().findById(idtacgia);
+                    cauHoiDTO.setNguoiDungDTO(nguoiDung);
+                    excelValues.add(cauHoiDTO);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(QLCauHoi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(excelValues.size()>0)
+            SingletonBusUtil.getCauHoiBUSInstance().saveCauHoiImport(excelValues);
+            System.out.println(fileName);
+            System.out.println(fileLocation);
+            System.out.println(excelValues.get(0).getCauHoi());
+          
+        
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -629,6 +701,7 @@ public class QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

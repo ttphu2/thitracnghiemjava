@@ -12,6 +12,8 @@ import DAO.SingletonDaoUtil;
 import DTO.CauHoiDTO;
 import Entity.CauHoiEntity;
 import Util.CauHoiBeanUtil;
+import Util.ChuongMonHocBeanUtil;
+import Util.NguoiDungBeanUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +49,29 @@ public Object[] findByProperty(Map<String, Object> property, String sortExpressi
     public Integer deleteCauHois(List<Integer> ids) {
         Integer result = SingletonDaoUtil.getCauHoiDAOInstance().delete(ids);
         return result;
+    }
+
+    @Override
+    public void saveCauHoiImport(List<CauHoiDTO> cauHoiDTOS) {
+     for (CauHoiDTO item : cauHoiDTOS) {
+         //   CauHoiEntity entity=new CauHoiEntity();
+//            entity.setCauHoi(item.getCauHoi());
+//            entity.setDapAn1(item.getDapAn1());
+//            entity.setDapAn2(item.getDapAn2());
+//            entity.setDapAn3(item.getDapAn3());
+//            entity.setDapAn4(item.getDapAn4());
+//            entity.setDapAnDung(item.getDapAnNguoiDung());
+//            entity.setDoKho(item.getDoKho());
+//            entity.setLoaiCauHoi(item.getLoaiCauHoi());
+//            entity.setHinhAnh(item.getHinhAnh());
+//            entity.setNghe(item.getNghe());
+//            entity.setChuongMonHocEntity(ChuongMonHocBeanUtil.dto2Entity(item.getChuongMonHocDTO()));
+//           // entity.setNguoiDungEntity(NguoiDungBeanUtil.dto2Entity(item.getNguoiDungDTO()));
+            
+           
+            SingletonDaoUtil.getCauHoiDAOInstance().save(CauHoiBeanUtil.dto2Entity(item));
+            
+        }
     }
     
 }

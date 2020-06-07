@@ -13,6 +13,6 @@ public interface CauHoiBUS {
  CauHoiDTO findById(Integer maCauHoi);  
  Integer saveCauHoi(CauHoiDTO cauHoiDTO);
  Integer deleteCauHois(List<Integer> ids);
-    
+ void saveCauHoiImport(List<CauHoiDTO> cauHoiDTOS);  
    
 }
