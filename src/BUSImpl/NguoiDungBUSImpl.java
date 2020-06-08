@@ -4,6 +4,7 @@ package BUSImpl;
 
 import BUS.NguoiDungBUS;
 import DAO.SingletonDaoUtil;
+import DTO.CheckLogin;
 import DTO.NguoiDungDTO;
 import Entity.NguoiDungEntity;
 import Util.NguoiDungBeanUtil;
@@ -58,17 +59,17 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
       
     }
 
-//    public CheckLogin checkLogin(String name, String password) {
-//        CheckLogin checkLogin = new CheckLogin();
-//        if (name != null && password != null) {
-//            Object[] objects = SingletonDaoUtil.getUserDaoInstance().checkLogin(name, password);
-//            checkLogin.setUserExist((Boolean) objects[0]);
-//            if (checkLogin.isUserExist()) {
-//                checkLogin.setRoleName(objects[1].toString());
-//            }
-//        }
-//        return checkLogin;
-//    }
+    public CheckLogin checkLogin(String name, String password) {
+        CheckLogin checkLogin = new CheckLogin();
+        if (name != null && password != null) {
+            Object[] objects = SingletonDaoUtil.getNguoiDungDAOInstance().checkLogin(name, password);
+            checkLogin.setUserExist((Boolean) objects[0]);
+            if (checkLogin.isUserExist()) {
+                checkLogin.setRoleName(objects[1].toString());
+            }
+        }
+      return checkLogin;
+   }
 //
 //    public void ValidateImportUser(List<UserImportDTO> userImportDTOS) {
 //        List<String> names = new ArrayList<String>();

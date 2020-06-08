@@ -2,6 +2,7 @@ package BUS;
 
 
 
+import DTO.CheckLogin;
 import DTO.NguoiDungDTO;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ public interface NguoiDungBUS {
     NguoiDungDTO updateUser(NguoiDungDTO userDTO);
     List<NguoiDungDTO> findSinhVien();
     Integer deleteUsers(List<Integer> ids);
+    public CheckLogin checkLogin(String name, String password);
    // CheckLogin checkLogin(String name, String password);
    // void ValidateImportUser(List<UserImportDTO> userImportDTOS);
    // void saveUserImport(List<UserImportDTO> userImportDTOS);

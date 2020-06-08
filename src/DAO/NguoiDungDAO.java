@@ -14,6 +14,6 @@ import org.hibernate.Transaction;
  * @author hocgioinhatlop
  */
 public interface NguoiDungDAO  extends GenericDao<Integer, NguoiDungEntity> {
-   
+   public Object[] checkLogin(String userName, String password);
     
 }
