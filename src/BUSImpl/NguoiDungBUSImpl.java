@@ -141,6 +141,17 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
         return result;
     }
 
+    @Override
+    public NguoiDungDTO findByEmail(String email)  {
+        List<NguoiDungEntity> entitys = SingletonDaoUtil.getNguoiDungDAOInstance().findEqualUnique("email",email);
+       NguoiDungDTO dto=new NguoiDungDTO();
+        if(entitys.size()==0){
+            return null;
+        }
+        dto = NguoiDungBeanUtil.entity2Dto(entitys.get(0));
+        return dto;
+    }
+
     
 
     

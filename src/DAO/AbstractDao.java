@@ -178,15 +178,19 @@ public class AbstractDao <ID extends Serializable,T> implements GenericDao<ID,T>
             String sql="FROM "+getPersistenceClassName()+" model WHERE model."+property+"= :value";
             Query query=session.createQuery(sql.toString());
             query.setParameter("value",value);
-            list= query.list();
+           // list= query.list();
+            if(query.list().size()>0){
+               list=query.list();
+            }
             
 
 
         }catch(HibernateException e){
             transaction.rollback();
          //   log.error(e.getMessage(),e);
-         System.out.println("findByUnique that bai");
+         System.out.println("findByUnique that bai");         
             throw e;
+       
         }finally {
             session.close();
         }

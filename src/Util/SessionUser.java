@@ -6,30 +6,30 @@
 package Util;
 
 
-public class Session {
+public class SessionUser {
     //Lop nay de luu thong tin danng nhap cua nguoi dung !!!
     private static String tenDangNhap=null;
     private static String tenVaiTro=null;
 
-    public Session() {
+    public SessionUser() {
     }
 
      public static void addSession(String tenDangNhap,String tenVaiTro) 
      {
-         Session.tenDangNhap=tenDangNhap;
-         Session.tenVaiTro=tenVaiTro;
+         SessionUser.tenDangNhap=tenDangNhap;
+         SessionUser.tenVaiTro=tenVaiTro;
      }
      public static void removeSession() 
      {
-         Session.tenDangNhap=null;
-         Session.tenVaiTro=null;
+         SessionUser.tenDangNhap=null;
+         SessionUser.tenVaiTro=null;
      }
     public static String getTenDangNhap() {
         return tenDangNhap;
     }
 
     public static void setTenDangNhap(String tenDangNhap) {
-        Session.tenDangNhap = tenDangNhap;
+        SessionUser.tenDangNhap = tenDangNhap;
     }
 
     public static String getTenVaiTro() {
@@ -37,7 +37,7 @@ public class Session {
     }
 
     public static void setTenVaiTro(String tenVaiTro) {
-        Session.tenVaiTro = tenVaiTro;
+        SessionUser.tenVaiTro = tenVaiTro;
     }
     
     

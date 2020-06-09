@@ -16,7 +16,8 @@ public interface NguoiDungBUS {
     NguoiDungDTO updateUser(NguoiDungDTO userDTO);
     List<NguoiDungDTO> findSinhVien();
     Integer deleteUsers(List<Integer> ids);
-    public CheckLogin checkLogin(String name, String password);
+    CheckLogin checkLogin(String name, String password);
+    NguoiDungDTO findByEmail(String email);
    // CheckLogin checkLogin(String name, String password);
    // void ValidateImportUser(List<UserImportDTO> userImportDTOS);
    // void saveUserImport(List<UserImportDTO> userImportDTOS);

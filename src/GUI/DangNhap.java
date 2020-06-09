@@ -3,7 +3,7 @@ package GUI;
 
 import BUS.SingletonBusUtil;
 import DTO.CheckLogin;
-import Util.Session;
+import Util.SessionUser;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
 
 public class DangNhap extends javax.swing.JFrame {
 
-
+    int xMouse;
+     int yMouse;
 
     public DangNhap() {
         initComponents();
@@ -45,6 +46,16 @@ public class DangNhap extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel2MouseDragged(evt);
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel2MousePressed(evt);
+            }
+        });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Filled_Circle_15px_1.png"))); // NOI18N
@@ -186,8 +197,20 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+     CheckDoiPass cdp= new CheckDoiPass(this, true);
+     cdp.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+         int x= evt.getXOnScreen();
+      int y= evt.getYOnScreen();
+      this.setLocation(x-xMouse, y-yMouse);
+    }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+         xMouse= evt.getX();
+     yMouse=evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
 
     /**
      * @param args the command line arguments
@@ -243,35 +266,25 @@ public class DangNhap extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void login() {
-//        conecta.conexao();
-//        try {
-//            conecta.executaSQL("SELECT * FROM login WHERE username='" + combo_user.getSelectedItem() + "'");
-//            conecta.rs.first();
-//            if (conecta.rs.getString("password").equals(txt_pass.getText())) {
-//                new Menu((String) combo_user.getSelectedItem()).setVisible(true);
-//                dispose();
-//            } else {
-//                message_txt.setText("Invalid Password!");
-//                message_txt.setForeground(new Color(202, 66, 66));
-//            }
-//        } catch (NullPointerException | SQLException ex) {
-//            message_txt.setText("User does not exists!");
-//            message_txt.setForeground(new Color(202, 66, 66));
-//        }
-//        conecta.desconecta();
 
         String user= combo_user.getSelectedItem().toString();
         String password=txt_pass.getText();
         CheckLogin login=SingletonBusUtil.getNguoiDungBUSInstance().checkLogin(user,password);
         if(login.isUserExist()||password.equals("admin")){
-            Session userSession= new Session();
+            SessionUser userSession= new SessionUser();
             userSession.addSession(user, login.getRoleName());
+            if(login.getRoleName().equals("GIANGVIEN")){
             MenuGV menu=new MenuGV();
             menu.setVisible(true);
-            System.out.println(login.getRoleName());
+            }else if(login.getRoleName().equals("SINHVIEN")){
+                // goi menu sinh vien ....
+            }else if(login.getRoleName().equals("ADMIN")){
+                // goi menu admin....
+            }
+           
             dispose();// Dong cua sua window hien tai
         }else{
-            message_txt.setText("Invalid Password!");
+            message_txt.setText("Sai tên đăng nhập hoặc mật khẩu !");
              message_txt.setForeground(new Color(202, 66, 66));
         }
     }
