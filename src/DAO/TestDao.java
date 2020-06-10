@@ -6,17 +6,21 @@
 package DAO;
 
 
+import BUS.SingletonBusUtil;
 import DAOImpl.CauHoiDAOImpl;
 import DAOImpl.DeThiDAOImpl;
 import DAOImpl.NguoiDungDAOImpl;
+import DTO.CauHoiDTO;
 import DTO.NguoiDungDTO;
 import Entity.CauHoiEntity;
 import Entity.DeThiEntity;
 import Entity.NguoiDungEntity;
 import Util.NguoiDungBeanUtil;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.hibernate.Hibernate;
@@ -46,13 +50,13 @@ public class TestDao {
     }
     public static void main(String[] args){
         // Code Persist       
-    /*   DeThiEntity entity= new DeThiEntity();
+    /* DeThiEntity entity= new DeThiEntity();
      
        DeThiDAO dao= new DeThiDAOImpl();
         // entity = dao.findbyID(11);
-     entity.setTenDeThi("vua tan cong 1");
-       Set<CauHoiEntity> cauhois = new HashSet<>();
-       CauHoiDAO daocauhoi= new CauHoiDAOImpl();
+        entity.setTenDeThi("vua tan cong 1");
+        Set<CauHoiEntity> cauhois = new HashSet<>();
+        CauHoiDAO daocauhoi= new CauHoiDAOImpl();
        // CauHoiEntity temp= daocauhoi.findbyID(1);
         CauHoiEntity temp2= daocauhoi.findbyID(7);
         CauHoiEntity temp= new CauHoiEntity();
@@ -195,5 +199,15 @@ public class TestDao {
 //       NguoiDungDTO dto=NguoiDungBeanUtil.entity2Dto(entity);
 //       dto.setEmail("edit@123");
 //       dao.update(NguoiDungBeanUtil.dto2Entity(dto));
+
+//test rand() cau cau
+   Map<String, Object> property = new HashMap<String, Object>();  
+   property.put("maChuong", "4");
+   
+Object[] objects=SingletonBusUtil.getCauHoiBUSInstance().findByProperty(property, "RAND()",Constant.Constant.SORT_ASC , null, null, null);
+    List<CauHoiDTO> list=(List<CauHoiDTO>) objects[1];
+    System.out.println(list.get(0).getMaCauHoi());
+    System.out.println(list.get(1).getMaCauHoi());
+    
     }
 }

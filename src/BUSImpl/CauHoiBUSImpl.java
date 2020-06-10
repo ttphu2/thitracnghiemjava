@@ -73,5 +73,15 @@ public Object[] findByProperty(Map<String, Object> property, String sortExpressi
             
         }
     }
+     @Override
+    public List<CauHoiDTO> findEqualUnique(String property,Object value) {
+        ArrayList <CauHoiDTO> listCauHoi=new ArrayList<CauHoiDTO>();      
+        List<CauHoiEntity> list=SingletonDaoUtil.getCauHoiDAOInstance().findEqualUnique(property, value);       
+        for(CauHoiEntity item:list){
+           CauHoiDTO dto1=CauHoiBeanUtil.entity2Dto(item);
+           listCauHoi.add(dto1);
+       }
+        return listCauHoi;
+    }
     
 }

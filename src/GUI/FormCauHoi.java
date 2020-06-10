@@ -34,13 +34,16 @@ public class FormCauHoi extends javax.swing.JDialog {
 
 List<MonHocDTO> listSubjectName= new ArrayList<MonHocDTO>();
 List <ChuongMonHocDTO> listCMH= new ArrayList<ChuongMonHocDTO>();
-private String tenFile="";
+private String tenFileAnh=null;
+private String tenFileNghe=null;
     public FormCauHoi(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         //txtNoiDung.setBorder(null);
         setCbMonHoc();
-         btnChonFile.setVisible(false);
+         btnChonHinhAnh.setVisible(false);
+         btnChonFileNghe.setVisible(false);
+      
          
         
         
@@ -104,12 +107,13 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
         tfCauHoi = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         cbDoKho = new javax.swing.JComboBox<>();
-        cbLoaiCauHoi = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
         cbDapAnDung = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        btnChonFile = new keeptoo.KButton();
         jLabel14 = new javax.swing.JLabel();
+        btnChonFileNghe = new keeptoo.KButton();
+        btnChonHinhAnh = new keeptoo.KButton();
+        jcbNghe = new javax.swing.JCheckBox();
+        jcbHinhAnh = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,7 +155,7 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 51, 51));
         jLabel4.setText("Chú thích : Độ khó 1 - Dễ ; Độ khó 2 - Trung bình ; Độ khó 3 - Khó ");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 440, -1));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 440, -1));
 
         saveButton.setText("Thêm mới");
         saveButton.setkAllowTab(false);
@@ -167,7 +171,7 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
                 saveButtonActionPerformed(evt);
             }
         });
-        jPanel4.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 400, 30));
+        jPanel4.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 400, 30));
         saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -283,52 +287,75 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
         });
         jPanel4.add(cbDoKho, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 100, 20));
 
-        cbLoaiCauHoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TRACNGHIEM", "NGHE", "HINHANH" }));
-        cbLoaiCauHoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbLoaiCauHoiActionPerformed(evt);
-            }
-        });
-        jPanel4.add(cbLoaiCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 100, 20));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Loại câu hỏi");
-        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 80, -1));
-
         cbDapAnDung.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
         cbDapAnDung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDapAnDungActionPerformed(evt);
             }
         });
-        jPanel4.add(cbDapAnDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 70, 20));
+        jPanel4.add(cbDapAnDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 140, 20));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(170, 170, 170));
         jLabel13.setText("Đáp án 4:");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
-        btnChonFile.setText("Chọn file");
-        btnChonFile.setFocusPainted(false);
-        btnChonFile.setkAllowGradient(false);
-        btnChonFile.setkAllowTab(false);
-        btnChonFile.setkBackGroundColor(new java.awt.Color(90, 82, 255));
-        btnChonFile.setkHoverColor(new java.awt.Color(73, 66, 203));
-        btnChonFile.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        btnChonFile.setkPressedColor(new java.awt.Color(55, 51, 133));
-        btnChonFile.setOpaque(false);
-        btnChonFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChonFileActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnChonFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 110, 20));
-        btnChonFile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(170, 170, 170));
         jLabel14.setText("Đáp án 1:");
         jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+
+        btnChonFileNghe.setText("Chọn file nghe");
+        btnChonFileNghe.setFocusPainted(false);
+        btnChonFileNghe.setkAllowGradient(false);
+        btnChonFileNghe.setkAllowTab(false);
+        btnChonFileNghe.setkBackGroundColor(new java.awt.Color(90, 82, 255));
+        btnChonFileNghe.setkHoverColor(new java.awt.Color(73, 66, 203));
+        btnChonFileNghe.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        btnChonFileNghe.setkPressedColor(new java.awt.Color(55, 51, 133));
+        btnChonFileNghe.setOpaque(false);
+        btnChonFileNghe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonFileNgheActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnChonFileNghe, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 330, 110, 20));
+        btnChonHinhAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnChonHinhAnh.setText("Chọn hình ảnh");
+        btnChonHinhAnh.setFocusPainted(false);
+        btnChonHinhAnh.setkAllowGradient(false);
+        btnChonHinhAnh.setkAllowTab(false);
+        btnChonHinhAnh.setkBackGroundColor(new java.awt.Color(90, 82, 255));
+        btnChonHinhAnh.setkHoverColor(new java.awt.Color(73, 66, 203));
+        btnChonHinhAnh.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        btnChonHinhAnh.setkPressedColor(new java.awt.Color(55, 51, 133));
+        btnChonHinhAnh.setOpaque(false);
+        btnChonHinhAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonHinhAnhActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnChonHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 110, 20));
+        btnChonHinhAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jcbNghe.setBackground(new java.awt.Color(255, 255, 255));
+        jcbNghe.setText("Có file nghe");
+        jcbNghe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbNgheActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jcbNghe, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, -1, -1));
+
+        jcbHinhAnh.setBackground(new java.awt.Color(255, 255, 255));
+        jcbHinhAnh.setText("Có hình ảnh");
+        jcbHinhAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbHinhAnhActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jcbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
 
         kGradientPanel9.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 550, 420));
 
@@ -384,7 +411,7 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
         chuongMH.setMaChuong(idCMH);
         chuongMH.setMonHocDTO(monHoc);
         dto.setChuongMonHocDTO(chuongMH);
-        dto.setLoaiCauHoi(cbLoaiCauHoi.getSelectedItem().toString());
+//        dto.setLoaiCauHoi(cbLoaiCauHoi.getSelectedItem().toString());
         dto.setDoKho(Integer.parseInt(cbDoKho.getSelectedItem().toString()));
         if("1".equals(cbDapAnDung.getSelectedItem().toString()))
         dto.setDapAnDung(tfDapAn1.getText());
@@ -396,12 +423,12 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
             dto.setDapAnDung(tfDapAn4.getText());  
         }
         //kiem tra loai cau hoi neu la HINHANH or NGHE thi add file vao
-        if(cbLoaiCauHoi.getSelectedItem().toString().equals("NGHE")){
+        
                 
-            dto.setNghe(tenFile);
-        }else if (cbLoaiCauHoi.getSelectedItem().toString().equals("HINHANH")){
-             dto.setHinhAnh(tenFile);
-        }
+            dto.setNghe(tenFileAnh);
+       
+             dto.setHinhAnh(tenFileNghe);
+        
           // ket thuc them file  
           
           // gan cung user sau nay se lay id tu session de them tac gia
@@ -424,49 +451,23 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
 //        if (levelname.equals("3")) this.level = 3;
     }//GEN-LAST:event_cbDoKhoActionPerformed
 
-    private void cbLoaiCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLoaiCauHoiActionPerformed
-     if(!"TRACNGHIEM".equals(cbLoaiCauHoi.getSelectedItem().toString())){
-         tenFile="";
-         btnChonFile.setVisible(true);
-     }else{
-          tenFile="";
-         btnChonFile.setVisible(false);
-     }
-    }//GEN-LAST:event_cbLoaiCauHoiActionPerformed
-
     private void cbDapAnDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDapAnDungActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbDapAnDungActionPerformed
-    JFileChooser fileDialog= new JFileChooser();
-    private void btnChonFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileActionPerformed
-        checkAndCreateFolder("Fileuploads");
-        
-       // System.out.println(Constant.FILEADDRESS);
-        int result=fileDialog.showOpenDialog(null);
+ JFileChooser fileDialog1= new JFileChooser(); 
+    private void btnChonFileNgheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonFileNgheActionPerformed
+      
+          checkAndCreateFolder("Fileuploads");
+          int result=fileDialog.showOpenDialog(null);
        if(result == JFileChooser.APPROVE_OPTION){
-           File f= fileDialog.getSelectedFile();
+            File f= fileDialog.getSelectedFile();
             String nameFile=f.getName();
-        if(cbLoaiCauHoi.getSelectedItem().toString().equals("HINHANH")){    
-           if(nameFile.endsWith(".jpg")||nameFile.endsWith(".png")){
-           File f2= new File(Constant.FILEADDRESS+File.separator+nameFile);          
-          try {
-             Files.copy(f.toPath(), f2.toPath());
-              tenFile=nameFile;
-             btnChonFile.setText(nameFile);
-          } catch (IOException ex) {
-              Logger.getLogger(FormCauHoi.class.getName()).log(Level.SEVERE, null, ex);
-          }
-          }else{
-               JOptionPane.showMessageDialog(null,"Chỉ chấp nhận file ảnh PNG và JPG");
-               return;
-           }
-        }else if (cbLoaiCauHoi.getSelectedItem().toString().equals("NGHE")) {
            if(nameFile.endsWith(".mp3")){
            File f2= new File(Constant.FILEADDRESS+File.separator+nameFile);          
           try {
              Files.copy(f.toPath(), f2.toPath());
-             tenFile=nameFile;
-             btnChonFile.setText(nameFile);
+             tenFileNghe=nameFile;
+             btnChonFileNghe.setText(nameFile);
           } catch (IOException ex) {
               Logger.getLogger(FormCauHoi.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -474,10 +475,52 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
                JOptionPane.showMessageDialog(null,"Chỉ chấp nhận file nghe mp3");
                return;
            } 
-        }  
        }
-       
-    }//GEN-LAST:event_btnChonFileActionPerformed
+    }//GEN-LAST:event_btnChonFileNgheActionPerformed
+    JFileChooser fileDialog= new JFileChooser();   // JFileChooser fileDialog= new JFileChooser();
+     
+    private void btnChonHinhAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonHinhAnhActionPerformed
+     
+          checkAndCreateFolder("Fileuploads");
+        
+       // System.out.println(Constant.FILEADDRESS);
+        int result=fileDialog.showOpenDialog(null);
+       if(result == JFileChooser.APPROVE_OPTION){
+           File f= fileDialog.getSelectedFile();
+            String nameFile=f.getName();
+           
+           if(nameFile.endsWith(".jpg")||nameFile.endsWith(".png")){
+           File f2= new File(Constant.FILEADDRESS+File.separator+nameFile);          
+          try {
+             Files.copy(f.toPath(), f2.toPath());
+              tenFileAnh=nameFile;
+             btnChonFileNghe.setText(nameFile);
+          } catch (IOException ex) {
+              Logger.getLogger(FormCauHoi.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          }else{
+               JOptionPane.showMessageDialog(null,"Chỉ chấp nhận file ảnh PNG và JPG");
+               return;
+           }
+        
+       }
+    }//GEN-LAST:event_btnChonHinhAnhActionPerformed
+
+    private void jcbNgheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNgheActionPerformed
+        if(jcbNghe.isSelected())
+        btnChonFileNghe.setVisible(true);
+        else
+        btnChonFileNghe.setVisible(false);
+    
+        
+    }//GEN-LAST:event_jcbNgheActionPerformed
+
+    private void jcbHinhAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbHinhAnhActionPerformed
+     if(jcbHinhAnh.isSelected())
+        btnChonHinhAnh.setVisible(true);
+        else
+        btnChonHinhAnh.setVisible(false);
+    }//GEN-LAST:event_jcbHinhAnhActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,16 +566,15 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private keeptoo.KButton btnChonFile;
+    private keeptoo.KButton btnChonFileNghe;
+    private keeptoo.KButton btnChonHinhAnh;
     private javax.swing.JComboBox<String> cbChuongMonHoc;
     private javax.swing.JComboBox<String> cbDapAnDung;
     private javax.swing.JComboBox<String> cbDoKho;
-    private javax.swing.JComboBox<String> cbLoaiCauHoi;
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
@@ -545,6 +587,8 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JCheckBox jcbHinhAnh;
+    private javax.swing.JCheckBox jcbNghe;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel3;
     private keeptoo.KGradientPanel kGradientPanel4;
