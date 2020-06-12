@@ -131,7 +131,10 @@ public class AbstractDao <ID extends Serializable,T> implements GenericDao<ID,T>
             if(offset!=null && offset>=0) {
                 query1.setFirstResult(offset);
             }
-            if(limit !=null && limit >0){
+            if(limit !=null ){
+                if(limit ==0){ 
+                    return new Object[]{0,list};
+                }
                 query1.setMaxResults(limit);
             }
             list = query1.list();

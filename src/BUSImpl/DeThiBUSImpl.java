@@ -9,13 +9,19 @@ package BUSImpl;
 import BUS.DeThiBUS;
 import BUS.KyThiBUS;
 import DAO.SingletonDaoUtil;
+import DTO.CauHoiDTO;
 import DTO.DeThiDTO;
 import DTO.MonHocDTO;
+import Entity.CauHoiEntity;
+import Entity.ChiTietDeThiEntity;
 import Entity.DeThiEntity;
 import Entity.MonHocEntity;
+import Util.CauHoiBeanUtil;
 import Util.DeThiBeanUtil;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -44,5 +50,39 @@ public class DeThiBUSImpl implements DeThiBUS{
 //       }
 //        return listDeThi;
 //    }
+
+    @Override
+    public Integer saveDeThi(DeThiDTO deThiDTO) {
+        DeThiEntity entity=null;       
+        entity=  SingletonDaoUtil.getDeThiDAOInstance().save(DeThiBeanUtil.dto2Entity(deThiDTO));      
+        return entity.getMaDeThi();
+    }
+    public void saveNoiDungDeThi (Set<CauHoiDTO> cauHoiDTOS,Integer maBaiThi) {
+        DeThiEntity entity=SingletonDaoUtil.getDeThiDAOInstance().findbyID(maBaiThi);
+        for(CauHoiDTO item:cauHoiDTOS){
+        ChiTietDeThiEntity chitiet=new ChiTietDeThiEntity();
+        chitiet.setCauHoiEntity(CauHoiBeanUtil.dto2Entity(item));
+        chitiet.setDeThiEntity(entity);
+        SingletonDaoUtil.getCTDTDAOImplInstance().save(chitiet);
+        }
+    }
+    public void deleteDeThi (Integer maBaiThi) {
+        List<ChiTietDeThiEntity> ctdtList=SingletonDaoUtil.getCTDTDAOImplInstance().findEqualUnique("deThiEntity.maDeThi", maBaiThi);
+       List<Integer> ids= new ArrayList<>();
+        //xoa noi dung bai thi
+       if(ctdtList.size()>0){
+            for(ChiTietDeThiEntity item:ctdtList){
+                ids.add(item.getId());            
+            }
+        SingletonDaoUtil.getCTDTDAOImplInstance().delete(ids);
+          }
+       //xoa ket qua cua bai thi
+       //....
+       //xoa bai thi
+         List<Integer> idDeThi= new ArrayList<>();
+         idDeThi.add(maBaiThi);        
+        SingletonDaoUtil.getDeThiDAOInstance().delete(idDeThi);
+        }
     
+       
 }

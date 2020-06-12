@@ -19,7 +19,10 @@ public class ChuongMonHocDTO implements Serializable{
     private MonHocDTO monHocDTO;
     private Integer soTiet;
     private List<CauHoiDTO> cauHoiDTOS;
-
+    private Integer soCauDe;
+    private Integer soCauKho;
+    private Integer soCauTB;
+    private Double tiLeChon;
     public ChuongMonHocDTO() {
     }
 
@@ -29,6 +32,39 @@ public class ChuongMonHocDTO implements Serializable{
         this.monHocDTO = monHocDTO;
         this.soTiet = soTiet;
     }
+
+    public Double getTiLeChon() {
+        return tiLeChon;
+    }
+
+    public void setTiLeChon(Double tiLeChon) {
+        this.tiLeChon = tiLeChon;
+    }
+    
+    public Integer getSoCauDe() {
+        return soCauDe;
+    }
+
+    public void setSoCauDe(Integer soCauDe) {
+        this.soCauDe = soCauDe;
+    }
+
+    public Integer getSoCauKho() {
+        return soCauKho;
+    }
+
+    public void setSoCauKho(Integer soCauKho) {
+        this.soCauKho = soCauKho;
+    }
+
+    public Integer getSoCauTB() {
+        return soCauTB;
+    }
+
+    public void setSoCauTB(Integer soCauTB) {
+        this.soCauTB = soCauTB;
+    }
+    
 
     public Integer getSoTiet() {
         return soTiet;

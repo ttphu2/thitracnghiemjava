@@ -22,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -73,18 +74,15 @@ public class CauHoiEntity {
     @JoinColumn(name = "machuong")
     private ChuongMonHocEntity chuongMonHocEntity;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinTable(name = "chitietdethi", 
-    joinColumns = { @JoinColumn(name = "macauhoi") }, 
-    inverseJoinColumns = {@JoinColumn(name = "madethi") })
-  private Set<DeThiEntity> listDeThi = new HashSet<>();
+    @OneToMany(mappedBy = "cauHoiEntity", fetch = FetchType.LAZY)
+    private List<ChiTietDeThiEntity> ctdtEntityList;
 
-    public Set<DeThiEntity> getListDeThi() {
-        return listDeThi;
+    public List<ChiTietDeThiEntity> getCtdtEntityList() {
+        return ctdtEntityList;
     }
 
-    public void setListDeThi(Set<DeThiEntity> listDeThi) {
-        this.listDeThi = listDeThi;
+    public void setCtdtEntityList(List<ChiTietDeThiEntity> ctdtEntityList) {
+        this.ctdtEntityList = ctdtEntityList;
     }
 
 

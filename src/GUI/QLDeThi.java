@@ -6,92 +6,86 @@
 package GUI;
 
 import BUS.SingletonBusUtil;
+import Constant.Constant;
 import DTO.CauHoiDTO;
+import DTO.ChuongMonHocDTO;
 import DTO.DeThiDTO;
+import DTO.KyThiDTO;
 import DTO.MonHocDTO;
+import DTO.NguoiDungDTO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
 /**
  *
  * @author DuongSon
  */
-public class QLBaiThi extends javax.swing.JFrame {
-    
-     private List<MonHocDTO> listSubjectName;
-     private int subjectID, topicID;
-     DefaultTableModel model;
-     private List<DeThiDTO> listTest;
+public class QLDeThi extends javax.swing.JFrame {
+
+    private List<MonHocDTO> listSubjectName;
+    private int subjectID, topicID;
+    DefaultTableModel model;
+    private List<DeThiDTO> listTest;
+
     /**
      * Creates new form TestManagerment
      */
-    public QLBaiThi() {
+    public QLDeThi() {
         initComponents();
-        setBounds(50,50,800,500);
+        setBounds(50, 50, 800, 500);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         setCbMonHoc();
         showTable();
     }
-    
-    public void showTable(){
+
+    public void showTable() {
         listTest = SingletonBusUtil.getDeThiBUSInstance().findAll();
-        model =(DefaultTableModel) jTable1.getModel();
+        model = (DefaultTableModel) jTable1.getModel();
         model.setColumnIdentifiers(new Object[]{
             "Mã đề", "Số câu hỏi", "Môn học", "Chủ đề"
         });
 
-        for(DeThiDTO t : listTest){
+        for (DeThiDTO t : listTest) {
             model.addRow(new Object[]{
-                t.getMaDeThi(),t.getSlCauHoi() ,t.getChuongMonHocDTO().getMonHocDTO().getTenMonHoc(),
+                t.getMaDeThi(), t.getSlCauHoi(), t.getChuongMonHocDTO().getMonHocDTO().getTenMonHoc(),
                 t.getChuongMonHocDTO().getTenChuong()
             });
         }
-        
+
     }
 
-    public void setCbMonHoc(){
-        listSubjectName=SingletonBusUtil.getMonHocBUSInstance().findAll();
-       
-        for(int i=0; i< listSubjectName.size(); i++){
+    public void setCbMonHoc() {
+        listSubjectName = SingletonBusUtil.getMonHocBUSInstance().findAll();
+
+        for (int i = 0; i < listSubjectName.size(); i++) {
             cbMonHoc.addItem(listSubjectName.get(i).getTenMonHoc());
-            
+
         }
-   
-//    public void setCbTopic(int id){
-//        cbTopic.removeAllItems();
-//        ArrayList<Topic> list = new GetDB().getListTopic(id);  //tìm cách sử dụng hàm getListTopic có sẵn trong
-//         for(int i=0; i<list.size(); i++){
-//            cbTopic.addItem(list.get(i).getTopicName());
-//        }   
-//    }
-    
-//    public Vector randomList(int input, int get){
-//        Random rd = new Random();
-//        Vector v = new Vector();
-//        int iNew = 0;
-//        for (int i = 0; i < get ;  ) {
-//            iNew = rd.nextInt(input);
-//            if (!v.contains(iNew)){
-//                i++;
-//                v.add(iNew);
-//            }
-//        
-//        }
-////        
-//        return v;
-        
     }
-    
+
+    public Integer getIdMonHoc() {
+        Integer idMonHoc = null;
+        for (int i = 0; i < listSubjectName.size(); i++) {
+            if (listSubjectName.get(i).getTenMonHoc() == cbMonHoc.getSelectedItem().toString()) {
+                idMonHoc = listSubjectName.get(i).getMaMonHoc();
+                break;
+            }
+
+        }
+        return idMonHoc;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,6 +109,8 @@ public class QLBaiThi extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         tfMaxPoint = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfTenDeThi = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,6 +186,8 @@ public class QLBaiThi extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Tổng điểm");
 
+        jLabel3.setText("Tên đề thi");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,7 +208,8 @@ public class QLBaiThi extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfLevel1)
@@ -220,7 +219,8 @@ public class QLBaiThi extends javax.swing.JFrame {
                             .addComponent(tfNumQuestion)
                             .addComponent(tfTestTime)
                             .addComponent(delButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                            .addComponent(tfMaxPoint))
+                            .addComponent(tfMaxPoint)
+                            .addComponent(tfTenDeThi))
                         .addGap(49, 49, 49)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52))
@@ -228,7 +228,11 @@ public class QLBaiThi extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tfTenDeThi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -265,7 +269,7 @@ public class QLBaiThi extends javax.swing.JFrame {
                             .addComponent(delButton)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(25, 25, 25))
         );
 
@@ -280,97 +284,187 @@ public class QLBaiThi extends javax.swing.JFrame {
     private void addTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestButtonActionPerformed
         // TODO add your handling code here:
         DeThiDTO t = new DeThiDTO();
+
+        //  t.setTopicID(topicID);
+        t.setTenDeThi(tfTenDeThi.getText());
+        t.setSlCauHoi(Integer.parseInt(tfNumQuestion.getText()));
+        t.setDiemToiDa(Integer.parseInt(tfMaxPoint.getText()));
+        t.setThoiGian(Integer.parseInt(tfTestTime.getText()));
+        t.setSlCauHoiDe(Integer.parseInt(tfLevel1.getText()));
+        t.setSlCauHoiTb(Integer.parseInt(tfLevel2.getText()));
+        t.setSlCauHoiKho(Integer.parseInt(tfLevel3.getText()));
+        List<CauHoiDTO> cauHoiDTOS = SingletonBusUtil.getCauHoiBUSInstance().findEqualUnique("chuongMonHocEntity.monHocEntity.tenMonHoc", cbMonHoc.getSelectedItem().toString());
+        int de = 0, kho = 0, tb = 0;
+        for (CauHoiDTO item : cauHoiDTOS) {
+            if (item.getDoKho() == 1) {
+                de++;
+            } else if (item.getDoKho() == 2) {
+                tb++;
+            } else {
+                kho++;
+            }
+        }
+        System.out.println(de);
+        System.out.println(tb);
+        System.out.println(kho);
+
+        if (((t.getSlCauHoiDe() + t.getSlCauHoiTb() + t.getSlCauHoiKho()) != t.getSlCauHoi()) || (t.getSlCauHoi() == 0)) {
+            JOptionPane.showMessageDialog(null, "Mời nhập lại số câu hỏi !");
+        } else if ((Integer.parseInt(tfLevel1.getText())) > de
+                || (Integer.parseInt(tfLevel2.getText())) > tb
+                || (Integer.parseInt(tfLevel3.getText())) > kho) {
+            JOptionPane.showMessageDialog(rootPane, "Ngân hàng đề không đủ số câu hỏi");
+        } else {
+
+          
+//                
+//                UpdateDB up = new UpdateDB();
+//                up.dbTest(t);
+//                listTest.add(t);
+                NguoiDungDTO tacgia= SingletonBusUtil.getNguoiDungBUSInstance().findById(1);
+                KyThiDTO kythi=SingletonBusUtil.getKyThiBUSImplInstance().findById(1);
+                ChuongMonHocDTO temp3= new ChuongMonHocDTO();
+                MonHocDTO temp4= new MonHocDTO();
+                temp3.setMonHocDTO(temp4);
+                temp3.setMaChuong(1);
+                t.setKyThiDTO(kythi);
+                t.setChuongMonHocDTO(temp3);
+                t.setNguoiDungDTO(tacgia);
+              Integer maBaiThi= SingletonBusUtil.getDeThiBUSInstance().saveDeThi(t);
                
-          //  t.setTopicID(topicID);
-            t.setSlCauHoi(Integer.parseInt(tfNumQuestion.getText()));
-            t.setDiemToiDa(Integer.parseInt(tfMaxPoint.getText()));
-            t.setThoiGian(Integer.parseInt(tfTestTime.getText()));
-            t.setSlCauHoiDe(Integer.parseInt(tfLevel1.getText()));
-            t.setSlCauHoiTb(Integer.parseInt(tfLevel2.getText()));
-            t.setSlCauHoiKho(Integer.parseInt(tfLevel3.getText()));
-            List<CauHoiDTO> cauHoiDTOS=SingletonBusUtil.getCauHoiBUSInstance().findEqualUnique("chuongMonHocEntity.monHocEntity.tenMonHoc", cbMonHoc.getSelectedItem().toString());
-             int de=0,kho=0,tb=0;
-            for(CauHoiDTO item:cauHoiDTOS){
-               if(item.getDoKho()==1){
-                   de++;
-               }else if(item.getDoKho()==2){
-                   tb++;
-               }else{
-                   kho++;
-               }
+            //    List<CauHoiDTO> cauHoiBaiThi= new ArrayList<CauHoiDTO>();
+            //    String whereClause1=" AND chuongMonHocEntity.monHocEntity.tenMonHoc="+cbMonHoc.getSelectedItem().toString()+" AND doKho=1";
+            List<ChuongMonHocDTO> cmhDTOS = SingletonBusUtil.getChuongMonHocBUSInstance().findByMonHoc(getIdMonHoc());
+            //   trr 3 vui ve 2 toan he` 4 30 cau thi chuong 1 co :1/3 2/9 4/9
+            //  10 6,6 cau 13,33 cau =de
+            // tinh toan giai thuat dua vao so tiet
+            //tinh tong so tiet
+            Integer tongSoTiet = 0;
+            for (int i = 0; i < cmhDTOS.size(); i++) {
+                tongSoTiet = tongSoTiet + cmhDTOS.get(i).getSoTiet();
             }
-            System.out.println(de);
-              System.out.println(tb);
-                System.out.println(kho);
-            if (((t.getSlCauHoiDe()+t.getSlCauHoiTb()+t.getSlCauHoiKho()) != t.getSlCauHoi())||(t.getSlCauHoi()==0))
-                JOptionPane.showMessageDialog(rootPane,"Mời nhập lại số câu hỏi !");
-            else if  ((Integer.parseInt(tfLevel1.getText()))> de
-                   || (Integer.parseInt(tfLevel2.getText()))> tb
-                   || (Integer.parseInt(tfLevel3.getText()))> kho)
-                JOptionPane.showMessageDialog(rootPane, "Ngân hàng đề không đủ số câu hỏi");
-         /*   else{
-            
-            try {
-                UpdateDB up = new UpdateDB();
-                up.dbTest(t);
-                listTest.add(t);
+            //     3 4 3
+            //tinh ti le chon cau hoi
+            Integer tiLe;
+            for (int i = 0; i < cmhDTOS.size(); i++) {
+                cmhDTOS.get(i).setTiLeChon((cmhDTOS.get(i).getSoTiet() * 1.0) / tongSoTiet);
 
-
-                ArrayList list1 = new GetDB().getListLevel(topicID,1);
-                Vector v1 = randomList(list1.size(),t.getLevel1());
-                for ( int i = 0 ; i < v1.size() ; i++){
-                   // System.out.println(v1.elementAt(i));
-                    CreateTest creTest = new CreateTest();
-                    Questions que = new Questions();
-                    que = (Questions) list1.get((int)v1.elementAt(i));                  
-                    creTest.setTestID(t.getTestID());
-                    creTest.setquestionID(que.getQuestionID());         
-                    System.out.println("testID = " + t.getTestID()+"cau hoi : " +que.getQuestionID());
-                    UpdateDB u = new UpdateDB();
-                    u.dbCreateTest(creTest);
-                }
-
-                ArrayList list2 = new GetDB().getListLevel(topicID,2);
-                Vector v2 = randomList(list2.size(),t.getLevel2());
-                for (  int i = 0 ; i < v2.size() ; i++){
-                    //System.out.println(v2.elementAt(i));
-                    CreateTest creTest = new CreateTest();
-                    Questions que = new Questions();
-                    que = (Questions) list2.get((int) v2.elementAt(i));
-                    //System.out.println(que.getQuestionID());
-                    creTest.setTestID(t.getTestID());
-                    creTest.setquestionID(que.getQuestionID());
-                    System.out.println("testID = " + t.getTestID()+"cau hoi : " +que.getQuestionID());
-                    UpdateDB u = new UpdateDB();
-                    u.dbCreateTest(creTest);
-                }
-
-                ArrayList list3 = new GetDB().getListLevel(topicID,3); 
-                Vector v3 = randomList(list3.size(),t.getLevel3());
-                for (  int i = 0 ; i < v3.size() ; i++){
-                    //System.out.println(v3.elementAt(i));
-                    CreateTest creTest = new CreateTest();
-                    Questions que = new Questions();
-                    que = (Questions) list3.get((int) v3.elementAt(i));
-                    //System.out.println(que.getQuestionID());
-                    creTest.setTestID(t.getTestID());
-                    creTest.setquestionID(que.getQuestionID());
-                    System.out.println("testID = " + t.getTestID()+"cau hoi : " +que.getQuestionID());
-                    UpdateDB u = new UpdateDB();
-                    u.dbCreateTest(creTest);
-                }
-                addTable();
-                JOptionPane.showMessageDialog(rootPane, "Thêm đề thi thành công !");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(rootPane, "Thêm đề thi không thành công !");
             }
-            
-        }*/
-        
-        
-        
+            // tinh so cau hoi o moi level va chuong
+            int tong1 = 0, tong2 = 0, tong3 = 0;
+            for (int i = 0; i < cmhDTOS.size(); i++) {
+                cmhDTOS.get(i).setSoCauDe((int) Math.floor(t.getSlCauHoiDe() * cmhDTOS.get(i).getTiLeChon()));
+                cmhDTOS.get(i).setSoCauTB((int) Math.floor(t.getSlCauHoiTb() * cmhDTOS.get(i).getTiLeChon()));
+                cmhDTOS.get(i).setSoCauKho((int) Math.floor(t.getSlCauHoiKho() * cmhDTOS.get(i).getTiLeChon()));
+                tong1 = tong1 + cmhDTOS.get(i).getSoCauDe();
+                tong2 = tong2 + cmhDTOS.get(i).getSoCauTB();
+                tong3 = tong3 + cmhDTOS.get(i).getSoCauKho();
+            }
+
+            //get cau hoi tu database len
+            Set<CauHoiDTO> setCauHoi = new HashSet<CauHoiDTO>();
+            for (int i = 0; i < cmhDTOS.size(); i++) {
+                String whereClause = " AND chuongMonHocEntity.maChuong=" + cmhDTOS.get(i).getMaChuong() + " AND doKho=1 ";
+                Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "RAND()", Constant.SORT_ASC, null, cmhDTOS.get(i).getSoCauDe(), whereClause);
+                List<CauHoiDTO> doKho1 = (List<CauHoiDTO>) objects[1];
+
+                String whereClause2 = " AND chuongMonHocEntity.maChuong=" + cmhDTOS.get(i).getMaChuong() + " AND doKho=2 ";
+                Object[] objects1 = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "RAND()", Constant.SORT_ASC, null, cmhDTOS.get(i).getSoCauTB(), whereClause2);
+                List<CauHoiDTO> doKho2 = (List<CauHoiDTO>) objects1[1];
+
+                String whereClause3 = " AND chuongMonHocEntity.maChuong=" + cmhDTOS.get(i).getMaChuong() + " AND doKho=3 ";
+                Object[] objects2 = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "RAND()", Constant.SORT_ASC, null, cmhDTOS.get(i).getSoCauKho(), whereClause3);
+                List<CauHoiDTO> doKho3 = (List<CauHoiDTO>) objects2[1];
+
+                setCauHoi.addAll(doKho1);
+                setCauHoi.addAll(doKho2);
+                setCauHoi.addAll(doKho3);
+            }
+            // tiep tuc lay nhung cau hoi con` thieu do lam` xuong xuong'
+            //check xem cau hoi co ton` tai trong de` roi hay chua
+                // check xong add cau hoi vao de`
+            if (t.getSlCauHoiDe() > tong1) {
+                 
+                List<CauHoiDTO> temp = new ArrayList<CauHoiDTO>();
+                while(t.getSlCauHoiDe()>tong1){         //6-4
+                String test = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + getIdMonHoc() + " AND doKho=1 ";
+                Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "RAND()", Constant.SORT_ASC, null, t.getSlCauHoiDe() - tong1, test);
+                temp = (List<CauHoiDTO>) objects[1];
+                for (int i = 0; i < temp.size(); i++) {
+                        boolean check=true;
+                    for(CauHoiDTO item:setCauHoi){
+                    if(item.getMaCauHoi()== temp.get(i).getMaCauHoi()){
+                            check=false;              
+                    }                                      
+                    }
+                    if(check==true && tong1<t.getSlCauHoiDe()){
+                     setCauHoi.add(temp.get(i));  
+                     tong1++;
+                    }
+                }
+                }
+
+            }
+            if (t.getSlCauHoiTb() > tong2) {
+                
+                List<CauHoiDTO> temp = new ArrayList<CauHoiDTO>();
+                while(t.getSlCauHoiTb()>tong2){         //6-4
+                String whereClause = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + getIdMonHoc() + " AND doKho=2 ";
+                Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "rand()", Constant.SORT_ASC, null, t.getSlCauHoiTb() - tong2, whereClause);
+                temp = (List<CauHoiDTO>) objects[1];
+                
+                    for (int i = 0; i < temp.size(); i++) {
+                        boolean check=true;
+                    for(CauHoiDTO item:setCauHoi){
+                    if(item.getMaCauHoi()== temp.get(i).getMaCauHoi()){
+                            check=false;              
+                    }                                        
+                    }
+                    if(check==true && tong2<t.getSlCauHoiTb()){
+                     setCauHoi.add(temp.get(i));  
+                     tong2++;
+                    }
+                }
+                }
+                
+            }
+            if (t.getSlCauHoiKho() > tong3) {
+                 
+                List<CauHoiDTO> temp = new ArrayList<CauHoiDTO>();
+                while(t.getSlCauHoiKho()>tong3){         //6-4
+                String whereClause = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + getIdMonHoc() + " AND doKho=3 ";
+                Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "rand()", Constant.SORT_ASC, null, t.getSlCauHoiKho() - tong3, whereClause);
+                temp = (List<CauHoiDTO>) objects[1];
+                
+                
+                 for (int i = 0; i < temp.size(); i++) {
+                    boolean check=true;
+                    for(CauHoiDTO item:setCauHoi){
+                    if(item.getMaCauHoi()== temp.get(i).getMaCauHoi()){
+                            check=false;              
+                    }                                      
+                    }
+                    if(check==true && tong3<t.getSlCauHoiKho()){
+                     setCauHoi.add(temp.get(i));  
+                     tong3++;
+                    }
+                }
+                }
+            }
+            // ket thuc giai thuat ta co dc 1 set cac cau hoi khac nhau dap ung 
+            // yeu cau theo so tiet va so luong cau hoi kho de tb
+           for(CauHoiDTO test:setCauHoi){
+               System.out.println(test.getMaCauHoi());
+           }
+           //add set cau hoi vao de thi roi update noi dung cho de thi
+           //maBaiThi
+         //  t.setListCauHoi(setCauHoi);
+           SingletonBusUtil.getDeThiBUSInstance().saveNoiDungDeThi(setCauHoi,maBaiThi);
+        }
+
+
     }//GEN-LAST:event_addTestButtonActionPerformed
-    
+
 //     public void addTable(){
 //        Test t = listTest.get(listTest.size()-1);
 //        model.addRow(new Object[]{
@@ -379,7 +473,7 @@ public class QLBaiThi extends javax.swing.JFrame {
 //        });
 //    }
     private void cbMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonHocActionPerformed
-       
+
 //       String st = cbMonHoc.getSelectedItem().toString();
 //       int id=0;
 //       for(Subject s : listSj){
@@ -394,38 +488,35 @@ public class QLBaiThi extends javax.swing.JFrame {
     private void tfNumQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumQuestionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNumQuestionActionPerformed
-int index ; //chỉ số hàng được chọn trong bảng
+    int index; //chỉ số hàng được chọn trong bảng
     private void delButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delButtonActionPerformed
-//        Object[] options = {"Xóa  ", "Thôi không xóa "};
-//                    int n = JOptionPane.showOptionDialog(rootPane,
-//                                    "Chắc chắn muốn xóa ? ",
-//                                    "Question",
-//                                    JOptionPane.YES_NO_OPTION,
-//                                    JOptionPane.QUESTION_MESSAGE,
-//                                    null,
-//                                    options,
-//                                    options[0]);
-//                    if (n == JOptionPane.YES_OPTION) {
-//                       //     
-//                       Test t = new Test();
-//                        TableModel mdl = jTable1.getModel();
-//                        String ID = model.getValueAt(index, 0).toString();
-//                        DeleteDB del = new DeleteDB();
-//                        del.deleteTest(Integer.parseInt(ID));
-//                        listTest.remove(t);
-//                        model = (DefaultTableModel) jTable1.getModel();
-//                        model.removeRow(index);
-//                        JOptionPane.showMessageDialog(rootPane,"Xoá thành công");
-//                       //
-//                    } else if (n == JOptionPane.NO_OPTION) {                        
-//                       return;
-//                    } else {                       
-//                    }                           
+        Object[] options = {"Xóa  ", "Thôi không xóa "};
+                    int n = JOptionPane.showOptionDialog(rootPane,
+                                    "Chắc chắn muốn xóa ? ",
+                                    "Question",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    options,
+                                    options[0]);
+                    if (n == JOptionPane.YES_OPTION) {
+                       //                            
+                        TableModel mdl = jTable1.getModel();
+                        String ID = model.getValueAt(index, 0).toString();
+                       SingletonBusUtil.getDeThiBUSInstance().deleteDeThi(Integer.parseInt(ID));
+                        model = (DefaultTableModel) jTable1.getModel();
+                        model.removeRow(index);
+                        JOptionPane.showMessageDialog(rootPane,"Xoá thành công");
+                       //
+                    } else if (n == JOptionPane.NO_OPTION) {                        
+                       return;
+                    } else {                       
+                    }                           
     }//GEN-LAST:event_delButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        index =jTable1.getSelectedRow();
+        index = jTable1.getSelectedRow();
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -445,21 +536,23 @@ int index ; //chỉ số hàng được chọn trong bảng
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLDeThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLDeThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLDeThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLDeThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLBaiThi().setVisible(true);
+                new QLDeThi().setVisible(true);
             }
         });
     }
@@ -471,6 +564,7 @@ int index ; //chỉ số hàng được chọn trong bảng
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -483,9 +577,8 @@ int index ; //chỉ số hàng được chọn trong bảng
     private javax.swing.JTextField tfLevel3;
     private javax.swing.JTextField tfMaxPoint;
     private javax.swing.JTextField tfNumQuestion;
+    private javax.swing.JTextField tfTenDeThi;
     private javax.swing.JTextField tfTestTime;
     // End of variables declaration//GEN-END:variables
-
-
 
 }

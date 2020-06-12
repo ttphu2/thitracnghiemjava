@@ -66,11 +66,8 @@ public class DeThiEntity {
     @JoinColumn(name = "makythi")
     private KyThiEntity kyThiEntity;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "chitietdethi", 
-    joinColumns = { @JoinColumn(name = "madethi") }, 
-    inverseJoinColumns = {@JoinColumn(name = "macauhoi") })
-  private Set<CauHoiEntity> listCauHoi = new HashSet<>();
+    @OneToMany(mappedBy = "cauHoiEntity", fetch = FetchType.LAZY)
+    private List<ChiTietDeThiEntity> ctdtEntityList;
 
     @OneToMany(mappedBy = "deThi", fetch = FetchType.LAZY)
     private List<KetQuaEntity> listKetQua;
@@ -82,15 +79,17 @@ public class DeThiEntity {
     public void setListKetQua(List<KetQuaEntity> listKetQua) {
         this.listKetQua = listKetQua;
     }
-    
-    
-    public Set<CauHoiEntity> getListCauHoi() {
-        return listCauHoi;
+
+    public List<ChiTietDeThiEntity> getCtdtEntityList() {
+        return ctdtEntityList;
     }
 
-    public void setListCauHoi(Set<CauHoiEntity> listCauHoi) {
-        this.listCauHoi = listCauHoi;
+    public void setCtdtEntityList(List<ChiTietDeThiEntity> ctdtEntityList) {
+        this.ctdtEntityList = ctdtEntityList;
     }
+    
+    
+   
 
 
     public Integer getMaDeThi() {
@@ -181,15 +180,7 @@ public class DeThiEntity {
         this.kyThiEntity = kyThiEntity;
     }
 
-    public void addCauHoi(CauHoiEntity entity) {
-        this.listCauHoi.add(entity);
-        entity.getListDeThi().add(this);
-    }
-  
-    public void removeCauHoi(CauHoiEntity entity) {
-        this.listCauHoi.remove(entity);
-        entity.getListDeThi().remove(this);
-    }
+    
     
     
 
