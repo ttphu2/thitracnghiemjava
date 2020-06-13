@@ -8,6 +8,7 @@ import DAOImpl.KetQuaDAOImpl;
 import DAOImpl.KyThiDAOImpl;
 import DAOImpl.MonHocDAOImpl;
 import DAOImpl.NguoiDungDAOImpl;
+import DAOImpl.PhongThiDAOImpl;
 import DAOImpl.VaiTroDAOImpl;
 
 
@@ -22,6 +23,7 @@ public class SingletonDaoUtil {
     private static KetQuaDAOImpl ketQuaDAOImpl=null;
     private static KyThiDAOImpl kyThiDAOImpl=null;
     private static ChiTietDeThiDAOImpl ctdtDAOImpl=null;
+    private static PhongThiDAOImpl phongThiDAOImpl=null;
 //    private static ResultDaoImpl resultDaoImpl = null;
 
     public static NguoiDungDAOImpl getNguoiDungDAOInstance(){
@@ -76,6 +78,12 @@ public class SingletonDaoUtil {
            ctdtDAOImpl=new ChiTietDeThiDAOImpl();
        }
         return ctdtDAOImpl;
+   }
+   public static PhongThiDAOImpl getPhongThiDAOInstance(){
+       if(phongThiDAOImpl==null){
+           phongThiDAOImpl=new PhongThiDAOImpl();
+       }
+        return phongThiDAOImpl;
    }
 //    public static ResultDaoImpl getResultDaoInstance() {
 //        if (resultDaoImpl == null) {

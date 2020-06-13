@@ -10,6 +10,7 @@ public class SessionUser {
     //Lop nay de luu thong tin danng nhap cua nguoi dung !!!
     private static String tenDangNhap=null;
     private static String tenVaiTro=null;
+    private static String maNguoiDung=null;
 
     public SessionUser() {
     }
@@ -38,6 +39,14 @@ public class SessionUser {
 
     public static void setTenVaiTro(String tenVaiTro) {
         SessionUser.tenVaiTro = tenVaiTro;
+    }
+
+    public static String getMaNguoiDung() {
+        return maNguoiDung;
+    }
+
+    public static void setMaNguoiDung(String maNguoiDung) {
+        SessionUser.maNguoiDung = maNguoiDung;
     }
     
     

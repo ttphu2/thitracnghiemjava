@@ -59,8 +59,8 @@ public class DeThiEntity {
     private NguoiDungEntity nguoiDungEntity1;
     
     @ManyToOne
-    @JoinColumn(name = "machuong")
-    private ChuongMonHocEntity chuongMonHocEntity1;
+    @JoinColumn(name = "mamonhoc")
+    private MonHocEntity monHocEntity;
     
     @ManyToOne
     @JoinColumn(name = "makythi")
@@ -71,7 +71,20 @@ public class DeThiEntity {
 
     @OneToMany(mappedBy = "deThi", fetch = FetchType.LAZY)
     private List<KetQuaEntity> listKetQua;
+    
+    @OneToMany(mappedBy = "deThiEntity",fetch = FetchType.LAZY)
+    private List<PhongThiEntity> phongThiList;
 
+    public List<PhongThiEntity> getPhongThiList() {
+        return phongThiList;
+    }
+
+    public void setPhongThiList(List<PhongThiEntity> phongThiList) {
+        this.phongThiList = phongThiList;
+    }
+    
+    
+    
     public List<KetQuaEntity> getListKetQua() {
         return listKetQua;
     }
@@ -164,13 +177,15 @@ public class DeThiEntity {
         this.nguoiDungEntity1 = nguoiDungEntity1;
     }
 
-    public ChuongMonHocEntity getChuongMonHocEntity1() {
-        return chuongMonHocEntity1;
+    public MonHocEntity getMonHocEntity() {
+        return monHocEntity;
     }
 
-    public void setChuongMonHocEntity1(ChuongMonHocEntity chuongMonHocEntity1) {
-        this.chuongMonHocEntity1 = chuongMonHocEntity1;
+    public void setMonHocEntity(MonHocEntity monHocEntity) {
+        this.monHocEntity = monHocEntity;
     }
+
+    
 
     public KyThiEntity getKyThiEntity() {
         return kyThiEntity;

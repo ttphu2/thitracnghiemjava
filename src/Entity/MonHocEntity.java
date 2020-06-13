@@ -33,7 +33,19 @@ public class MonHocEntity {
      
     @OneToMany(mappedBy = "monHocEntity",fetch = FetchType.LAZY)
     private List<ChuongMonHocEntity> chuongMonHocList;
+    
+    @OneToMany(mappedBy = "monHocEntity",fetch = FetchType.LAZY)
+    private List<DeThiEntity> deThiList;
 
+    public List<DeThiEntity> getDeThiList() {
+        return deThiList;
+    }
+
+    public void setDeThiList(List<DeThiEntity> deThiList) {
+        this.deThiList = deThiList;
+    }
+
+    
     public Integer getSoTinChi() {
         return soTinChi;
     }

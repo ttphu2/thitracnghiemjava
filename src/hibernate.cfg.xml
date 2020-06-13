@@ -57,5 +57,6 @@ Contributor(s):
              <mapping class="Entity.KyThiEntity" />
               <mapping class="Entity.KetQuaEntity" />
               <mapping class="Entity.ChiTietDeThiEntity" />
+              <mapping class="Entity.PhongThiEntity" />
   </session-factory>
 </hibernate-configuration>

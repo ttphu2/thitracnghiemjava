@@ -15,7 +15,7 @@ public class DeThiDTO {
     private Integer slCauHoiTb; 
     private Integer slCauHoiKho;      
     private NguoiDungDTO nguoiDungDTO;       
-    private ChuongMonHocDTO chuongMonHocDTO;    
+    private MonHocDTO monHocDTO;    
     private KyThiDTO kyThiDTO;        
     private Set<CauHoiDTO> listCauHoi = new HashSet<>();
 
@@ -110,13 +110,15 @@ public class DeThiDTO {
         this.nguoiDungDTO = nguoiDungDTO;
     }
 
-    public ChuongMonHocDTO getChuongMonHocDTO() {
-        return chuongMonHocDTO;
+    public MonHocDTO getMonHocDTO() {
+        return monHocDTO;
     }
 
-    public void setChuongMonHocDTO(ChuongMonHocDTO chuongMonHocDTO) {
-        this.chuongMonHocDTO = chuongMonHocDTO;
+    public void setMonHocDTO(MonHocDTO monHocDTO) {
+        this.monHocDTO = monHocDTO;
     }
+
+    
     
 
    

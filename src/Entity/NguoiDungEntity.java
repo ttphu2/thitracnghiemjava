@@ -9,9 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Admin on 4/6/2017.
- */
+
 @Entity
 @Table(name = "nguoidung")
 public class NguoiDungEntity {
@@ -58,7 +56,19 @@ public class NguoiDungEntity {
     
     @OneToMany(mappedBy = "nguoiDung",fetch = FetchType.LAZY)
     private List<KetQuaEntity> ketQuaEntitys;
+    
+     @OneToMany(mappedBy = "nguoiDungEntity",fetch = FetchType.LAZY)
+    private List<PhongThiEntity> phongThiList;
 
+    public List<PhongThiEntity> getPhongThiList() {
+        return phongThiList;
+    }
+
+    public void setPhongThiList(List<PhongThiEntity> phongThiList) {
+        this.phongThiList = phongThiList;
+    }
+
+     
     public List<KetQuaEntity> getKetQuaEntitys() {
         return ketQuaEntitys;
     }

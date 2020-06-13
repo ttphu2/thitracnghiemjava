@@ -3,6 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="ItemDataSource" class="java.util.List"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT
      nguoidung.`manguoidung` AS nguoidung_manguoidung,
@@ -97,7 +98,7 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="54" splitType="Stretch">
+		<band height="93" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="20" width="100" height="20" forecolor="#000000" uuid="be253558-f566-4c28-a77a-483abf0f281c"/>
 				<textElement>
@@ -123,13 +124,17 @@ WHERE
 				<reportElement x="288" y="20" width="100" height="20" uuid="5008fd2c-7257-4b79-8881-d6c1cedc3c94"/>
 				<textFieldExpression><![CDATA[($F{ngaysinh}.getDate())+"/"+($F{ngaysinh}.getMonth()+1)+"/"+($F{ngaysinh}.getYear()+1900)]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="52" width="100" height="20" uuid="e6b47707-b704-4303-94d4-e564ef49b68f"/>
+				<textFieldExpression><![CDATA[""+$P{ItemDataSource}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="14" splitType="Stretch"/>
+		<band height="42" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="8" splitType="Stretch"/>
+		<band height="33" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

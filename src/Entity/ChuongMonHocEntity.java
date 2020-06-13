@@ -42,8 +42,7 @@ public class ChuongMonHocEntity {
      @OneToMany(mappedBy = "chuongMonHocEntity",fetch = FetchType.LAZY)
     private List<CauHoiEntity> cauHoiEntitys;
      
-     @OneToMany(mappedBy = "chuongMonHocEntity1",fetch = FetchType.LAZY)
-    private List<DeThiEntity> deThiEntitys;
+     
 
      
     public Integer getSoTiet() {
@@ -87,12 +86,6 @@ public class ChuongMonHocEntity {
         this.cauHoiEntitys = cauHoiEntitys;
     }
 
-    public List<DeThiEntity> getDeThiEntitys() {
-        return deThiEntitys;
-    }
-
-    public void setDeThiEntitys(List<DeThiEntity> deThiEntitys) {
-        this.deThiEntitys = deThiEntitys;
-    }
+   
     
 }

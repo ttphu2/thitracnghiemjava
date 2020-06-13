@@ -29,19 +29,9 @@ public class DeThiBeanUtil {
                 dto.setSlCauHoiKho(entity.getSlCauHoiKho());
                 dto.setDiemToiDa(entity.getDiemToiDa());
                 dto.setThoiGian(entity.getThoiGian());
-                dto.setChuongMonHocDTO(ChuongMonHocBeanUtil.entity2Dto(entity.getChuongMonHocEntity1()));
+                dto.setMonHocDTO(MonHocBeanUtil.entity2Dto(entity.getMonHocEntity()));
                 dto.setKyThiDTO(KyThiBeanUtil.entity2Dto(entity.getKyThiEntity()));
                 dto.setNguoiDungDTO(NguoiDungBeanUtil.entity2Dto(entity.getNguoiDungEntity1()));// tac gia
-//                if(entity.getListCauHoi().size()>0){
-//                
-//                Set<CauHoiDTO> set=new HashSet<>();
-//                for(CauHoiEntity item:entity.getListCauHoi()){
-//                    CauHoiDTO temp= CauHoiBeanUtil.entity2Dto(item);
-//                    set.add(temp);
-//                }
-//                dto.getListCauHoi().addAll(set);
-//                }
-             //   dto.setChuongMonHocList(entity.getChuongMonHocList());
 		return dto;
 	}
 	public static DeThiEntity dto2Entity(DeThiDTO dto) {
@@ -54,19 +44,10 @@ public class DeThiBeanUtil {
                 entity.setSlCauHoiKho(dto.getSlCauHoiKho());
                 entity.setDiemToiDa(dto.getDiemToiDa());
                 entity.setThoiGian(dto.getThoiGian());
-                entity.setChuongMonHocEntity1(ChuongMonHocBeanUtil.dto2Entity(dto.getChuongMonHocDTO()));
+                entity.setMonHocEntity(MonHocBeanUtil.dto2Entity(dto.getMonHocDTO()));
                 entity.setKyThiEntity(KyThiBeanUtil.dto2Entity(dto.getKyThiDTO()));
                 entity.setNguoiDungEntity1(NguoiDungBeanUtil.dto2Entity(dto.getNguoiDungDTO()));// tac gia
-               // if ̣(dto.)
-              //  entity.setListCauHoi();
-//                if(dto.getListCauHoi().size()>0){
-//                Set<CauHoiEntity> set=new HashSet<>();
-//                for(CauHoiDTO item: dto.getListCauHoi()){
-//                    CauHoiEntity temp= CauHoiBeanUtil.dto2Entity(item);
-//                    set.add(temp);
-//                }
-//                entity.getListCauHoi().addAll(set);	
-//                }
+             
 		return entity;
 	}
 }

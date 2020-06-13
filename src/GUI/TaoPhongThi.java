@@ -46,12 +46,12 @@ import org.hibernate.ObjectNotFoundException;
  *
  * @author hocgioinhatlop
  */
-public class QLSinhVien extends javax.swing.JDialog {
+public class TaoPhongThi extends javax.swing.JDialog {
 
     SinhVienTable cod = new SinhVienTable();
     ArrayList<NguoiDungDTO> userDTOS = new ArrayList<NguoiDungDTO>();
 
-    public QLSinhVien(java.awt.Frame parent, boolean modal) {
+    public TaoPhongThi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         paint_table();
@@ -75,13 +75,10 @@ public class QLSinhVien extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        buttonXoa = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        buttonThem = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         tfIdStu = new javax.swing.JTextField();
@@ -99,6 +96,7 @@ public class QLSinhVien extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jDateNgaySinh2 = new com.toedter.calendar.JDateChooser();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,19 +105,6 @@ public class QLSinhVien extends javax.swing.JDialog {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setPreferredSize(new java.awt.Dimension(602, 440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        buttonXoa.setBackground(new java.awt.Color(93, 200, 119));
-        buttonXoa.setForeground(new java.awt.Color(255, 255, 255));
-        buttonXoa.setText("Xóa");
-        buttonXoa.setContentAreaFilled(false);
-        buttonXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonXoa.setOpaque(true);
-        buttonXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonXoaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 139, 31));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Danh sách sinh viên");
@@ -136,16 +121,7 @@ public class QLSinhVien extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 140, 30));
-
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Xuất thống kê");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 151, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 140, 30));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
@@ -245,20 +221,7 @@ public class QLSinhVien extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(table);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 810, 240));
-
-        buttonThem.setBackground(new java.awt.Color(93, 200, 119));
-        buttonThem.setForeground(new java.awt.Color(255, 255, 255));
-        buttonThem.setText("Thêm");
-        buttonThem.setContentAreaFilled(false);
-        buttonThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonThem.setOpaque(true);
-        buttonThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonThemActionPerformed(evt);
-            }
-        });
-        jPanel1.add(buttonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 139, 30));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 720, 220));
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm nâng cao"));
@@ -346,47 +309,14 @@ public class QLSinhVien extends javax.swing.JDialog {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 770, 140));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 470));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 750, 470));
 
-        setSize(new java.awt.Dimension(845, 508));
+        jPanel3.setBackground(new java.awt.Color(250, 250, 250));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 470));
+
+        setSize(new java.awt.Dimension(1058, 508));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
-        Object[] options = {"Xóa  ", "Thôi không xóa "};
-        int n = JOptionPane.showOptionDialog(rootPane,
-                "Chắc chắn muốn xóa ? ",
-                "Question",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]);
-        if (n == JOptionPane.YES_OPTION) {
-            int[] cacLuaChon = table.getSelectedRows();
-            List<Integer> ids = new ArrayList<Integer>();
-            for (int i = 0; i < cacLuaChon.length; i++) {
-                ids.add(userDTOS.get(cacLuaChon[i]).getMaNguoiDung());
-
-            }
-            Integer checkDelete = SingletonBusUtil.getNguoiDungBUSInstance().deleteUsers(ids);
-            if (checkDelete == ids.size()) {
-                Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
-                userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
-                cod.showTable(userDTOS, table);
-                JOptionPane.showMessageDialog(rootPane, "Xoá thành công");
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Xoá thất bại");
-            }
-
-            //
-        } else if (n == JOptionPane.NO_OPTION) {
-            return;
-        } else {
-        }
-
-
-    }//GEN-LAST:event_buttonXoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Map<String, Object> property = new HashMap<String, Object>();
@@ -473,36 +403,6 @@ public class QLSinhVien extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        Connection conn;
-        conn = UtilConnect.getConnection();
-        try {
-           
-            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\hocgioinhatlop\\OneDrive\\Documents\\NetBeansProjects\\Thitracnghiem\\src\\Report\\sinhvien.jrxml");
-            
-            String query = "select * from nguoidung where mavaitro=1";
-            JRDesignQuery updateQuery = new JRDesignQuery();
-            updateQuery.setText(query);
-            jdesign.setQuery(updateQuery);
-            JasperReport jsreport = JasperCompileManager.compileReport(jdesign);
-            JasperPrint jprint = JasperFillManager.fillReport(jsreport, null, conn);
-            JasperViewer jv= new JasperViewer(jprint,false);
-           JDialog dialog = new JDialog(this);//the owner
-            dialog.setContentPane(jv.getContentPane());
-            dialog.setSize(jv.getSize());
-            dialog.setTitle("Danh sách");
-
-            dialog.setVisible(true);
-//            JasperViewer.viewReport(jprint);
-//            JasperViewer.
-        } catch (JRException ex) {
-            Logger.getLogger(JasperRp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-    
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void tableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFocusGained
 
     }//GEN-LAST:event_tableFocusGained
@@ -514,12 +414,6 @@ public class QLSinhVien extends javax.swing.JDialog {
     private void tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseReleased
 
     }//GEN-LAST:event_tableMouseReleased
-
-    private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
-        new FormNguoiDung(this, true).setVisible(true);;
-        cod.showResult(table);
-
-    }//GEN-LAST:event_buttonThemActionPerformed
 
     private void tfIdStuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdStuActionPerformed
         // TODO add your handling code here:
@@ -568,20 +462,21 @@ public class QLSinhVien extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaoPhongThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaoPhongThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaoPhongThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaoPhongThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QLSinhVien dialog = new QLSinhVien(new javax.swing.JFrame(), true);
+                TaoPhongThi dialog = new TaoPhongThi(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -594,14 +489,11 @@ public class QLSinhVien extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonThem;
-    private javax.swing.JButton buttonXoa;
     private javax.swing.JButton buttonXoa1;
     private javax.swing.JComboBox<String> cbChieuSapXep;
     private javax.swing.JComboBox<String> cbGioiTinh;
     private javax.swing.JComboBox<String> cbSapXep;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private com.toedter.calendar.JDateChooser jDateNgaySinh1;
     private com.toedter.calendar.JDateChooser jDateNgaySinh2;
@@ -615,6 +507,7 @@ public class QLSinhVien extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
     private javax.swing.JTextField tfIdStu;

@@ -32,6 +32,7 @@ import javax.swing.table.TableModel;
 public class QLDeThi extends javax.swing.JFrame {
 
     private List<MonHocDTO> listSubjectName;
+    private List<KyThiDTO> listKyThiName;
     private int subjectID, topicID;
     DefaultTableModel model;
     private List<DeThiDTO> listTest;
@@ -46,6 +47,7 @@ public class QLDeThi extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         setCbMonHoc();
+        setCbKyThi();
         showTable();
     }
 
@@ -53,13 +55,13 @@ public class QLDeThi extends javax.swing.JFrame {
         listTest = SingletonBusUtil.getDeThiBUSInstance().findAll();
         model = (DefaultTableModel) jTable1.getModel();
         model.setColumnIdentifiers(new Object[]{
-            "Mã đề", "Số câu hỏi", "Môn học", "Chủ đề"
+            "Mã đề", "Số câu hỏi", "Môn học", "Điểm tối đa"
         });
 
         for (DeThiDTO t : listTest) {
             model.addRow(new Object[]{
-                t.getMaDeThi(), t.getSlCauHoi(), t.getChuongMonHocDTO().getMonHocDTO().getTenMonHoc(),
-                t.getChuongMonHocDTO().getTenChuong()
+                t.getMaDeThi(), t.getSlCauHoi(), t.getMonHocDTO().getTenMonHoc(),
+                t.getDiemToiDa()
             });
         }
 
@@ -70,6 +72,14 @@ public class QLDeThi extends javax.swing.JFrame {
 
         for (int i = 0; i < listSubjectName.size(); i++) {
             cbMonHoc.addItem(listSubjectName.get(i).getTenMonHoc());
+
+        }
+    }
+    public void setCbKyThi() {
+        listKyThiName = SingletonBusUtil.getKyThiBUSImplInstance().findAll();
+
+        for (int i = 0; i < listKyThiName.size(); i++) {
+            cbKyThi.addItem(listKyThiName.get(i).getTenKyThi());
 
         }
     }
@@ -84,6 +94,17 @@ public class QLDeThi extends javax.swing.JFrame {
 
         }
         return idMonHoc;
+    }
+    public Integer getIdKyThi() {
+        Integer idKyThi = null;
+        for (int i = 0; i < listKyThiName.size(); i++) {
+            if (listKyThiName.get(i).getTenKyThi()== cbKyThi.getSelectedItem().toString()) {
+                idKyThi = listKyThiName.get(i).getMaKyThi();
+                break;
+            }
+
+        }
+        return idKyThi;
     }
 
     @SuppressWarnings("unchecked")
@@ -111,38 +132,53 @@ public class QLDeThi extends javax.swing.JFrame {
         tfMaxPoint = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tfTenDeThi = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        cbKyThi = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Số câu hỏi :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 46, 118, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Môn học :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 84, 118, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Thời gian (phút ) :");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 115, 118, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Số câu dễ :");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 153, 118, -1));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Số câu trung bình :");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 191, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Số câu khó :");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 231, 118, -1));
 
         tfNumQuestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNumQuestionActionPerformed(evt);
             }
         });
+        getContentPane().add(tfNumQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 45, 111, -1));
+        getContentPane().add(tfTestTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 114, 111, -1));
+        getContentPane().add(tfLevel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 152, 111, -1));
+        getContentPane().add(tfLevel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 190, 111, -1));
+        getContentPane().add(tfLevel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 228, 111, -1));
 
         cbMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbMonHocActionPerformed(evt);
             }
         });
+        getContentPane().add(cbMonHoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 83, 111, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,6 +195,8 @@ public class QLDeThi extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 43, -1, 340));
+
         addTestButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         addTestButton.setText("Thêm ");
         addTestButton.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +204,7 @@ public class QLDeThi extends javax.swing.JFrame {
                 addTestButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(addTestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 333, 84, -1));
 
         delButton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         delButton.setText("Xóa");
@@ -174,6 +213,7 @@ public class QLDeThi extends javax.swing.JFrame {
                 delButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(delButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 333, 111, -1));
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton3.setText("Thoát ");
@@ -182,96 +222,27 @@ public class QLDeThi extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 401, 96, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Tổng điểm");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 266, 121, 27));
+        getContentPane().add(tfMaxPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 266, 111, -1));
 
         jLabel3.setText("Tên đề thi");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 15, -1, -1));
+        getContentPane().add(tfTenDeThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 12, 111, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfLevel1)
-                            .addComponent(tfLevel2)
-                            .addComponent(tfLevel3)
-                            .addComponent(cbMonHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfNumQuestion)
-                            .addComponent(tfTestTime)
-                            .addComponent(delButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                            .addComponent(tfMaxPoint)
-                            .addComponent(tfTenDeThi))
-                        .addGap(49, 49, 49)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfTenDeThi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(tfNumQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cbMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(tfTestTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(tfLevel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(tfLevel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(tfLevel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfMaxPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addTestButton)
-                            .addComponent(delButton)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
-        );
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setText("Kỳ thi:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 303, 129, -1));
+
+        cbKyThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbKyThiActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbKyThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 302, 111, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -315,26 +286,18 @@ public class QLDeThi extends javax.swing.JFrame {
                 || (Integer.parseInt(tfLevel3.getText())) > kho) {
             JOptionPane.showMessageDialog(rootPane, "Ngân hàng đề không đủ số câu hỏi");
         } else {
-
           
-//                
-//                UpdateDB up = new UpdateDB();
-//                up.dbTest(t);
-//                listTest.add(t);
                 NguoiDungDTO tacgia= SingletonBusUtil.getNguoiDungBUSInstance().findById(1);
-                KyThiDTO kythi=SingletonBusUtil.getKyThiBUSImplInstance().findById(1);
-                ChuongMonHocDTO temp3= new ChuongMonHocDTO();
+                KyThiDTO kythi=SingletonBusUtil.getKyThiBUSImplInstance().findById(getIdKyThi());
+               Integer idMonHoc=getIdMonHoc();
                 MonHocDTO temp4= new MonHocDTO();
-                temp3.setMonHocDTO(temp4);
-                temp3.setMaChuong(1);
+               temp4.setMaMonHoc(idMonHoc);              
                 t.setKyThiDTO(kythi);
-                t.setChuongMonHocDTO(temp3);
+                t.setMonHocDTO(temp4);
                 t.setNguoiDungDTO(tacgia);
               Integer maBaiThi= SingletonBusUtil.getDeThiBUSInstance().saveDeThi(t);
-               
-            //    List<CauHoiDTO> cauHoiBaiThi= new ArrayList<CauHoiDTO>();
-            //    String whereClause1=" AND chuongMonHocEntity.monHocEntity.tenMonHoc="+cbMonHoc.getSelectedItem().toString()+" AND doKho=1";
-            List<ChuongMonHocDTO> cmhDTOS = SingletonBusUtil.getChuongMonHocBUSInstance().findByMonHoc(getIdMonHoc());
+
+            List<ChuongMonHocDTO> cmhDTOS = SingletonBusUtil.getChuongMonHocBUSInstance().findByMonHoc(idMonHoc);
             //   trr 3 vui ve 2 toan he` 4 30 cau thi chuong 1 co :1/3 2/9 4/9
             //  10 6,6 cau 13,33 cau =de
             // tinh toan giai thuat dua vao so tiet
@@ -387,7 +350,7 @@ public class QLDeThi extends javax.swing.JFrame {
                  
                 List<CauHoiDTO> temp = new ArrayList<CauHoiDTO>();
                 while(t.getSlCauHoiDe()>tong1){         //6-4
-                String test = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + getIdMonHoc() + " AND doKho=1 ";
+                String test = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + idMonHoc + " AND doKho=1 ";
                 Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "RAND()", Constant.SORT_ASC, null, t.getSlCauHoiDe() - tong1, test);
                 temp = (List<CauHoiDTO>) objects[1];
                 for (int i = 0; i < temp.size(); i++) {
@@ -409,7 +372,7 @@ public class QLDeThi extends javax.swing.JFrame {
                 
                 List<CauHoiDTO> temp = new ArrayList<CauHoiDTO>();
                 while(t.getSlCauHoiTb()>tong2){         //6-4
-                String whereClause = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + getIdMonHoc() + " AND doKho=2 ";
+                String whereClause = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + idMonHoc + " AND doKho=2 ";
                 Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "rand()", Constant.SORT_ASC, null, t.getSlCauHoiTb() - tong2, whereClause);
                 temp = (List<CauHoiDTO>) objects[1];
                 
@@ -432,7 +395,7 @@ public class QLDeThi extends javax.swing.JFrame {
                  
                 List<CauHoiDTO> temp = new ArrayList<CauHoiDTO>();
                 while(t.getSlCauHoiKho()>tong3){         //6-4
-                String whereClause = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + getIdMonHoc() + " AND doKho=3 ";
+                String whereClause = " AND chuongMonHocEntity.monHocEntity.maMonHoc=" + idMonHoc + " AND doKho=3 ";
                 Object[] objects = SingletonBusUtil.getCauHoiBUSInstance().findByProperty(null, "rand()", Constant.SORT_ASC, null, t.getSlCauHoiKho() - tong3, whereClause);
                 temp = (List<CauHoiDTO>) objects[1];
                 
@@ -519,6 +482,10 @@ public class QLDeThi extends javax.swing.JFrame {
         index = jTable1.getSelectedRow();
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void cbKyThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbKyThiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbKyThiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -559,6 +526,7 @@ public class QLDeThi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTestButton;
+    private javax.swing.JComboBox<String> cbKyThi;
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JButton delButton;
     private javax.swing.JButton jButton3;
@@ -570,6 +538,7 @@ public class QLDeThi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField tfLevel1;

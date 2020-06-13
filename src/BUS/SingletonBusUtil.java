@@ -8,6 +8,7 @@ import BUSImpl.KetQuaBUSImpl;
 import BUSImpl.KyThiBUSImpl;
 import BUSImpl.MonHocBUSImpl;
 import BUSImpl.NguoiDungBUSImpl;
+import BUSImpl.PhongThiBUSImpl;
 import BUSImpl.VaiTroBUSImpl;
 
 
@@ -22,6 +23,8 @@ public class SingletonBusUtil {
     private static CauHoiBUSImpl cauHoiBUSImpl=null;
     private static KetQuaBUSImpl ketQuaBUSImpl=null;
     private static KyThiBUSImpl kyThiBUSImpl=null;
+    private static PhongThiBUSImpl phongThiBUSImpl=null;
+    
 
     public static NguoiDungBUSImpl getNguoiDungBUSInstance(){
         if(nguoiDungBUSImpl==null){
@@ -69,5 +72,11 @@ public class SingletonBusUtil {
            kyThiBUSImpl=new KyThiBUSImpl();
        }
         return kyThiBUSImpl;
+   }
+   public static PhongThiBUSImpl getPhongThiBUSInstance(){
+       if(phongThiBUSImpl==null){
+           phongThiBUSImpl=new PhongThiBUSImpl();
+       }
+        return phongThiBUSImpl;
    }
 }
