@@ -21,6 +21,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -29,7 +30,7 @@ import javax.swing.table.TableModel;
  *
  * @author DuongSon
  */
-public class QLDeThi extends javax.swing.JFrame {
+public class QLDeThi extends javax.swing.JDialog {
 
     private List<MonHocDTO> listSubjectName;
     private List<KyThiDTO> listKyThiName;
@@ -40,7 +41,8 @@ public class QLDeThi extends javax.swing.JFrame {
     /**
      * Creates new form TestManagerment
      */
-    public QLDeThi() {
+    public QLDeThi(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         setBounds(50, 50, 800, 500);
         setResizable(false);
@@ -135,7 +137,7 @@ public class QLDeThi extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cbKyThi = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -244,7 +246,8 @@ public class QLDeThi extends javax.swing.JFrame {
         });
         getContentPane().add(cbKyThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 302, 111, -1));
 
-        pack();
+        setSize(new java.awt.Dimension(840, 491));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -497,7 +500,7 @@ public class QLDeThi extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -519,7 +522,7 @@ public class QLDeThi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLDeThi().setVisible(true);
+                new QLDeThi(new JFrame(),true).setVisible(true);
             }
         });
     }

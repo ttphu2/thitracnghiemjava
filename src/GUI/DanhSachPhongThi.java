@@ -269,10 +269,8 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
         if (n == JOptionPane.YES_OPTION) {
         
             SingletonBusUtil.getPhongThiBUSInstance().deleteDeThi(Integer.parseInt(cbPhongThi.getSelectedItem().toString()));
-//            cbPhongThi.remove(cbPhongThi.getSelectedIndex());
             cbPhongThi.removeItem(cbPhongThi.getSelectedItem());
             cbPhongThi.setSelectedIndex(0);
-         //   setCbPhongThi();
             userDTOS= SingletonBusUtil.getPhongThiBUSInstance().findSinhVienByEqualUnique("maPhong", Integer.parseInt(cbPhongThi.getSelectedItem().toString()));
             cod.showTable((ArrayList<NguoiDungDTO>) userDTOS, table);
             
@@ -323,8 +321,13 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
     }//GEN-LAST:event_tableMouseReleased
 
     private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
-     // new FormNguoiDung(this, true).setVisible(true);
-    //  cod.showResult(table);
+           dispose();
+        new SLThiSinh(this, true).setVisible(true);
+        setVisible(true);
+      //listIdPhong=SingletonBusUtil.getPhongThiBUSInstance().findListIdPhongThi();
+    //  cbPhongThi.addItem(listIdPhong.get(listIdPhong.size()-1).getMaPhong().toString());
+      
+       
 
     }//GEN-LAST:event_buttonThemActionPerformed
 

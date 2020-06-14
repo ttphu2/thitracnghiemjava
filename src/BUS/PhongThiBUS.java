@@ -21,5 +21,6 @@ public interface PhongThiBUS {
     Integer deleteDeThi(Integer ID);
     Integer findNewIdPhongThi();
     Integer savePhongThi(List<NguoiDungDTO> userDTOS,Integer maDe);
+    List<PhongThiDTO> findPhongThiByUserId(Integer id);
    
 }

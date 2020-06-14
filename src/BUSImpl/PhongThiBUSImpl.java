@@ -96,4 +96,16 @@ public class PhongThiBUSImpl implements PhongThiBUS{
          }               
          return roomId;
      }
+    @Override
+    public List<PhongThiDTO> findPhongThiByUserId(Integer id) {
+         NguoiDungEntity user=SingletonDaoUtil.getNguoiDungDAOInstance().findbyID(id);
+         List<PhongThiEntity> entitys=user.getPhongThiList();
+         List<PhongThiDTO> dtos=new ArrayList<PhongThiDTO>();
+         for(PhongThiEntity item:entitys){
+             PhongThiDTO temp= PhongThiBeanUtil.entity2Dto(item);
+             dtos.add(temp);
+             
+         }
+         return dtos;
+    }
 }
