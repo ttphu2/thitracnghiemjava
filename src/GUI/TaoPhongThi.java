@@ -9,11 +9,14 @@ import BUS.NguoiDungBUS;
 import BUS.SingletonBusUtil;
 import BUSImpl.NguoiDungBUSImpl;
 import Constant.Constant;
+import DTO.DeThiDTO;
 import DTO.NguoiDungDTO;
+import DTO.PhongThiDTO;
 import DTO.VaiTroDTO;
 import Report.JasperRp;
 import Report.UtilConnect;
 import Table.SinhVienTable;
+import Util.CheckData;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Font;
@@ -50,13 +53,19 @@ public class TaoPhongThi extends javax.swing.JDialog {
 
     SinhVienTable cod = new SinhVienTable();
     ArrayList<NguoiDungDTO> userDTOS = new ArrayList<NguoiDungDTO>();
+    private static Integer maDe;
+    private static Integer soLuongThiSinh;
+    private int idPhongThi;
+    int sample=0;
 
-    public TaoPhongThi(java.awt.Frame parent, boolean modal) {
+    public TaoPhongThi(java.awt.Dialog parent, boolean modal,Integer maDe,Integer soLuongThiSinh) {
         super(parent, modal);
         initComponents();
+        this.maDe=maDe;
+        this.soLuongThiSinh=soLuongThiSinh;
         paint_table();
-        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(null, null, Constant.SORT_ASC, null, null, "");
-        userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
+        idPhongThi=SingletonBusUtil.getPhongThiBUSInstance().findNewIdPhongThi();
+        counterLabel.setText(String.valueOf(sample)+"/"+String.valueOf(soLuongThiSinh));
         cod.showTable(userDTOS, table);
 
     }
@@ -79,24 +88,14 @@ public class TaoPhongThi extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        tfIdStu = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        tfNameStu = new javax.swing.JTextField();
-        cbGioiTinh = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        cbSapXep = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        cbChieuSapXep = new javax.swing.JComboBox<>();
-        buttonXoa1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jDateNgaySinh1 = new com.toedter.calendar.JDateChooser();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jDateNgaySinh2 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
+        counterLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txMSSV = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,7 +107,7 @@ public class TaoPhongThi extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Danh sách sinh viên");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 130, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 130, -1));
 
         jButton1.setBackground(new java.awt.Color(93, 200, 119));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,7 +120,7 @@ public class TaoPhongThi extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 140, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 140, 30));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
@@ -221,186 +220,77 @@ public class TaoPhongThi extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(table);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 720, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 620, 330));
 
-        jPanel2.setBackground(new java.awt.Color(250, 250, 250));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm nâng cao"));
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 620, 420));
 
-        jLabel4.setText("Giới tính");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, 20));
+        jPanel3.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tfIdStu.addActionListener(new java.awt.event.ActionListener() {
+        counterLabel.setBackground(new java.awt.Color(250, 250, 250));
+        counterLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        counterLabel.setForeground(new java.awt.Color(32, 78, 199));
+        counterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        counterLabel.setText("00/25");
+        jPanel3.add(counterLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Số lượng SV:");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 100, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Nhập MSSV:");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 80, 20));
+        jPanel3.add(txMSSV, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 140, -1));
+
+        btnAdd.setBackground(new java.awt.Color(93, 200, 119));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("Thêm");
+        btnAdd.setContentAreaFilled(false);
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdd.setOpaque(true);
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIdStuActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        jPanel2.add(tfIdStu, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 170, 20));
+        jPanel3.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 110, 20));
 
-        jLabel5.setText("Tìm theo tên sinh viên");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 150, 20));
-        jPanel2.add(tfNameStu, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 170, 20));
-
-        cbGioiTinh.setBackground(new java.awt.Color(250, 250, 250));
-        cbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Nam", "Nữ" }));
-        cbGioiTinh.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(93, 200, 119));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Xóa");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setOpaque(true);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGioiTinhActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(cbGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 110, 20));
 
-        jLabel7.setText("Tìm theo ngày sinh");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, -1, 20));
-
-        jLabel8.setText("Sắp xếp theo");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, 20));
-
-        cbSapXep.setBackground(new java.awt.Color(250, 250, 250));
-        cbSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Mã người dùng", "Tên đăng nhập", "Ngày tạo", "Họ", "Tên", "Ngày sinh" }));
-        cbSapXep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSapXepActionPerformed(evt);
-            }
-        });
-        jPanel2.add(cbSapXep, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
-
-        jLabel9.setText("Chiều sắp xếp");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 70, 20));
-
-        cbChieuSapXep.setBackground(new java.awt.Color(250, 250, 250));
-        cbChieuSapXep.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Tăng dần", "Giảm dần" }));
-        cbChieuSapXep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbChieuSapXepActionPerformed(evt);
-            }
-        });
-        jPanel2.add(cbChieuSapXep, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
-
-        buttonXoa1.setBackground(new java.awt.Color(93, 200, 119));
-        buttonXoa1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonXoa1.setText("Xóa");
-        buttonXoa1.setContentAreaFilled(false);
-        buttonXoa1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonXoa1.setOpaque(true);
-        buttonXoa1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonXoa1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(buttonXoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 139, 31));
-
-        jButton3.setText("Mặc định");
+        jButton3.setBackground(new java.awt.Color(93, 200, 119));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Lưu");
+        jButton3.setContentAreaFilled(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
-        jPanel2.add(jDateNgaySinh1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 170, 20));
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 110, 20));
 
-        jLabel10.setText("Tìm theo mã sinh viên");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 20));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 420));
 
-        jLabel11.setText("Đến ngày");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 50, 20));
-        jPanel2.add(jDateNgaySinh2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 170, 20));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 770, 140));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 750, 470));
-
-        jPanel3.setBackground(new java.awt.Color(250, 250, 250));
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 470));
-
-        setSize(new java.awt.Dimension(1058, 508));
+        setSize(new java.awt.Dimension(953, 459));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Map<String, Object> property = new HashMap<String, Object>();
-        String tuNgay = null;
-        String denNgay = null;
-        String whereClause = "";
-        if (jDateNgaySinh1.getDate() != null) {
-            tuNgay = convertJavaDateToSqlDate(jDateNgaySinh1.getDate()).toString();
-            if (jDateNgaySinh2.getDate() != null) {
-                denNgay = convertJavaDateToSqlDate(jDateNgaySinh2.getDate()).toString();
-                whereClause = "AND ngaysinh BETWEEN '" + tuNgay + "' AND '" + denNgay + "'";
-            } else {
-                property.put("ngaySinh", tuNgay);
-            }
-
-        }
-
-        if (!"".equals(tfIdStu.getText())) {
-            try {
-                NguoiDungDTO temp = SingletonBusUtil.getNguoiDungBUSInstance().findById(Integer.parseInt(tfIdStu.getText()));
-                userDTOS = new ArrayList<NguoiDungDTO>();
-                if (temp != null) {
-                    userDTOS.add(temp);
-                }
-                cod.showTable(userDTOS, table);
-            } catch (ObjectNotFoundException e) {
-                userDTOS = new ArrayList<NguoiDungDTO>();
-                cod.showTable(userDTOS, table);
-            }
-
-            return;
-        }
-        if (!"".equals(tfNameStu.getText())) {
-            property.put("tenDayDu", tfNameStu.getText());
-
-        }
-        String sapXepTheo = null;
-        if (!"None".equals(cbSapXep.getSelectedItem().toString())) {
-//            None
-//Mã người dùng
-//Tên đăng nhập
-//Ngày tạo
-//Họ
-//Tên
-//Ngày sinh
-            int temp = cbSapXep.getSelectedIndex();
-            switch (temp) {
-                case 1:
-                    sapXepTheo = "maNguoiDung";
-                    break;
-                case 2:
-                    sapXepTheo = "tenDangNhap";
-                    break;
-                case 3:
-                    sapXepTheo = "ngayTao";
-                    break;
-                case 4:
-                    sapXepTheo = "ho";
-                    break;
-                case 5:
-                    sapXepTheo = "ten";
-                    break;
-                case 6:
-                    sapXepTheo = "ngaySinh";
-                    break;
-                default:
-                    sapXepTheo = null;
-                    break;
-            }
-
-        }
-
-        if (!"None".equals(cbGioiTinh.getSelectedItem().toString())) {
-            property.put("gioiTinh", cbGioiTinh.getSelectedItem().toString());
-        }
-        String chieuSapXep = "1";
-        if (!"None".equals(cbChieuSapXep.getSelectedItem().toString())) {
-            chieuSapXep = Integer.toString(cbChieuSapXep.getSelectedIndex());
-        }
-        Object[] objects = SingletonBusUtil.getNguoiDungBUSInstance().findByProperty(property, sapXepTheo, chieuSapXep, null, null, whereClause);
-        userDTOS = (ArrayList<NguoiDungDTO>) objects[1];
-        cod.showTable(userDTOS, table);
-
-
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFocusGained
@@ -415,34 +305,66 @@ public class TaoPhongThi extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tableMouseReleased
 
-    private void tfIdStuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdStuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIdStuActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+       
+        if (userDTOS.size() == soLuongThiSinh){
+            JOptionPane.showMessageDialog(rootPane,"Số lượng sinh viên đã đủ!");      
+            return;
+        }
+        
+        if( CheckData.kiemTraSo(txMSSV.getText())){
+            if(!checkIdInList(Integer.parseInt(txMSSV.getText()))){
+         try{
+           NguoiDungDTO dto= SingletonBusUtil.getNguoiDungBUSInstance().findById(Integer.parseInt(txMSSV.getText()));
+           userDTOS.add(dto);
+           sample++;
+           counterLabel.setText(String.valueOf(sample)+"/"+soLuongThiSinh); 
+           txMSSV.setText("");
+           txMSSV.requestFocus();
+           cod.showTable(userDTOS,table);
+         } catch(ObjectNotFoundException e){
+             JOptionPane.showMessageDialog(null, "MSSV không tồn tại");
+             return;
+         }
+            }else{
+               JOptionPane.showMessageDialog(null, "MSSV đã có trong dánh sách thí sinh");
+             return; 
+            }
+     }else{
+         JOptionPane.showMessageDialog(null, "Vui lòng nhập số");
+     }
+        
+      
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void cbGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGioiTinhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbGioiTinhActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int[] index = table.getSelectedRows();// lay so thu tu nhung~ dong` can` xoa ( dong` vs mssv khac nhau)
+        List<Integer> listIdRemove = new ArrayList<>();
+        for (int item : index) {
+            listIdRemove.add((Integer) table.getValueAt(item, 0));
+        }// lay list MSSV can xoa
 
-    private void cbSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSapXepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbSapXepActionPerformed
-
-    private void cbChieuSapXepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChieuSapXepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbChieuSapXepActionPerformed
-
-    private void buttonXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoa1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonXoa1ActionPerformed
+        for (Integer item : listIdRemove) {
+            for (NguoiDungDTO temp : userDTOS) {
+                if (temp.getMaNguoiDung() == item) {
+                    userDTOS.remove(temp);                   
+                    break;
+                }
+            }
+        }
+        sample=sample-listIdRemove.size();
+       counterLabel.setText(String.valueOf(sample)+"/"+soLuongThiSinh);
+        cod.showTable(userDTOS, table);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        tfIdStu.setText("");
-        tfNameStu.setText("");
-        jDateNgaySinh1.setDate(null);
-        jDateNgaySinh2.setDate(null);
-        cbChieuSapXep.setSelectedIndex(0);
-        cbGioiTinh.setSelectedIndex(0);
-        cbSapXep.setSelectedIndex(0);
+     if(userDTOS.size() == soLuongThiSinh){
+        SingletonBusUtil.getPhongThiBUSInstance().savePhongThi(userDTOS, maDe);
+        JOptionPane.showMessageDialog(rootPane, "Lưu thành công !");
+        dispose();
+     }else{
+        JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ số thí sinh");  
+     }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -476,7 +398,7 @@ public class TaoPhongThi extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TaoPhongThi dialog = new TaoPhongThi(new javax.swing.JFrame(), true);
+                TaoPhongThi dialog = new TaoPhongThi(new javax.swing.JDialog(), true,maDe,soLuongThiSinh);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -489,29 +411,19 @@ public class TaoPhongThi extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonXoa1;
-    private javax.swing.JComboBox<String> cbChieuSapXep;
-    private javax.swing.JComboBox<String> cbGioiTinh;
-    private javax.swing.JComboBox<String> cbSapXep;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JLabel counterLabel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateNgaySinh1;
-    private com.toedter.calendar.JDateChooser jDateNgaySinh2;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
-    private javax.swing.JTextField tfIdStu;
-    private javax.swing.JTextField tfNameStu;
+    private javax.swing.JTextField txMSSV;
     // End of variables declaration//GEN-END:variables
 private void paint_table() {
         jScrollPane1.getViewport().setBackground(Color.WHITE);
@@ -525,5 +437,12 @@ private void paint_table() {
         //table.setShowVerticalLines(true);// de the hien duong vien doc
 
     }
-
+private boolean checkIdInList(Integer id){
+    for(NguoiDungDTO item:userDTOS){
+        if(item.getMaNguoiDung()==id){          
+            return true;
+        }
+    }
+    return false;
+}
 }

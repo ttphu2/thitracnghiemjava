@@ -19,5 +19,7 @@ public interface PhongThiBUS {
     List<NguoiDungDTO> findSinhVienByEqualUnique(String property,Object value);
     List<PhongThiDTO> findListIdPhongThi();
     Integer deleteDeThi(Integer ID);
+    Integer findNewIdPhongThi();
+    Integer savePhongThi(List<NguoiDungDTO> userDTOS,Integer maDe);
    
 }

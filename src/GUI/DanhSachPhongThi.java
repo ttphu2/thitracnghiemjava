@@ -323,8 +323,8 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
     }//GEN-LAST:event_tableMouseReleased
 
     private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
-      //  new FormNguoiDung(this, true).setVisible(true);
-     //   cod.showResult(table);
+     // new FormNguoiDung(this, true).setVisible(true);
+    //  cod.showResult(table);
 
     }//GEN-LAST:event_buttonThemActionPerformed
 

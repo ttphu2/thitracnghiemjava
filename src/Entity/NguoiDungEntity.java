@@ -57,7 +57,7 @@ public class NguoiDungEntity {
     @OneToMany(mappedBy = "nguoiDung",fetch = FetchType.LAZY)
     private List<KetQuaEntity> ketQuaEntitys;
     
-     @OneToMany(mappedBy = "nguoiDungEntity",fetch = FetchType.LAZY)
+     @OneToMany(mappedBy = "nguoiDungEntity",fetch = FetchType.EAGER)
     private List<PhongThiEntity> phongThiList;
 
     public List<PhongThiEntity> getPhongThiList() {

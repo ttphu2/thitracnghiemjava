@@ -104,14 +104,15 @@ public class SLThiSinh extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int numStudent ,numRoom;
         String input = jTextField1.getText();
-      
+      Integer maDe= Integer.parseInt(cbDeThi.getSelectedItem().toString());
        
         if (CheckData.kiemTraSo(input)) {
             
                 numStudent = Integer.parseInt(input);
-                System.out.println(numStudent);              
-//                new CreateRoom(numRoom,numStudent).setVisible(true);
-//                setVisible(false);          
+                System.out.println(numStudent);     
+                 dispose();
+               new TaoPhongThi(this,true,maDe,numStudent).setVisible(true);
+                        
         }else{
             JOptionPane.showMessageDialog(rootPane,
                     "Số lượng phải là số > 0",

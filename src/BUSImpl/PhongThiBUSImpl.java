@@ -8,13 +8,17 @@ package BUSImpl;
 
 import BUS.KyThiBUS;
 import BUS.PhongThiBUS;
+import BUS.SingletonBusUtil;
+import Constant.Constant;
 import DAO.SingletonDaoUtil;
+import DTO.DeThiDTO;
 import DTO.KyThiDTO;
 import DTO.NguoiDungDTO;
 import DTO.PhongThiDTO;
 import Entity.KyThiEntity;
 import Entity.NguoiDungEntity;
 import Entity.PhongThiEntity;
+import Util.DeThiBeanUtil;
 import Util.KyThiBeanUtil;
 import Util.NguoiDungBeanUtil;
 import Util.PhongThiBeanUtil;
@@ -69,5 +73,27 @@ public class PhongThiBUSImpl implements PhongThiBUS{
         Integer result = SingletonDaoUtil.getPhongThiDAOInstance().delete(ids);
         return result;
     }
-        
+     @Override
+     public Integer findNewIdPhongThi() {
+      Object[] objects=   SingletonDaoUtil.getPhongThiDAOInstance().findByProperty(null, "maPhong", Constant.SORT_DESC, null, 1, " GROUP BY maPhong");
+         List<PhongThiEntity> list=(List<PhongThiEntity>) objects[1];
+        return list.get(0).getMaPhong()+1;
+         
+     }
+     @Override
+     public Integer savePhongThi(List<NguoiDungDTO> userDTOS,Integer maDe ) {
+         PhongThiDTO phongThiDTO=new PhongThiDTO();
+         DeThiDTO dethi=DeThiBeanUtil.entity2Dto(SingletonDaoUtil.getDeThiDAOInstance().findbyID(maDe));
+         Integer roomId=findNewIdPhongThi();
+       for(NguoiDungDTO item:userDTOS){
+              PhongThiDTO dto= new PhongThiDTO();
+              dto.setMaPhong(roomId);
+              dto.setTrangThai(1);
+              dto.setNguoiDungDTO(item);          
+              dethi.setMaDeThi(maDe);
+              dto.setDeThiDTO(dethi);
+              SingletonDaoUtil.getPhongThiDAOInstance().save(PhongThiBeanUtil.dto2Entity(dto));             
+         }               
+         return roomId;
+     }
 }
