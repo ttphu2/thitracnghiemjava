@@ -9,6 +9,7 @@ package BUSImpl;
 import BUS.DeThiBUS;
 import BUS.KyThiBUS;
 import DAO.SingletonDaoUtil;
+import static DAO.SingletonDaoUtil.getCTDTDAOImplInstance;
 import DTO.CauHoiDTO;
 import DTO.DeThiDTO;
 import DTO.MonHocDTO;
@@ -83,6 +84,25 @@ public class DeThiBUSImpl implements DeThiBUS{
          idDeThi.add(maBaiThi);        
         SingletonDaoUtil.getDeThiDAOInstance().delete(idDeThi);
         }
+    public List<CauHoiDTO> getCauHoiByMaDe (Integer maDeThi) {
+        DeThiEntity entity=SingletonDaoUtil.getDeThiDAOInstance().findbyID(maDeThi);            
+       List<ChiTietDeThiEntity> ctdt=SingletonDaoUtil.getCTDTDAOImplInstance().findEqualUnique("deThiEntity.maDeThi", maDeThi);
+       List<CauHoiDTO> cauHoiDTOS=new ArrayList<CauHoiDTO>();
+       for(ChiTietDeThiEntity item:ctdt)
+       {
+           CauHoiDTO dto=new CauHoiDTO();
+           dto=CauHoiBeanUtil.entity2Dto(item.getCauHoiEntity());
+           cauHoiDTOS.add(dto);                  
+       }
+       return cauHoiDTOS;
+       
+    }
+    public DeThiDTO findById(Integer maDeThi)
+    {
+        DeThiEntity entity=SingletonDaoUtil.getDeThiDAOInstance().findbyID(maDeThi); 
+        return DeThiBeanUtil.entity2Dto(entity);
+        
+    }
     
        
 }

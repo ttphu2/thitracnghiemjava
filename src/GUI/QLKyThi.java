@@ -182,7 +182,8 @@ public class QLKyThi extends javax.swing.JDialog {
         jLabel6.setText("Ngày kết thúc");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 70, 20));
 
-        pack();
+        setSize(new java.awt.Dimension(816, 434));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed

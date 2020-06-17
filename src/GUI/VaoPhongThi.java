@@ -133,9 +133,9 @@ public class VaoPhongThi extends javax.swing.JDialog {
     private void btnVaoPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoPhongActionPerformed
 int index = tbList.getSelectedRow();
     TableModel model = tbList.getModel();
-    int id = Integer.parseInt(model.getValueAt(index, 0).toString());
-    
-    System.out.println("vào phòng "+id);
+    int idDethi = Integer.parseInt(model.getValueAt(index, 0).toString());
+    new LamBaiThi(idDethi).setVisible(true);
+   
         
     }//GEN-LAST:event_btnVaoPhongActionPerformed
 

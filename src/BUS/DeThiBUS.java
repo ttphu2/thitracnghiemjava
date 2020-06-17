@@ -16,6 +16,8 @@ public interface DeThiBUS {
  Integer saveDeThi(DeThiDTO deThiDTO); 
  void saveNoiDungDeThi (Set<CauHoiDTO> cauHoiDTOS,Integer maBaiThi);
   void deleteDeThi (Integer maBaiThi);
+  DeThiDTO findById(Integer maDeThi);
+  List<CauHoiDTO> getCauHoiByMaDe (Integer maDeThi);
 // List<DeThiEntity> findEqualUnique(String property,Object value) ;
 
    
