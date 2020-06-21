@@ -8,6 +8,6 @@ import java.util.List;
 
 
 public interface KetQuaBUS {
-	KetQuaDTO saveResult(String userName, Integer maBaiThi, List<CauHoiDTO> listCauHoi);
+	KetQuaDTO saveResult(Integer maNguoiDung, Integer maBaiThi, List<CauHoiDTO> listCauHoi);
 
 }

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -124,7 +125,7 @@ public class QLCauHoi extends javax.swing.JDialog {
                 btnTinhSoCauHoiActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTinhSoCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 180, 139, 31));
+        jPanel1.add(btnTinhSoCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 130, 31));
 
         jButton1.setBackground(new java.awt.Color(93, 200, 119));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +138,7 @@ public class QLCauHoi extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 140, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm nâng cao"));
@@ -367,7 +368,7 @@ public class QLCauHoi extends javax.swing.JDialog {
                 buttonXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 139, 31));
+        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 139, 31));
 
         jButton2.setBackground(new java.awt.Color(93, 200, 119));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -380,15 +381,19 @@ public class QLCauHoi extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 140, 30));
 
+        jButton4.setBackground(new java.awt.Color(93, 200, 119));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Import");
+        jButton4.setContentAreaFilled(false);
+        jButton4.setOpaque(true);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 120, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 570));
 

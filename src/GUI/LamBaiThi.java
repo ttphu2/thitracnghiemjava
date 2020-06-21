@@ -8,6 +8,8 @@ package GUI;
 import BUS.SingletonBusUtil;
 import DTO.CauHoiDTO;
 import DTO.DeThiDTO;
+import DTO.KetQuaDTO;
+import Util.SessionUser;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,8 +24,8 @@ import java.util.List;
  * @author User
  */
 public class LamBaiThi extends javax.swing.JFrame {
-    private static final Integer IDS=1;
-    public static int testID=34;
+    private static final Integer IDS=Integer.parseInt(SessionUser.getMaNguoiDung());
+    public static int testID;
     private List<CauHoiDTO> listQuestion;
     private DeThiDTO deThi;
     
@@ -39,13 +41,10 @@ public class LamBaiThi extends javax.swing.JFrame {
         setBounds(50,50,850,610);
         setResizable(false);
         
-       // this.IDS=userId;
-        //test
-        // this.IDS=1;
-         //test
         tfStuId.setText(String.valueOf(IDS));
         tfDate.setText(java.time.LocalDate.now().toString());
-     //   testID = testId;
+        System.out.println(testId);
+        testID = testId;
         deThi=SingletonBusUtil.getDeThiBUSInstance().findById(testId);
         tfSub.setText(deThi.getMonHocDTO().getTenMonHoc());      
         listQuestion = SingletonBusUtil.getDeThiBUSInstance().getCauHoiByMaDe(testId);
@@ -80,7 +79,10 @@ public class LamBaiThi extends javax.swing.JFrame {
         }      
         if (minute == -1) {
             JOptionPane.showMessageDialog(rootPane, "Hết giờ làm bài ");
-            //btDoneActionPerformed(evt);
+            KetQuaDTO ketQua= SingletonBusUtil.getKetQuaBUSInstance().saveResult(Integer.parseInt(SessionUser.getMaNguoiDung()), deThi.getMaDeThi(), listQuestion);
+            
+            JOptionPane.showMessageDialog(rootPane, "Điểm thi là: "+ketQua.getDiemBaiThi());
+            dispose();
 //            endExam();
         }
         return --second;        
@@ -127,6 +129,7 @@ public class LamBaiThi extends javax.swing.JFrame {
         
     }
     
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -165,23 +168,30 @@ public class LamBaiThi extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         lbAns1 = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thi Trắc Nghiệm ");
+        setAlwaysOnTop(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Mã Sinh Viên:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 11, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Môn Thi :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 59, -1, 30));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Ngày thi :");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 11, -1, 30));
 
         labelTime.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         labelTime.setText("Thời gian còn :");
+        getContentPane().add(labelTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 11, -1, 30));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Câu hỏi số :");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 107, 89, 32));
 
         buttonGroup1.add(rbChoiceA);
         rbChoiceA.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -196,6 +206,7 @@ public class LamBaiThi extends javax.swing.JFrame {
                 rbChoiceAActionPerformed(evt);
             }
         });
+        getContentPane().add(rbChoiceA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 72));
 
         buttonGroup1.add(rbChoiceB);
         rbChoiceB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -210,6 +221,7 @@ public class LamBaiThi extends javax.swing.JFrame {
                 rbChoiceBActionPerformed(evt);
             }
         });
+        getContentPane().add(rbChoiceB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, 69));
 
         buttonGroup1.add(rbChoiceC);
         rbChoiceC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -224,6 +236,7 @@ public class LamBaiThi extends javax.swing.JFrame {
                 rbChoiceCActionPerformed(evt);
             }
         });
+        getContentPane().add(rbChoiceC, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, 72));
 
         buttonGroup1.add(rbChoiceD);
         rbChoiceD.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -238,48 +251,67 @@ public class LamBaiThi extends javax.swing.JFrame {
                 rbChoiceDActionPerformed(evt);
             }
         });
+        getContentPane().add(rbChoiceD, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, 69));
 
+        btPre.setBackground(new java.awt.Color(93, 200, 119));
         btPre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btPre.setText("<< Câu trước");
+        btPre.setContentAreaFilled(false);
+        btPre.setOpaque(true);
         btPre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPreActionPerformed(evt);
             }
         });
+        getContentPane().add(btPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 180, -1));
 
+        btNext.setBackground(new java.awt.Color(93, 200, 119));
         btNext.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btNext.setText("Câu sau >>");
+        btNext.setContentAreaFilled(false);
+        btNext.setOpaque(true);
         btNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btNextActionPerformed(evt);
             }
         });
+        getContentPane().add(btNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, 180, -1));
 
+        btDone.setBackground(new java.awt.Color(0, 204, 204));
         btDone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btDone.setText("Nộp bài");
+        btDone.setContentAreaFilled(false);
+        btDone.setOpaque(true);
         btDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDoneActionPerformed(evt);
             }
         });
+        getContentPane().add(btDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 120, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Chọn câu hỏi");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 25, 121, 48));
 
         tfStuId.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfStuId.setText("mssv");
+        getContentPane().add(tfStuId, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 18, -1, -1));
 
         tfSub.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfSub.setText("mon thi");
+        getContentPane().add(tfSub, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 66, -1, -1));
 
         tfDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfDate.setText("date");
+        getContentPane().add(tfDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 18, -1, -1));
 
         lbMinutes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lbMinutes.setText("time");
+        getContentPane().add(lbMinutes, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 18, -1, -1));
 
         tfNumOfQes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfNumOfQes.setText("number");
+        getContentPane().add(tfNumOfQes, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 115, 58, -1));
 
         cbQuestion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         cbQuestion.addActionListener(new java.awt.event.ActionListener() {
@@ -287,144 +319,51 @@ public class LamBaiThi extends javax.swing.JFrame {
                 cbQuestionActionPerformed(evt);
             }
         });
+        getContentPane().add(cbQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 79, 121, 36));
 
         lbSec.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lbSec.setText("jLabel5");
+        getContentPane().add(lbSec, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 18, -1, -1));
 
+        tfQueContent.setEditable(false);
         tfQueContent.setColumns(20);
         tfQueContent.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfQueContent.setRows(5);
         jScrollPane1.setViewportView(tfQueContent);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 145, 722, 100));
+
+        lbAns2.setEditable(false);
         lbAns2.setColumns(20);
-        lbAns2.setRows(5);
+        lbAns2.setRows(3);
         jScrollPane2.setViewportView(lbAns2);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 301, 69));
+
+        lbAns3.setEditable(false);
         lbAns3.setColumns(20);
-        lbAns3.setRows(5);
+        lbAns3.setRows(3);
         jScrollPane3.setViewportView(lbAns3);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 284, 72));
+
+        lbAns4.setEditable(false);
         lbAns4.setColumns(20);
-        lbAns4.setRows(5);
+        lbAns4.setRows(3);
         jScrollPane4.setViewportView(lbAns4);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 284, 69));
+
+        lbAns1.setEditable(false);
         lbAns1.setColumns(20);
-        lbAns1.setRows(5);
+        lbAns1.setLineWrap(true);
+        lbAns1.setRows(3);
         jScrollPane5.setViewportView(lbAns1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btPre, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfNumOfQes, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfStuId)
-                                        .addComponent(tfSub))
-                                    .addGap(69, 69, 69)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfDate)
-                                    .addGap(72, 72, 72)
-                                    .addComponent(labelTime)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lbMinutes)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbSec)
-                            .addGap(48, 48, 48)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbQuestion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(rbChoiceB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(rbChoiceA)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane5)))
-                            .addGap(31, 31, 31)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btDone, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(rbChoiceD, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(rbChoiceC, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(83, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfStuId)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfDate)
-                            .addComponent(lbMinutes)
-                            .addComponent(lbSec))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfSub))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNumOfQes)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rbChoiceA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rbChoiceC, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rbChoiceB, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(rbChoiceD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btPre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btDone, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btNext, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
-        );
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 301, 72));
 
-        pack();
+        setSize(new java.awt.Dimension(865, 570));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNextActionPerformed
@@ -500,18 +439,24 @@ public class LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_cbQuestionActionPerformed
 
     private void btDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoneActionPerformed
-//        // TODO add your handling code here:
-//        for (int i=0; i< listChoice.length;i++)
-//            if ( listChoice[i] == null ){
-//                JOptionPane.showMessageDialog(rootPane,"Bạn còn câu chưa làm");
-//                break;
-//            } 
-//        int click = JOptionPane.showConfirmDialog(rootPane,"Thời gian vẫn còn . "
-//                + "Bạn có chắc chắn nộp bài không?", "Nộp bài", JOptionPane.YES_NO_OPTION);
-//        if (click == JOptionPane.YES_OPTION){
-//            endExam();
-//        }
-//        
+        // TODO add your handling code here:
+        int count=0;
+        for (int i=0; i< listQuestion.size();i++)
+            if ( listQuestion.get(i).getDapAnNguoiDung() == null ){
+                JOptionPane.showMessageDialog(rootPane,"Bạn còn câu chưa làm");
+                break;
+            } 
+        
+        int click = JOptionPane.showConfirmDialog(rootPane,"Thời gian vẫn còn . "
+                + "Bạn có chắc chắn nộp bài không?", "Nộp bài", JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.YES_OPTION){
+           //Integer.parseInt(SessionUser.getMaNguoiDung())
+           KetQuaDTO ketQua= SingletonBusUtil.getKetQuaBUSInstance().saveResult(1, deThi.getMaDeThi(), listQuestion);
+            
+            JOptionPane.showMessageDialog(rootPane, "Điểm thi là: "+ketQua.getDiemBaiThi());
+            dispose();
+        }
+        
         
         
     }//GEN-LAST:event_btDoneActionPerformed

@@ -62,7 +62,7 @@ public class TestDao {
 //System.out.print(list.get(1).getCauHoiEntity().getMaCauHoi());
 
 //json
-/*
+
 List<NguoiDungDTO> list=new ArrayList<NguoiDungDTO>();
 NguoiDungDTO dto=SingletonBusUtil.getNguoiDungBUSInstance().findById(1);
 NguoiDungDTO dto1=SingletonBusUtil.getNguoiDungBUSInstance().findById(2);
@@ -71,16 +71,16 @@ list.add(dto1);
 Gson gson = new Gson();
 String json = gson.toJson(list);
 List<NguoiDungDTO> temp = gson.fromJson(json, new TypeToken<List<NguoiDungDTO>>(){}.getType());
-System.out.println(json);
+
 for(NguoiDungDTO item:temp)
 {
     System.out.println(item.getTenDangNhap());
-}*/
- NguoiDungEntity entity=SingletonDaoUtil.getNguoiDungDAOInstance().findbyID(1);
- System.out.println(entity.getPhongThiList().size());
- System.out.println(entity.getPhongThiList().get(0).getMaPhong());
- System.out.println(entity.getPhongThiList().get(1).getMaPhong());
- System.out.println(entity.getPhongThiList().get(2).getMaPhong());
+}
+// NguoiDungEntity entity=SingletonDaoUtil.getNguoiDungDAOInstance().findbyID(1);
+// System.out.println(entity.getPhongThiList().size());
+// System.out.println(entity.getPhongThiList().get(0).getMaPhong());
+// System.out.println(entity.getPhongThiList().get(1).getMaPhong());
+// System.out.println(entity.getPhongThiList().get(2).getMaPhong());
 
     }
 }

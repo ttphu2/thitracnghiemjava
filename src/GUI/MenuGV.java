@@ -43,8 +43,7 @@ public class MenuGV extends javax.swing.JFrame {
         TestVar = new javax.swing.JLabel();
         btnDash = new javax.swing.JPanel();
         btnDashBoard1 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        btnDashBoard2 = new javax.swing.JLabel();
+        btnQuit = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         pnlDashBoard = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -58,15 +57,12 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         pnlTest = new javax.swing.JPanel();
@@ -76,11 +72,9 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
@@ -88,7 +82,6 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -216,38 +209,20 @@ public class MenuGV extends javax.swing.JFrame {
 
         jPanel2.add(btnDash, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 240, 30));
 
-        jPanel9.setBackground(new java.awt.Color(34, 45, 49));
-
-        btnDashBoard2.setBackground(new java.awt.Color(34, 45, 49));
-        btnDashBoard2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        btnDashBoard2.setForeground(new java.awt.Color(255, 255, 255));
-        btnDashBoard2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnDashBoard2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-speed-24.png"))); // NOI18N
-        btnDashBoard2.setText("Dashboard");
-        btnDashBoard2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDashBoard2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnQuit.setBackground(new java.awt.Color(34, 45, 49));
+        btnQuit.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        btnQuit.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnQuit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_exit_24px_1.png"))); // NOI18N
+        btnQuit.setText("Thoát");
+        btnQuit.setToolTipText("");
+        btnQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnDashBoard2MouseClicked(evt);
+                btnQuitMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnDashBoard2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnDashBoard2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 210, 30));
+        jPanel2.add(btnQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 214, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 510));
 
@@ -317,7 +292,7 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jPanel12.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
 
-        jLabel31.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(102, 102, 102));
         jLabel31.setText("Đổi mật khẩu");
         jPanel12.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -339,11 +314,7 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel26.setOpaque(true);
         jPanel11.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel27.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel27.setText("Thêm,xóa sinh viên");
-        jPanel11.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        jLabel28.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(102, 102, 102));
         jLabel28.setText("Quản lý sinh viên");
         jPanel11.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -365,11 +336,7 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel32.setOpaque(true);
         jPanel13.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel33.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel33.setText("Thêm,xóa môn học");
-        jPanel13.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, 30));
-
-        jLabel34.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(102, 102, 102));
         jLabel34.setText("Quản lý môn học");
         jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -391,11 +358,7 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel35.setOpaque(true);
         jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel36.setText("Thêm,xóa câu hỏi");
-        jPanel14.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        jLabel37.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel37.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(102, 102, 102));
         jLabel37.setText("Quản lý câu hỏi");
         jPanel14.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -470,11 +433,7 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel38.setOpaque(true);
         jPanel15.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel39.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel39.setText("Thêm,xóa môn học");
-        jPanel15.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, 30));
-
-        jLabel40.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel40.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
         jLabel40.setText("Quản lý kỳ thi");
         jPanel15.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -482,6 +441,7 @@ public class MenuGV extends javax.swing.JFrame {
         jPanel4.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 250, 100));
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel16.setToolTipText("");
         jPanel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -490,17 +450,13 @@ public class MenuGV extends javax.swing.JFrame {
         });
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel41.setBackground(new java.awt.Color(0, 167, 89));
+        jLabel41.setBackground(java.awt.Color.lightGray);
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_test_passed_64px_1.png"))); // NOI18N
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_exam_64px.png"))); // NOI18N
         jLabel41.setOpaque(true);
         jPanel16.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel42.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel42.setText("Thêm,xóa đề thi");
-        jPanel16.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        jLabel43.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel43.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(102, 102, 102));
         jLabel43.setText("Quản lý đề thi");
         jPanel16.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -525,7 +481,7 @@ public class MenuGV extends javax.swing.JFrame {
         jLabel45.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jPanel17.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
 
-        jLabel46.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel46.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(102, 102, 102));
         jLabel46.setText("Quản lý phòng thi");
         jPanel17.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -541,17 +497,13 @@ public class MenuGV extends javax.swing.JFrame {
         });
         jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel47.setBackground(new java.awt.Color(57, 129, 215));
+        jLabel47.setBackground(new java.awt.Color(238, 243, 248));
         jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_student_male_64px.png"))); // NOI18N
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_leaderboard_64px.png"))); // NOI18N
         jLabel47.setOpaque(true);
         jPanel18.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel48.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel48.setText("Thêm,xóa sinh viên");
-        jPanel18.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        jLabel49.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel49.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel49.setForeground(new java.awt.Color(102, 102, 102));
         jLabel49.setText("Quản lý kết quả");
         jPanel18.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
@@ -657,10 +609,6 @@ public class MenuGV extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnDashBoard1MouseClicked
 
-    private void btnDashBoard2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashBoard2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDashBoard2MouseClicked
-
     private void btnTestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTestMouseClicked
         
     }//GEN-LAST:event_btnTestMouseClicked
@@ -720,6 +668,10 @@ public class MenuGV extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(this, "Nhóm gồm 4 thành viên: \n Trần Thanh Phú \n Bùi Minh Cương \n Trần Ngọc Sang \n Tô Hồng Phúc");
     }//GEN-LAST:event_jAboutMouseClicked
 
+    private void btnQuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuitMouseClicked
+       System.exit(0);
+    }//GEN-LAST:event_btnQuitMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -774,7 +726,7 @@ public class MenuGV extends javax.swing.JFrame {
     private javax.swing.JLabel TestVar;
     private javax.swing.JPanel btnDash;
     private javax.swing.JLabel btnDashBoard1;
-    private javax.swing.JLabel btnDashBoard2;
+    private javax.swing.JLabel btnQuit;
     private javax.swing.JPanel btnTest;
     private javax.swing.JLabel jAbout;
     private javax.swing.JLabel jLabel1;
@@ -787,29 +739,23 @@ public class MenuGV extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -831,7 +777,6 @@ public class MenuGV extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pnlDashBoard;
     private javax.swing.JPanel pnlTest;

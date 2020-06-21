@@ -8,8 +8,11 @@ package GUI;
 //import Util.ConnectUtil;
 //import Util.ControlPerson;
 //import Util.SingletonServiceUtil;
+import Util.SessionUser;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,8 +29,10 @@ public class MenuSV extends javax.swing.JFrame {
         initComponents();
         btnDash.setBackground(new java.awt.Color(44,59,66));
         pnlDashBoard.setVisible(true);
+        setIcon();
+        jLabel5.setText(SessionUser.getTenDangNhap());
        // paint_table();
-       // cod.preencherTabela("SELECT * FROM person ORDER BY id", table);
+      
         
     }
 
@@ -48,12 +53,11 @@ public class MenuSV extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        btnTest = new javax.swing.JPanel();
-        TestVar = new javax.swing.JLabel();
         btnDash = new javax.swing.JPanel();
         btnDashBoard1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         btnDashBoard2 = new javax.swing.JLabel();
+        btnQuit = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         pnlDashBoard = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -61,15 +65,14 @@ public class MenuSV extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
         pnlTest = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,8 +81,8 @@ public class MenuSV extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jAbout = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -124,43 +127,6 @@ public class MenuSV extends javax.swing.JFrame {
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-user-36.png"))); // NOI18N
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 40));
-
-        btnTest.setBackground(new java.awt.Color(34, 45, 49));
-        btnTest.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnTestMouseClicked(evt);
-            }
-        });
-
-        TestVar.setBackground(new java.awt.Color(34, 45, 49));
-        TestVar.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        TestVar.setForeground(new java.awt.Color(255, 255, 255));
-        TestVar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        TestVar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_folder_24px.png"))); // NOI18N
-        TestVar.setText("Data");
-        TestVar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        TestVar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TestVarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnTestLayout = new javax.swing.GroupLayout(btnTest);
-        btnTest.setLayout(btnTestLayout);
-        btnTestLayout.setHorizontalGroup(
-            btnTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnTestLayout.createSequentialGroup()
-                .addGap(0, 25, Short.MAX_VALUE)
-                .addComponent(TestVar, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        btnTestLayout.setVerticalGroup(
-            btnTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnTestLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(TestVar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel2.add(btnTest, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 240, 30));
 
         btnDash.setBackground(new java.awt.Color(34, 45, 49));
         btnDash.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -233,6 +199,21 @@ public class MenuSV extends javax.swing.JFrame {
 
         jPanel2.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 210, 30));
 
+        btnQuit.setBackground(new java.awt.Color(34, 45, 49));
+        btnQuit.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        btnQuit.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnQuit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_exit_24px_1.png"))); // NOI18N
+        btnQuit.setText("Thoát");
+        btnQuit.setToolTipText("");
+        btnQuit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnQuitMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 214, 30));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 510));
 
         jPanel7.setLayout(new java.awt.CardLayout());
@@ -283,27 +264,13 @@ public class MenuSV extends javax.swing.JFrame {
 
         pnlDashBoard.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 630, 30));
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel29.setBackground(new java.awt.Color(220, 237, 193));
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_class_64px.png"))); // NOI18N
-        jLabel29.setOpaque(true);
-        jPanel12.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
-
-        jLabel30.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel30.setText("90%");
-        jPanel12.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        jLabel31.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel31.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel31.setText("Hướng dẫn");
-        jPanel12.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
-
-        pnlDashBoard.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 250, 100));
-
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel14MouseClicked(evt);
+            }
+        });
         jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel35.setBackground(new java.awt.Color(102, 0, 204));
@@ -312,16 +279,12 @@ public class MenuSV extends javax.swing.JFrame {
         jLabel35.setOpaque(true);
         jPanel14.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
-        jLabel36.setText("90%");
-        jPanel14.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        jLabel37.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jLabel37.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(102, 102, 102));
         jLabel37.setText("Làm bài thi");
         jPanel14.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
 
-        pnlDashBoard.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 250, 100));
+        pnlDashBoard.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 250, 100));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -335,6 +298,31 @@ public class MenuSV extends javax.swing.JFrame {
         );
 
         pnlDashBoard.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, -1, 40));
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel12MouseClicked(evt);
+            }
+        });
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel29.setBackground(new java.awt.Color(220, 237, 193));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_class_64px.png"))); // NOI18N
+        jLabel29.setOpaque(true);
+        jPanel12.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 90, 110));
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        jPanel12.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel31.setText("Đổi mật khẩu");
+        jPanel12.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
+
+        pnlDashBoard.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 250, 100));
 
         jPanel7.add(pnlDashBoard, "card2");
 
@@ -494,18 +482,24 @@ public class MenuSV extends javax.swing.JFrame {
         });
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, -1, 40));
 
-        jLabel18.setBackground(new java.awt.Color(54, 127, 168));
-        jLabel18.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setText("Admin Thanh Phu");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 170, 40));
-
         jLabel9.setFont(new java.awt.Font("Segoe UI Semilight", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_info_24px.png"))); // NOI18N
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, -1, 40));
+
+        jAbout.setBackground(new java.awt.Color(54, 127, 168));
+        jAbout.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
+        jAbout.setForeground(new java.awt.Color(255, 255, 255));
+        jAbout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jAbout.setText("About Team");
+        jAbout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jAbout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jAboutMouseClicked(evt);
+            }
+        });
+        jPanel3.add(jAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 130, 40));
 
         jPanel8.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 670, -1));
 
@@ -517,19 +511,10 @@ public class MenuSV extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TestVarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TestVarMouseClicked
-        
-        btnDash.setBackground(new java.awt.Color(34,45,49));
-        pnlDashBoard.setVisible(false);
-        btnTest.setBackground(new java.awt.Color(44,59,66));
-        pnlTest.setVisible(true);
-        
-    }//GEN-LAST:event_TestVarMouseClicked
-
     private void btnDashBoard1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashBoard1MouseClicked
         btnDash.setBackground(new java.awt.Color(44,59,66));
         pnlDashBoard.setVisible(true);
-        btnTest.setBackground(new java.awt.Color(34,45,49));
+       // btnTest.setBackground(new java.awt.Color(34,45,49));
         pnlTest.setVisible(false);
        
     }//GEN-LAST:event_btnDashBoard1MouseClicked
@@ -537,10 +522,6 @@ public class MenuSV extends javax.swing.JFrame {
     private void btnDashBoard2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashBoard2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDashBoard2MouseClicked
-
-    private void btnTestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTestMouseClicked
-        
-    }//GEN-LAST:event_btnTestMouseClicked
 
     private void btnDashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashMouseClicked
        
@@ -572,6 +553,22 @@ public class MenuSV extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAboutMouseClicked
+        JOptionPane.showMessageDialog(this, "Nhóm gồm 4 thành viên: \n Trần Thanh Phú \n Bùi Minh Cương \n Trần Ngọc Sang \n Tô Hồng Phúc");
+    }//GEN-LAST:event_jAboutMouseClicked
+
+    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
+        new VaoPhongThi(this,true).setVisible(true);
+    }//GEN-LAST:event_jPanel14MouseClicked
+
+    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+        new DoiMatKhau1(this, true).setVisible(true);
+    }//GEN-LAST:event_jPanel12MouseClicked
+
+    private void btnQuitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnQuitMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btnQuitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -640,25 +637,23 @@ public class MenuSV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel TestVar;
     private javax.swing.JPanel btnDash;
     private javax.swing.JLabel btnDashBoard1;
     private javax.swing.JLabel btnDashBoard2;
-    private javax.swing.JPanel btnTest;
+    private javax.swing.JLabel btnQuit;
+    private javax.swing.JLabel jAbout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -689,5 +684,8 @@ private void paint_table() {
         table.getTableHeader().setForeground(new Color(255, 255, 255));
         table.setRowHeight(50);
         
+    }
+private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/icon_exam.png")));
     }
 }

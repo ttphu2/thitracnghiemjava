@@ -1,5 +1,6 @@
 package DAO;
 
+import DAOImpl.BaiThiDAOImpl;
 import DAOImpl.CauHoiDAOImpl;
 import DAOImpl.ChiTietDeThiDAOImpl;
 import DAOImpl.ChuongMonHocDAOImpl;
@@ -24,7 +25,8 @@ public class SingletonDaoUtil {
     private static KyThiDAOImpl kyThiDAOImpl=null;
     private static ChiTietDeThiDAOImpl ctdtDAOImpl=null;
     private static PhongThiDAOImpl phongThiDAOImpl=null;
-//    private static ResultDaoImpl resultDaoImpl = null;
+    private static BaiThiDAOImpl baiThiDAOImpl=null;
+
 
     public static NguoiDungDAOImpl getNguoiDungDAOInstance(){
         if(nguoiDungDAOImpl==null){
@@ -85,10 +87,10 @@ public class SingletonDaoUtil {
        }
         return phongThiDAOImpl;
    }
-//    public static ResultDaoImpl getResultDaoInstance() {
-//        if (resultDaoImpl == null) {
-//            resultDaoImpl = new ResultDaoImpl();
-//        }
-//        return resultDaoImpl;
-//    }
+    public static BaiThiDAOImpl getBaiThiDAOInstance() {
+        if (baiThiDAOImpl == null) {
+            baiThiDAOImpl = new BaiThiDAOImpl();
+        }
+        return baiThiDAOImpl;
+    }
 }

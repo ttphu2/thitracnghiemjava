@@ -6,7 +6,18 @@ public class CheckLogin implements Serializable {
     // lop nay để luu kết quả sau khi kiểm tra là nguoi` dung có tồn tại hay không
     private boolean isUserExist;
     private String roleName;
+    private Integer userId;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    
+    
     public boolean isUserExist() {
         return isUserExist;
     }

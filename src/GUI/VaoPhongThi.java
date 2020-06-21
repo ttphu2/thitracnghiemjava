@@ -22,7 +22,7 @@ import javax.swing.table.TableModel;
  */
 public class VaoPhongThi extends javax.swing.JDialog {
  //Integer.parseInt(SessionUser.getMaNguoiDung())
-    private List<PhongThiDTO> listPhongThi=SingletonBusUtil.getPhongThiBUSInstance().findPhongThiByUserId(1);
+    private List<PhongThiDTO> listPhongThi=SingletonBusUtil.getPhongThiBUSInstance().findPhongThiByUserId(Integer.parseInt(SessionUser.getMaNguoiDung()));
     DefaultTableModel tableModel;
     public VaoPhongThi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -133,8 +133,9 @@ public class VaoPhongThi extends javax.swing.JDialog {
     private void btnVaoPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaoPhongActionPerformed
 int index = tbList.getSelectedRow();
     TableModel model = tbList.getModel();
-    int idDethi = Integer.parseInt(model.getValueAt(index, 0).toString());
+    int idDethi = Integer.parseInt(model.getValueAt(index, 1).toString());
     new LamBaiThi(idDethi).setVisible(true);
+    dispose();
    
         
     }//GEN-LAST:event_btnVaoPhongActionPerformed

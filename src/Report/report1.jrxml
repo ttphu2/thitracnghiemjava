@@ -3,66 +3,111 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="Heading 1" fontSize="16" isBold="true"/>
 	<field name="COLUMN_1" class="java.lang.String"/>
 	<field name="COLUMN_0" class="java.lang.Integer"/>
 	<field name="COLUMN_2" class="java.lang.String"/>
 	<field name="COLUMN_3" class="java.lang.String"/>
 	<field name="COLUMN_4" class="java.lang.String"/>
 	<field name="COLUMN_5" class="java.util.Date"/>
+	<field name="COLUMN_6" class="java.lang.String"/>
+	<field name="COLUMN_7" class="java.lang.String"/>
+	<field name="COLUMN_8" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="121" y="48" width="80" height="20" uuid="5dca18fb-a458-4e94-a8e4-d6365c18067f"/>
-				<text><![CDATA[COLUMN_1]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="241" y="48" width="82" height="20" uuid="2af00b55-e9fd-4768-8cfb-84ac55cc6637"/>
-				<text><![CDATA[COLUMN_2]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="355" y="48" width="83" height="20" uuid="026b3960-1e41-4541-bebd-6a2a4da57e59"/>
-				<text><![CDATA[COLUMN_3]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="470" y="48" width="84" height="20" uuid="84828d03-ddc3-4c2b-9229-decb0440b55f"/>
-				<text><![CDATA[COLUMN_4]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="48" width="88" height="20" uuid="4aa4e97b-e8d9-4b9b-8b77-96ca8fdd52e4"/>
-				<text><![CDATA[COLUMN_0]]></text>
-			</staticText>
-		</band>
+		<band height="2" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="2" splitType="Stretch"/>
+		<band height="63" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="455" y="0" width="100" height="20" uuid="f11dff60-8749-4383-8308-e51b8c9d7c6a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="149" y="6" width="306" height="47" uuid="11b4abad-7f58-430d-bd1e-b89d0f005d05"/>
+				<textElement>
+					<font fontName="Cormorant Infant" size="36" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Danh sách thí sinh]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="4" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="179" y="16" width="82" height="20" uuid="2af00b55-e9fd-4768-8cfb-84ac55cc6637"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày sinh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="16" width="80" height="20" uuid="5dca18fb-a458-4e94-a8e4-d6365c18067f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Họ tên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="53" height="20" uuid="4aa4e97b-e8d9-4b9b-8b77-96ca8fdd52e4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MSSV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="16" width="66" height="20" uuid="026b3960-1e41-4541-bebd-6a2a4da57e59"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giới tính]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="16" width="84" height="20" uuid="84828d03-ddc3-4c2b-9229-decb0440b55f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số điện thoại]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="16" width="100" height="20" uuid="d8a2f8e0-3382-434e-907a-8ccf5539249c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="73" splitType="Stretch">
+		<band height="42" splitType="Stretch">
 			<textField>
-				<reportElement x="121" y="18" width="80" height="20" uuid="d0dde60d-e219-410e-856d-4e3f8b1b65e6"/>
-				<textFieldExpression><![CDATA[$F{COLUMN_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="241" y="18" width="82" height="20" uuid="9d5e435b-50ff-4ff2-9615-e3899833c2a5"/>
-				<textFieldExpression><![CDATA[$F{COLUMN_2}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="355" y="18" width="83" height="20" uuid="3af48e06-54be-4fc4-aade-3e79a3a7aee7"/>
+				<reportElement x="69" y="13" width="80" height="20" uuid="d0dde60d-e219-410e-856d-4e3f8b1b65e6"/>
 				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="18" width="85" height="20" uuid="37f1e5ce-5061-487c-9422-5c19a4563bfa"/>
-				<textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
+				<reportElement x="179" y="12" width="82" height="20" uuid="9d5e435b-50ff-4ff2-9615-e3899833c2a5"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="18" width="88" height="20" uuid="527c7991-64a5-4cca-a2ff-21254b472676"/>
+				<reportElement x="0" y="12" width="53" height="20" uuid="527c7991-64a5-4cca-a2ff-21254b472676"/>
 				<textFieldExpression><![CDATA[$F{COLUMN_0}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="32" width="554" height="1" uuid="fa25af3e-ea2f-44de-a3b4-252b9600680a"/>
+			</line>
+			<textField>
+				<reportElement x="283" y="13" width="66" height="20" uuid="c9888bc8-293d-422d-8284-ebac16f8a01d"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="13" width="82" height="20" uuid="33fc8669-2933-4940-a88b-b2c319621f47"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="12" width="100" height="20" uuid="020b45c7-bf25-482e-b314-9772ee1de6c1"/>
+				<textFieldExpression><![CDATA[$F{COLUMN_8}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

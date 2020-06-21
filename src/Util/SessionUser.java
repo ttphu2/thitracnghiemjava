@@ -15,15 +15,12 @@ public class SessionUser {
     public SessionUser() {
     }
 
-     public static void addSession(String tenDangNhap,String tenVaiTro) 
-     {
-         SessionUser.tenDangNhap=tenDangNhap;
-         SessionUser.tenVaiTro=tenVaiTro;
-     }
+    
      public static void removeSession() 
      {
          SessionUser.tenDangNhap=null;
          SessionUser.tenVaiTro=null;
+         SessionUser.maNguoiDung=null;
      }
     public static String getTenDangNhap() {
         return tenDangNhap;

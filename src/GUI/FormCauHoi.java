@@ -14,6 +14,7 @@ import DTO.MonHocDTO;
 import DTO.NguoiDungDTO;
 import DTO.VaiTroDTO;
 import Table.SinhVienTable;
+import Util.SessionUser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -432,7 +433,7 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
           // ket thuc them file  
           
           // gan cung user sau nay se lay id tu session de them tac gia
-        NguoiDungDTO nguoiDung=SingletonBusUtil.getNguoiDungBUSInstance().findById(1);
+        NguoiDungDTO nguoiDung=SingletonBusUtil.getNguoiDungBUSInstance().findById(Integer.parseInt(SessionUser.getMaNguoiDung()));
         dto.setNguoiDungDTO(nguoiDung);
         // ket thuc them tac gia
         

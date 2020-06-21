@@ -27,6 +27,7 @@ public class NguoiDungDAOImpl extends AbstractDao<Integer, NguoiDungEntity> impl
        Transaction transaction=session.beginTransaction();
        boolean isUserExist=false;
        String roleName=null;
+       Integer userId = null;
         try{
             StringBuilder sql= new StringBuilder("FROM NguoiDungEntity ue WHERE ue.tenDangNhap= :tenDangNhap AND ue.matKhau= :matKhau");
             Query query=session.createQuery(sql.toString());
@@ -36,6 +37,7 @@ public class NguoiDungDAOImpl extends AbstractDao<Integer, NguoiDungEntity> impl
                 isUserExist=true;
                 NguoiDungEntity userEntity= (NguoiDungEntity) query.uniqueResult();
                 roleName=userEntity.getVaiTroEntity().getTenVaiTro();
+                userId=userEntity.getMaNguoiDung();
             }
         }catch(HibernateException e){
             transaction.rollback();
@@ -43,6 +45,6 @@ public class NguoiDungDAOImpl extends AbstractDao<Integer, NguoiDungEntity> impl
         }finally {
             session.close();
         }
-        return new Object[]{isUserExist,roleName};
+        return new Object[]{isUserExist,roleName,userId};
     }
 }

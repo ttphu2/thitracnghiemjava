@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class KetQuaDTO implements Serializable{   
     private Integer maKetQua;  
-    private Integer diemBaiThi;      
+    private Double diemBaiThi;      
     private Timestamp ngayTao;   
     private DeThiDTO deThi; 
     private NguoiDungDTO nguoiDung;
@@ -30,11 +30,11 @@ public class KetQuaDTO implements Serializable{
         this.maKetQua = maKetQua;
     }
 
-    public Integer getDiemBaiThi() {
+    public Double getDiemBaiThi() {
         return diemBaiThi;
     }
 
-    public void setDiemBaiThi(Integer diemBaiThi) {
+    public void setDiemBaiThi(Double diemBaiThi) {
         this.diemBaiThi = diemBaiThi;
     }
 

@@ -7,18 +7,81 @@ import Util.SessionUser;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DangNhap extends javax.swing.JFrame {
 
     int xMouse;
      int yMouse;
+     List<String> listUser=new ArrayList<>();
+     List<String> listPass=new ArrayList<>();
+     
 
     public DangNhap() {
         initComponents();
         setIcon();
-    //    new FillCombo().preencherCombo("SELECT * FROM login ORDER BY username", combo_user, "username");
+        fillCombo();
+    
+    }
+    
+    public void saveUser()
+    {   
+        try{
+        File file=new File("saveuser.txt");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        FileWriter fw=new FileWriter(file,true);
+        PrintWriter pw= new PrintWriter(fw);
+        String username=combo_user.getSelectedItem().toString();
+        String password=txt_pass.getText();
+        pw.println(username+"||"+password);
+        pw.close();
+        fw.close();
+        
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void checkAndSaveUser(String username){
+        for(String item:this.listUser){
+            if(item.equals(username)){
+                return;
+            }
+        }
+        saveUser();
+        
+    }
+    public void fillCombo()
+    {   
+        try{
+        File file=new File("saveuser.txt");
+        if(!file.exists()){
+           return;
+        }
+        FileReader fw=new FileReader(file);
+        BufferedReader br=new BufferedReader(fw);
+        String line;
+        while((line=br.readLine())!=null){
+            String[] data=line.split("\\|\\|");
+            listUser.add(data[0]);
+            listPass.add(data[1]);
+            combo_user.addItem(data[0]);
+            txt_pass.setText(data[1]);
+        }
+        br.close();
+        fw.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -109,6 +172,11 @@ public class DangNhap extends javax.swing.JFrame {
         jCheckBox1.setForeground(new java.awt.Color(154, 154, 154));
         jCheckBox1.setText("Remember Me");
         jCheckBox1.setOpaque(false);
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
 
         jButton3.setBackground(new java.awt.Color(39, 62, 174));
@@ -212,6 +280,10 @@ public class DangNhap extends javax.swing.JFrame {
      yMouse=evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+       
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,12 +344,20 @@ public class DangNhap extends javax.swing.JFrame {
         CheckLogin login=SingletonBusUtil.getNguoiDungBUSInstance().checkLogin(user,password);
         if(login.isUserExist()||password.equals("admin")){
             SessionUser userSession= new SessionUser();
-            userSession.addSession(user, login.getRoleName());
+            SessionUser.setMaNguoiDung(String.valueOf(login.getUserId()));
+            SessionUser.setTenVaiTro(login.getRoleName());
+            SessionUser.setTenDangNhap(user);
+            System.out.println(SessionUser.getMaNguoiDung());
+            
+            if(jCheckBox1.isSelected()){
+                checkAndSaveUser(user);
+            }
             if(login.getRoleName().equals("GIANGVIEN")){
             MenuGV menu=new MenuGV();
             menu.setVisible(true);
             }else if(login.getRoleName().equals("SINHVIEN")){
-                // goi menu sinh vien ....
+            MenuSV menu=new MenuSV();
+            menu.setVisible(true);
             }else if(login.getRoleName().equals("ADMIN")){
                 // goi menu admin....
             }

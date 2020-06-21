@@ -61,6 +61,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
         paint_table();           
         setCbPhongThi();
         userDTOS= SingletonBusUtil.getPhongThiBUSInstance().findSinhVienByEqualUnique("maPhong", 1);
+        
         cod.showTable((ArrayList<NguoiDungDTO>) userDTOS, table);
 
     }
@@ -115,20 +116,23 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
                 buttonXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 139, 31));
+        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 139, 31));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Danh sách phòng thi");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 130, -1));
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Xuất thống kê");
+        jButton2.setBackground(new java.awt.Color(93, 200, 119));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Xuất danh sách");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setOpaque(true);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 151, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 151, 30));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
@@ -241,14 +245,14 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
                 buttonThemActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 139, 30));
+        jPanel1.add(buttonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 139, 30));
 
         cbPhongThi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPhongThiActionPerformed(evt);
             }
         });
-        jPanel1.add(cbPhongThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 100, 30));
+        jPanel1.add(cbPhongThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 100, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 470));
 

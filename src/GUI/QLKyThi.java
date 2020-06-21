@@ -91,7 +91,6 @@ public class QLKyThi extends javax.swing.JDialog {
         btThem = new javax.swing.JButton();
         txTenKyThi = new javax.swing.JTextField();
         btXoa = new javax.swing.JButton();
-        btThoat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -134,14 +133,6 @@ public class QLKyThi extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 259, 203, -1));
-
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btThoat, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 340, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -244,13 +235,6 @@ public class QLKyThi extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btXoaActionPerformed
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
-        MenuGV menu = new MenuGV();
-        menu.setVisible(true);
-        setVisible(false);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btThoatActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int SelectRow = jTable1.getSelectedRow();
         TableModel model = jTable1.getModel();
@@ -311,7 +295,6 @@ public class QLKyThi extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btThem;
-    private javax.swing.JButton btThoat;
     private javax.swing.JButton btXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

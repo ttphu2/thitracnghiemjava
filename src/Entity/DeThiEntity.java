@@ -100,10 +100,6 @@ public class DeThiEntity {
     public void setCtdtEntityList(List<ChiTietDeThiEntity> ctdtEntityList) {
         this.ctdtEntityList = ctdtEntityList;
     }
-    
-    
-   
-
 
     public Integer getMaDeThi() {
         return maDeThi;

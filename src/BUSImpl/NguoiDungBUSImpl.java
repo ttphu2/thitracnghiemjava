@@ -65,7 +65,9 @@ public class NguoiDungBUSImpl implements NguoiDungBUS {
             Object[] objects = SingletonDaoUtil.getNguoiDungDAOInstance().checkLogin(name, password);
             checkLogin.setUserExist((Boolean) objects[0]);
             if (checkLogin.isUserExist()) {
+                
                 checkLogin.setRoleName(objects[1].toString());
+                checkLogin.setUserId((Integer) objects[2]);
             }
         }
       return checkLogin;

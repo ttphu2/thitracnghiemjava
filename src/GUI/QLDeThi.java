@@ -129,7 +129,6 @@ public class QLDeThi extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         addTestButton = new javax.swing.JButton();
         delButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         tfMaxPoint = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -217,15 +216,6 @@ public class QLDeThi extends javax.swing.JDialog {
         });
         getContentPane().add(delButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 333, 111, -1));
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton3.setText("Thoát ");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 401, 96, -1));
-
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Tổng điểm");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 266, 121, 27));
@@ -249,11 +239,6 @@ public class QLDeThi extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(840, 491));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new MenuGV().setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void addTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestButtonActionPerformed
         // TODO add your handling code here:
@@ -532,7 +517,6 @@ public class QLDeThi extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbKyThi;
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JButton delButton;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

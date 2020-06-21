@@ -14,7 +14,7 @@ public class KetQuaEntity {
     private Integer maKetQua;
 
     @Column(name = "diembaithi")
-    private Integer diemBaiThi;
+    private Double diemBaiThi;
    
     @Column(name = "ngaytao")
     private Timestamp ngayTao;
@@ -26,6 +26,19 @@ public class KetQuaEntity {
     @ManyToOne
     @JoinColumn(name = "manguoidung")
     private NguoiDungEntity nguoiDung;
+    
+    @OneToOne
+    @JoinColumn(name = "mabaithi", nullable = false)
+    private BaiThiEntity baiThiEntity;
+
+    public BaiThiEntity getBaiThiEntity() {
+        return baiThiEntity;
+    }
+
+    public void setBaiThiEntity(BaiThiEntity baiThiEntity) {
+        this.baiThiEntity = baiThiEntity;
+    }
+    
 
     public Integer getMaKetQua() {
         return maKetQua;
@@ -37,11 +50,11 @@ public class KetQuaEntity {
 
     
 
-    public Integer getDiemBaiThi() {
+    public Double getDiemBaiThi() {
         return diemBaiThi;
     }
 
-    public void setDiemBaiThi(Integer diemBaiThi) {
+    public void setDiemBaiThi(Double diemBaiThi) {
         this.diemBaiThi = diemBaiThi;
     }
 
