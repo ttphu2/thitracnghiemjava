@@ -58,6 +58,8 @@ public class MenuSV extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         btnDashBoard2 = new javax.swing.JLabel();
         btnQuit = new javax.swing.JLabel();
+        btnTest1 = new javax.swing.JPanel();
+        TestVar1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         pnlDashBoard = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -212,7 +214,44 @@ public class MenuSV extends javax.swing.JFrame {
                 btnQuitMouseClicked(evt);
             }
         });
-        jPanel2.add(btnQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 214, 30));
+        jPanel2.add(btnQuit, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 214, 30));
+
+        btnTest1.setBackground(new java.awt.Color(34, 45, 49));
+        btnTest1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTest1MouseClicked(evt);
+            }
+        });
+
+        TestVar1.setBackground(new java.awt.Color(34, 45, 49));
+        TestVar1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        TestVar1.setForeground(new java.awt.Color(255, 255, 255));
+        TestVar1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        TestVar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_undo_24px.png"))); // NOI18N
+        TestVar1.setText("Đăng nhập lại");
+        TestVar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TestVar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TestVar1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnTest1Layout = new javax.swing.GroupLayout(btnTest1);
+        btnTest1.setLayout(btnTest1Layout);
+        btnTest1Layout.setHorizontalGroup(
+            btnTest1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnTest1Layout.createSequentialGroup()
+                .addGap(0, 25, Short.MAX_VALUE)
+                .addComponent(TestVar1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        btnTest1Layout.setVerticalGroup(
+            btnTest1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnTest1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(TestVar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(btnTest1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 240, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 510));
 
@@ -570,6 +609,16 @@ public class MenuSV extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnQuitMouseClicked
 
+    private void TestVar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TestVar1MouseClicked
+        dispose();
+        SessionUser.removeSession();
+        new DangNhap().setVisible(true);
+    }//GEN-LAST:event_TestVar1MouseClicked
+
+    private void btnTest1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTest1MouseClicked
+
+    }//GEN-LAST:event_btnTest1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -637,10 +686,12 @@ public class MenuSV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TestVar1;
     private javax.swing.JPanel btnDash;
     private javax.swing.JLabel btnDashBoard1;
     private javax.swing.JLabel btnDashBoard2;
     private javax.swing.JLabel btnQuit;
+    private javax.swing.JPanel btnTest1;
     private javax.swing.JLabel jAbout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -20,6 +20,17 @@ public class KetQuaDTO implements Serializable{
     private Timestamp ngayTao;   
     private DeThiDTO deThi; 
     private NguoiDungDTO nguoiDung;
+    private BaiThiDTO baiThi;
+
+    public BaiThiDTO getBaiThi() {
+        return baiThi;
+    }
+
+    public void setBaiThi(BaiThiDTO baiThi) {
+        this.baiThi = baiThi;
+    }
+    
+    
     
 
     public Integer getMaKetQua() {

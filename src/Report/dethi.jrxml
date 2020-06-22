@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9527b1ab-2dab-495c-af21-b273be92b4cb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="test" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tenmonthi" class="java.lang.String"/>
+	<parameter name="thoigian" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     cauhoi.`macauhoi` AS cauhoi_macauhoi,
+     cauhoi.`hinhanh` AS cauhoi_hinhanh,
+     cauhoi.`nghe` AS cauhoi_nghe,
+     cauhoi.`cauhoi` AS cauhoi_cauhoi,
+     cauhoi.`doanvan` AS cauhoi_doanvan,
+     cauhoi.`dapan1` AS cauhoi_dapan1,
+     cauhoi.`dapan2` AS cauhoi_dapan2,
+     cauhoi.`dapan3` AS cauhoi_dapan3,
+     cauhoi.`dapan4` AS cauhoi_dapan4,
+     cauhoi.`dapandung` AS cauhoi_dapandung,
+     cauhoi.`dokho` AS cauhoi_dokho,
+     cauhoi.`loaicauhoi` AS cauhoi_loaicauhoi,
+     cauhoi.`tacgia` AS cauhoi_tacgia,
+     cauhoi.`loaicauhoi` AS cauhoi_loaicauhoi,
+     cauhoi.`machuong` AS cauhoi_machuong,
+     chitietdethi.`ID` AS chitietdethi_ID,
+     chitietdethi.`macauhoi` AS chitietdethi_macauhoi,
+     chitietdethi.`madethi` AS chitietdethi_madethi
+FROM
+     `cauhoi` cauhoi INNER JOIN `chitietdethi` chitietdethi ON cauhoi.`macauhoi` = chitietdethi.`macauhoi` where chitietdethi.`madethi`=$P{test}]]>
+	</queryString>
+	<field name="cauhoi_macauhoi" class="java.lang.Long"/>
+	<field name="cauhoi_hinhanh" class="java.lang.String"/>
+	<field name="cauhoi_nghe" class="java.lang.String"/>
+	<field name="cauhoi_cauhoi" class="java.lang.String"/>
+	<field name="cauhoi_doanvan" class="java.lang.String"/>
+	<field name="cauhoi_dapan1" class="java.lang.String"/>
+	<field name="cauhoi_dapan2" class="java.lang.String"/>
+	<field name="cauhoi_dapan3" class="java.lang.String"/>
+	<field name="cauhoi_dapan4" class="java.lang.String"/>
+	<field name="cauhoi_dapandung" class="java.lang.String"/>
+	<field name="cauhoi_dokho" class="java.lang.Integer"/>
+	<field name="cauhoi_loaicauhoi" class="java.lang.String"/>
+	<field name="cauhoi_tacgia" class="java.lang.Long"/>
+	<field name="cauhoi_machuong" class="java.lang.Long"/>
+	<field name="chitietdethi_ID" class="java.lang.Long"/>
+	<field name="chitietdethi_macauhoi" class="java.lang.Long"/>
+	<field name="chitietdethi_madethi" class="java.lang.Long"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement x="36" y="26" width="114" height="20" uuid="1001d2f9-9123-469e-9835-bf36f3bd621e"/>
+				<textElement textAlignment="Justified">
+					<font isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ĐỀ THI CHÍNH THỨC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="229" height="26" uuid="f0366aba-5e0f-4674-8aec-f36fb9b5404d"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[TRƯỜNG ĐẠI HỌC SÀI GÒN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="0" width="226" height="26" uuid="ad4533cd-e36a-4a23-8bc1-9f2690efed5e"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[ĐỀ THI KẾT THÚC HỌC PHẦN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="375" y="26" width="133" height="20" uuid="35322115-2748-4a54-8370-bb2f6fbaf506"/>
+				<textFieldExpression><![CDATA["Môn thi: "+$P{tenmonthi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="358" y="46" width="186" height="20" uuid="e8232eea-1aac-4cf0-b081-1fba973edf62"/>
+				<textFieldExpression><![CDATA["Thời gian làm bài: "+$P{thoigian}+" phút"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="66" width="100" height="20" uuid="9fafafb2-342a-48b9-a7fc-3dd51ba279dc"/>
+				<text><![CDATA[Học kì 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="86" width="314" height="20" uuid="4a75dd19-8966-4fdc-b5b0-dfd6b77b1a4b"/>
+				<text><![CDATA[Họ tên sinh viên:..........................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="86" width="200" height="20" uuid="cb1c6d03-9ce6-434b-8339-cd8d359e187c"/>
+				<text><![CDATA[MSSV:.............................................]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="5" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="91" splitType="Stretch">
+			<textField>
+				<reportElement x="29" y="50" width="100" height="20" uuid="83ff85f3-b80b-447d-9bad-16ed67051289"/>
+				<textFieldExpression><![CDATA["A/ "+$F{cauhoi_dapan1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="50" width="100" height="20" uuid="2bd769f0-9cd3-450d-89c7-e5b1ee4cb377"/>
+				<textFieldExpression><![CDATA["B/ "+$F{cauhoi_dapan2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="50" width="100" height="20" uuid="cd9c52f8-9828-4229-8c3c-9f280c6816d8"/>
+				<textFieldExpression><![CDATA["C/ "+$F{cauhoi_dapan3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="50" width="100" height="20" uuid="146eec84-4259-4fd4-9fc2-e0388d970967"/>
+				<textFieldExpression><![CDATA["D/ "+$F{cauhoi_dapan4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="11" width="503" height="20" uuid="74f1b1c0-2654-49bb-8e19-0ec572d4d7cf"/>
+				<textFieldExpression><![CDATA["Câu "+($V{REPORT_COUNT})+": "+$F{cauhoi_cauhoi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="17" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="10" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch"/>
+	</summary>
+</jasperReport>

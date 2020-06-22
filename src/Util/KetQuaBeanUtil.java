@@ -22,7 +22,9 @@ public class KetQuaBeanUtil {
 		dto.setMaKetQua(entity.getMaKetQua());
 		dto.setDiemBaiThi(entity.getDiemBaiThi());
                 dto.setNgayTao(entity.getNgayTao());
-                                        
+                dto.setBaiThi(BaiThiBeanUtil.entity2Dto(entity.getBaiThiEntity()));
+                dto.setNguoiDung(NguoiDungBeanUtil.entity2Dto(entity.getNguoiDung()));
+                dto.setDeThi(DeThiBeanUtil.entity2Dto(entity.getDeThi()));
 		return dto;
 	}
 	public static KetQuaEntity dto2Entity(KetQuaDTO dto) {
@@ -30,6 +32,9 @@ public class KetQuaBeanUtil {
 		entity.setMaKetQua(dto.getMaKetQua());
 		entity.setDiemBaiThi(dto.getDiemBaiThi());
                 entity.setNgayTao(dto.getNgayTao());
+                 entity.setBaiThiEntity(BaiThiBeanUtil.dto2Entity(dto.getBaiThi()));
+                 entity.setNguoiDung(NguoiDungBeanUtil.dto2Entity(dto.getNguoiDung()));
+                  entity.setDeThi(DeThiBeanUtil.dto2Entity(dto.getDeThi()));
 		return entity;
 	}
 }

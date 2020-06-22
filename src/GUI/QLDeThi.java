@@ -13,18 +13,34 @@ import DTO.DeThiDTO;
 import DTO.KyThiDTO;
 import DTO.MonHocDTO;
 import DTO.NguoiDungDTO;
+import Report.JasperRp;
+import Report.UtilConnect;
+import java.sql.Connection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -57,13 +73,13 @@ public class QLDeThi extends javax.swing.JDialog {
         listTest = SingletonBusUtil.getDeThiBUSInstance().findAll();
         model = (DefaultTableModel) jTable1.getModel();
         model.setColumnIdentifiers(new Object[]{
-            "Mã đề", "Số câu hỏi", "Môn học", "Điểm tối đa"
+            "Mã đề", "Số câu hỏi", "Môn học", "Điểm tối đa","Thời gian"
         });
 
         for (DeThiDTO t : listTest) {
             model.addRow(new Object[]{
                 t.getMaDeThi(), t.getSlCauHoi(), t.getMonHocDTO().getTenMonHoc(),
-                t.getDiemToiDa()
+                t.getDiemToiDa(),t.getThoiGian()
             });
         }
 
@@ -135,6 +151,7 @@ public class QLDeThi extends javax.swing.JDialog {
         tfTenDeThi = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cbKyThi = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -221,6 +238,7 @@ public class QLDeThi extends javax.swing.JDialog {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 266, 121, 27));
         getContentPane().add(tfMaxPoint, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 266, 111, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Tên đề thi");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 15, -1, -1));
         getContentPane().add(tfTenDeThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 12, 111, -1));
@@ -235,6 +253,14 @@ public class QLDeThi extends javax.swing.JDialog {
             }
         });
         getContentPane().add(cbKyThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 302, 111, -1));
+
+        jButton1.setText("Xuất đề thi");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
         setSize(new java.awt.Dimension(840, 491));
         setLocationRelativeTo(null);
@@ -474,6 +500,38 @@ public class QLDeThi extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbKyThiActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TableModel mdl = jTable1.getModel();
+        String ID = model.getValueAt(index, 0).toString();
+        String tenMonThi = model.getValueAt(index, 2).toString();
+        String thoiGian = model.getValueAt(index, 4).toString();
+        System.out.print(ID);
+        Connection conn;
+        conn = UtilConnect.getConnection();
+        try {
+           HashMap a = new HashMap();
+           a.put("test",ID );
+           a.put("thoigian",thoiGian );
+           a.put("tenmonthi",tenMonThi );
+            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\hocgioinhatlop\\OneDrive\\Documents\\NetBeansProjects\\Thitracnghiem\\src\\Report\\dethi.jrxml");
+           
+            JasperReport jsreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jsreport, a, conn);
+            JasperViewer jv= new JasperViewer(jprint,false);
+           JDialog dialog = new JDialog(this);//the owner
+            dialog.setContentPane(jv.getContentPane());
+            dialog.setSize(jv.getSize());
+            dialog.setTitle("Danh sách");
+
+            dialog.setVisible(true);
+//            JasperViewer.viewReport(jprint);
+//            JasperViewer.
+        } catch (JRException ex) {
+            Logger.getLogger(JasperRp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -517,6 +575,7 @@ public class QLDeThi extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbKyThi;
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JButton delButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

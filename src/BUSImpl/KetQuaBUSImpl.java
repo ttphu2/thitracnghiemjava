@@ -7,13 +7,17 @@ import DAO.SingletonDaoUtil;
 import DTO.CauHoiDTO;
 import DTO.KetQuaDTO;
 import Entity.BaiThiEntity;
+import Entity.CauHoiEntity;
 import Entity.DeThiEntity;
 import Entity.KetQuaEntity;
 import Entity.NguoiDungEntity;
+import Util.CauHoiBeanUtil;
 import Util.KetQuaBeanUtil;
 import com.google.gson.Gson;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class KetQuaBUSImpl implements KetQuaBUS {
@@ -61,12 +65,16 @@ public class KetQuaBUSImpl implements KetQuaBUS {
 		return result;
 	}
 
-	private void initDataToResultEntity(KetQuaEntity resultEntity, NguoiDungEntity user, DeThiEntity examination) {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		resultEntity.setDeThi(examination);
-		resultEntity.setNguoiDung(user);
-		resultEntity.setNgayTao(timestamp);
-	}
+	public Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit,String whereClause) {
+        Object[] objects = SingletonDaoUtil.getKetQuaDAOInstance().findByProperty(property, sortExpression, sortDirection, offset, limit,whereClause);
+        List<KetQuaDTO> ketQuaDTOS = new ArrayList<KetQuaDTO>();
+        for (KetQuaEntity item : (List<KetQuaEntity>) objects[1]) {
+            KetQuaDTO ketQuaDTO = KetQuaBeanUtil.entity2Dto(item);
+            ketQuaDTOS.add(ketQuaDTO);
+        }
+        objects[1] = ketQuaDTOS;
+        return objects;
+    }
 
 	
 }
