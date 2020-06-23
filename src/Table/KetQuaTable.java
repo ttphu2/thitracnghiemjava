@@ -29,7 +29,7 @@ public class KetQuaTable {
    
     public static ArrayList listObj = new ArrayList();
     
-    String[] TenCot = new String[]{"Mã KQ","Họ Tên","Tên Đăng Nhập","Mã Đề","Môn Thi","Điểm Thi"};
+    String[] TenCot = new String[]{"Mã KQ","MSSV","Họ Tên","Tên Đăng Nhập","Mã Đề","Môn Thi","Điểm Thi"};
    
 
     public void showTable(ArrayList<KetQuaDTO> ketQuaDTOS,JTable table) {
@@ -41,6 +41,7 @@ public class KetQuaTable {
        listObj.add(new Object[]{
                     
                     item.getMaKetQua(),
+                    item.getNguoiDung().getMaNguoiDung(),
                     item.getNguoiDung().getTenDayDu(),
                     item.getNguoiDung().getTenDangNhap(),
                     item.getDeThi().getMaDeThi(),
@@ -83,6 +84,8 @@ public class KetQuaTable {
         //table.getColumnModel().getColumn(1).setWidth(10);
          table.getColumnModel().getColumn(0).setMaxWidth(50);
         table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(1).setMaxWidth(50);
+        table.getColumnModel().getColumn(1).setMinWidth(0);
         table.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(50);
         table.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
        // CheckBoxRenderer checkBoxRenderer = new CheckBoxRenderer();
@@ -110,25 +113,6 @@ public class KetQuaTable {
         }
     }
 
-    public class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
-
-        CheckBoxRenderer() {
-            setHorizontalAlignment(JLabel.CENTER);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-            if (isSelected) {
-                setForeground(table.getSelectionForeground());
-                //super.setBackground(table.getSelectionBackground());
-                setBackground(table.getSelectionBackground());
-            } else {
-                setForeground(table.getForeground());
-                setBackground(table.getBackground());
-            }
-            setSelected((value != null && ((Boolean) value).booleanValue()));
-            return this;
-        }
-    }
+   
     
 }

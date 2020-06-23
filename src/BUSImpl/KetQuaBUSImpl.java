@@ -14,6 +14,7 @@ import Entity.NguoiDungEntity;
 import Util.CauHoiBeanUtil;
 import Util.KetQuaBeanUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,15 @@ public class KetQuaBUSImpl implements KetQuaBUS {
         objects[1] = ketQuaDTOS;
         return objects;
     }
+      public List<CauHoiDTO> xemBaiThi(Integer maKQ)
+      {
+          List<CauHoiDTO> cauHoiDTOS=new ArrayList<CauHoiDTO>();
+          KetQuaEntity kqEntity=SingletonDaoUtil.getKetQuaDAOInstance().findbyID(maKQ);
+        String json= kqEntity.getBaiThiEntity().getNoiDung();
+        Gson gson = new Gson();
+        cauHoiDTOS=gson.fromJson(json, new TypeToken<List<CauHoiDTO>>(){}.getType());
+         return cauHoiDTOS;
+      }
 
 	
 }

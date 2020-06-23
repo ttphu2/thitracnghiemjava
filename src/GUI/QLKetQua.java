@@ -102,6 +102,7 @@ public void setCbMonHoc(){
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -346,6 +347,19 @@ public void setCbMonHoc(){
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 790, 250));
 
+        jButton2.setBackground(new java.awt.Color(93, 200, 119));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Xem bai thi");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setOpaque(true);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 140, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 570));
 
         setSize(new java.awt.Dimension(846, 548));
@@ -486,6 +500,13 @@ public void setCbMonHoc(){
         // TODO add your handling code here:
     }//GEN-LAST:event_tfToDiemActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   int row=table.getSelectedRow();
+   Object maKQ=table.getValueAt(row, 0);
+   Object maSV=table.getValueAt(row, 1);
+       new XemBaiThi(this,true,(Integer) maSV,(Integer) maKQ).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -536,6 +557,7 @@ public void setCbMonHoc(){
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JComboBox<String> cbSapXep;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

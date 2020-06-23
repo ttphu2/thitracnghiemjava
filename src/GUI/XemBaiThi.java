@@ -10,6 +10,7 @@ import DTO.CauHoiDTO;
 import DTO.DeThiDTO;
 import DTO.KetQuaDTO;
 import Util.SessionUser;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,14 +19,16 @@ import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 
 /**
  *
  * @author User
  */
-public class LamBaiThi extends javax.swing.JFrame {
-    private static final Integer IDS=Integer.parseInt(SessionUser.getMaNguoiDung());
-    public static int testID;
+public class XemBaiThi extends javax.swing.JDialog {
+    private static Integer maSV;
+    public static int maKetQua;
     private List<CauHoiDTO> listQuestion;
     private DeThiDTO deThi;
     
@@ -36,64 +39,26 @@ public class LamBaiThi extends javax.swing.JFrame {
     /**
      * Creates new form Take_exam
      */
-    public LamBaiThi(Integer testId) {
+    public XemBaiThi(java.awt.Dialog parent, boolean modal,Integer maSV,Integer maKetQua) {
+        super(parent, modal);
         initComponents();
         setBounds(50,50,850,610);
         setResizable(false);
         
-        tfStuId.setText(String.valueOf(IDS));
+        tfStuId.setText(maSV.toString());
         tfDate.setText(java.time.LocalDate.now().toString());
-        System.out.println(testId);
-        testID = testId;
-        deThi=SingletonBusUtil.getDeThiBUSInstance().findById(testId);
-        tfSub.setText(deThi.getMonHocDTO().getTenMonHoc());      
-        listQuestion = SingletonBusUtil.getDeThiBUSInstance().getCauHoiByMaDe(testId);
+        maKetQua=maKetQua;       
+       maSV=maSV;
+        listQuestion = SingletonBusUtil.getKetQuaBUSInstance().xemBaiThi(maKetQua);
+         tfSub.setText(listQuestion.get(0).getChuongMonHocDTO().getMonHocDTO().getTenMonHoc());      
         amountQue = listQuestion.size();
-        Collections.shuffle(listQuestion);
-        addTime();
+        
         showQuestion(1);
         setCbQuestion();
         
     }
     
-    static int second, minute;
-    static Timer timer;
     
-     private void addTime(){              
-        int delay = 1000;
-        int period = 1000;
-        timer  = new Timer();
-        second =    60;   
-        minute =   deThi.getThoiGian() -1 ;  
-        lbMinutes.setText(""+minute+"m ");
-        lbSec.setText(""+second+" s");       
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {             
-                lbSec.setText(""+setSeconds()+" s");
-            }
-        }, delay, period);         
-    }
-    private  int setSeconds() {
-        if (second == 0){
-           lbMinutes.setText(""+setMinute());
-        }      
-        if (minute == -1) {
-            JOptionPane.showMessageDialog(rootPane, "Hết giờ làm bài ");
-            KetQuaDTO ketQua= SingletonBusUtil.getKetQuaBUSInstance().saveResult(Integer.parseInt(SessionUser.getMaNguoiDung()), deThi.getMaDeThi(), listQuestion);
-            
-            JOptionPane.showMessageDialog(rootPane, "Điểm thi là: "+ketQua.getDiemBaiThi());
-            dispose();
-//            endExam();
-        }
-        return --second;        
-    }
-    private int setMinute(){
-        if (minute == 0 ){             
-             timer.cancel();                       
-        }           
-        second = 60;             
-        return --minute;
-    }
  
     
    
@@ -108,14 +73,46 @@ public class LamBaiThi extends javax.swing.JFrame {
          if(listQuestion.get(index).getDapAnNguoiDung()!=null){
              String dapAnDung=listQuestion.get(index).getDapAnDung();
              String dapAnNguoiDung=listQuestion.get(index).getDapAnNguoiDung();
-             if(lbAns1.getText().equals(dapAnNguoiDung)){
-               rbChoiceA.setSelected(true);            
-             }else if(lbAns2.getText().equals(dapAnNguoiDung)){
-                rbChoiceB.setSelected(true);  
-             }else if(lbAns3.getText().equals(dapAnNguoiDung)){
-                rbChoiceC.setSelected(true);  
-             }else if(lbAns4.getText().equals(dapAnNguoiDung)){
-                rbChoiceD.setSelected(true);  
+             jcauA.setIcon(null);
+             jcauB.setIcon(null);
+             jcauC.setIcon(null);
+             jcauD.setIcon(null);
+             if(lbAns1.getText().equals(dapAnNguoiDung)||lbAns1.getText().equals(dapAnDung)){
+                 if(lbAns1.getText().equals(dapAnDung)){
+                      ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_checkmark_24px_1.png"); 
+                      jcauA.setIcon(iconLogo);
+                 }else{
+                     ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_delete_24px.png"); 
+                      jcauA.setIcon(iconLogo);
+                 }
+                   
+             }
+             if(lbAns2.getText().equals(dapAnNguoiDung)||lbAns2.getText().equals(dapAnDung)){
+              if(lbAns2.getText().equals(dapAnDung)){
+                      ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_checkmark_24px_1.png"); 
+                      jcauB.setIcon(iconLogo);
+                 }else{
+                     ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_delete_24px.png"); 
+                      jcauB.setIcon(iconLogo);
+                 }
+             }
+             if(lbAns3.getText().equals(dapAnNguoiDung)||lbAns3.getText().equals(dapAnDung)){
+            if(lbAns3.getText().equals(dapAnDung)){
+                      ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_checkmark_24px_1.png"); 
+                      jcauC.setIcon(iconLogo);
+                 }else{
+                     ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_delete_24px.png"); 
+                      jcauC.setIcon(iconLogo);
+                 }
+             }
+             if(lbAns4.getText().equals(dapAnNguoiDung)||lbAns4.getText().equals(dapAnDung)){
+          if(lbAns4.getText().equals(dapAnDung)){
+                      ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_checkmark_24px_1.png"); 
+                      jcauD.setIcon(iconLogo);
+                 }else{
+                     ImageIcon iconLogo = new ImageIcon(System.getProperty("user.dir")+"\\src\\img\\icons8_delete_24px.png"); 
+                      jcauD.setIcon(iconLogo);
+                 }  
              }
          }
         
@@ -140,23 +137,15 @@ public class LamBaiThi extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        labelTime = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        rbChoiceA = new javax.swing.JRadioButton();
-        rbChoiceB = new javax.swing.JRadioButton();
-        rbChoiceC = new javax.swing.JRadioButton();
-        rbChoiceD = new javax.swing.JRadioButton();
         btPre = new javax.swing.JButton();
         btNext = new javax.swing.JButton();
-        btDone = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         tfStuId = new javax.swing.JLabel();
         tfSub = new javax.swing.JLabel();
         tfDate = new javax.swing.JLabel();
-        lbMinutes = new javax.swing.JLabel();
         tfNumOfQes = new javax.swing.JLabel();
         cbQuestion = new javax.swing.JComboBox<>();
-        lbSec = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tfQueContent = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -167,6 +156,10 @@ public class LamBaiThi extends javax.swing.JFrame {
         lbAns4 = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         lbAns1 = new javax.swing.JTextArea();
+        jcauA = new javax.swing.JLabel();
+        jcauB = new javax.swing.JLabel();
+        jcauD = new javax.swing.JLabel();
+        jcauC = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Thi Trắc Nghiệm ");
@@ -185,73 +178,9 @@ public class LamBaiThi extends javax.swing.JFrame {
         jLabel4.setText("Ngày thi :");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 11, -1, 30));
 
-        labelTime.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        labelTime.setText("Thời gian còn :");
-        getContentPane().add(labelTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 11, -1, 30));
-
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Câu hỏi số :");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 107, 89, 32));
-
-        buttonGroup1.add(rbChoiceA);
-        rbChoiceA.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbChoiceA.setText("A");
-        rbChoiceA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbChoiceAMouseClicked(evt);
-            }
-        });
-        rbChoiceA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbChoiceAActionPerformed(evt);
-            }
-        });
-        getContentPane().add(rbChoiceA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 72));
-
-        buttonGroup1.add(rbChoiceB);
-        rbChoiceB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbChoiceB.setText("B");
-        rbChoiceB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbChoiceBMouseClicked(evt);
-            }
-        });
-        rbChoiceB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbChoiceBActionPerformed(evt);
-            }
-        });
-        getContentPane().add(rbChoiceB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, 69));
-
-        buttonGroup1.add(rbChoiceC);
-        rbChoiceC.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbChoiceC.setText("C");
-        rbChoiceC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbChoiceCMouseClicked(evt);
-            }
-        });
-        rbChoiceC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbChoiceCActionPerformed(evt);
-            }
-        });
-        getContentPane().add(rbChoiceC, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, 72));
-
-        buttonGroup1.add(rbChoiceD);
-        rbChoiceD.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbChoiceD.setText("D");
-        rbChoiceD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rbChoiceDMouseClicked(evt);
-            }
-        });
-        rbChoiceD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbChoiceDActionPerformed(evt);
-            }
-        });
-        getContentPane().add(rbChoiceD, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, 69));
 
         btPre.setBackground(new java.awt.Color(93, 200, 119));
         btPre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -277,19 +206,6 @@ public class LamBaiThi extends javax.swing.JFrame {
         });
         getContentPane().add(btNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, 180, -1));
 
-        btDone.setBackground(new java.awt.Color(0, 204, 204));
-        btDone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btDone.setText("Nộp bài");
-        btDone.setContentAreaFilled(false);
-        btDone.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btDone.setOpaque(true);
-        btDone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDoneActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btDone, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, 120, -1));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Chọn câu hỏi");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 25, 121, 48));
@@ -306,10 +222,6 @@ public class LamBaiThi extends javax.swing.JFrame {
         tfDate.setText("date");
         getContentPane().add(tfDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 18, -1, -1));
 
-        lbMinutes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lbMinutes.setText("time");
-        getContentPane().add(lbMinutes, new org.netbeans.lib.awtextra.AbsoluteConstraints(518, 18, -1, -1));
-
         tfNumOfQes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfNumOfQes.setText("number");
         getContentPane().add(tfNumOfQes, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 115, 58, -1));
@@ -321,10 +233,6 @@ public class LamBaiThi extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cbQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 79, 121, 36));
-
-        lbSec.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lbSec.setText("jLabel5");
-        getContentPane().add(lbSec, new org.netbeans.lib.awtextra.AbsoluteConstraints(552, 18, -1, -1));
 
         tfQueContent.setEditable(false);
         tfQueContent.setColumns(20);
@@ -362,6 +270,10 @@ public class LamBaiThi extends javax.swing.JFrame {
         jScrollPane5.setViewportView(lbAns1);
 
         getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 301, 72));
+        getContentPane().add(jcauA, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 20, 20));
+        getContentPane().add(jcauB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 20, 20));
+        getContentPane().add(jcauD, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 20, 20));
+        getContentPane().add(jcauC, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 20, 20));
 
         setSize(new java.awt.Dimension(865, 570));
         setLocationRelativeTo(null);
@@ -387,49 +299,6 @@ public class LamBaiThi extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btPreActionPerformed
 
-    private void rbChoiceAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbChoiceAMouseClicked
-       String str = cbQuestion.getSelectedItem().toString();
-        int a=Integer.parseInt(str)-1;
-        listQuestion.get(a).setDapAnNguoiDung(lbAns1.getText());
-        System.out.println(listQuestion.get(a).getDapAnNguoiDung());
-        
-    }//GEN-LAST:event_rbChoiceAMouseClicked
-
-    private void rbChoiceBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbChoiceBActionPerformed
-       String str = cbQuestion.getSelectedItem().toString();
-        int a=Integer.parseInt(str)-1;
-        listQuestion.get(a).setDapAnNguoiDung(lbAns2.getText());
-        System.out.println(listQuestion.get(a).getDapAnNguoiDung());
-    }//GEN-LAST:event_rbChoiceBActionPerformed
-
-    private void rbChoiceCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbChoiceCMouseClicked
-    
-        
-    }//GEN-LAST:event_rbChoiceCMouseClicked
-
-    private void rbChoiceDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbChoiceDMouseClicked
-       
-    }//GEN-LAST:event_rbChoiceDMouseClicked
-
-    private void rbChoiceAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbChoiceAActionPerformed
-        // TODO add your handling code here:
-//               addChoice(lbAns1.getText());
-    }//GEN-LAST:event_rbChoiceAActionPerformed
-
-    private void rbChoiceCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbChoiceCActionPerformed
-    String str = cbQuestion.getSelectedItem().toString();
-        int a=Integer.parseInt(str)-1;
-        listQuestion.get(a).setDapAnNguoiDung(lbAns3.getText());
-        System.out.println(listQuestion.get(a).getDapAnNguoiDung());
-    }//GEN-LAST:event_rbChoiceCActionPerformed
-
-    private void rbChoiceDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbChoiceDActionPerformed
-         String str = cbQuestion.getSelectedItem().toString();
-        int a=Integer.parseInt(str)-1;
-        listQuestion.get(a).setDapAnNguoiDung(lbAns4.getText());
-        System.out.println(listQuestion.get(a).getDapAnNguoiDung());
-    }//GEN-LAST:event_rbChoiceDActionPerformed
-
     private void cbQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbQuestionActionPerformed
       // TODO add your handling code here:
         buttonGroup1.clearSelection();
@@ -438,33 +307,6 @@ public class LamBaiThi extends javax.swing.JFrame {
         showQuestion(a);
         
     }//GEN-LAST:event_cbQuestionActionPerformed
-
-    private void btDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDoneActionPerformed
-        // TODO add your handling code here:
-        int count=0;
-        for (int i=0; i< listQuestion.size();i++)
-            if ( listQuestion.get(i).getDapAnNguoiDung() == null ){
-                JOptionPane.showMessageDialog(rootPane,"Bạn còn câu chưa làm");
-                break;
-            } 
-        
-        int click = JOptionPane.showConfirmDialog(rootPane,"Thời gian vẫn còn . "
-                + "Bạn có chắc chắn nộp bài không?", "Nộp bài", JOptionPane.YES_NO_OPTION);
-        if (click == JOptionPane.YES_OPTION){
-           //Integer.parseInt(SessionUser.getMaNguoiDung())
-           KetQuaDTO ketQua= SingletonBusUtil.getKetQuaBUSInstance().saveResult(Integer.parseInt(SessionUser.getMaNguoiDung()), deThi.getMaDeThi(), listQuestion);
-            
-            JOptionPane.showMessageDialog(rootPane, "Điểm thi là: "+ketQua.getDiemBaiThi());
-            dispose();
-        }
-        
-        
-        
-    }//GEN-LAST:event_btDoneActionPerformed
-
-    private void rbChoiceBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbChoiceBMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbChoiceBMouseClicked
 
     /**
      * @param args the command line arguments
@@ -483,14 +325,18 @@ public class LamBaiThi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LamBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LamBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LamBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LamBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(XemBaiThi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -499,13 +345,12 @@ public class LamBaiThi extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LamBaiThi(testID).setVisible(true);
+                new XemBaiThi(new JDialog(),true,maSV,maKetQua).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btDone;
     private javax.swing.JButton btNext;
     private javax.swing.JButton btPre;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -521,17 +366,14 @@ public class LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel labelTime;
+    private javax.swing.JLabel jcauA;
+    private javax.swing.JLabel jcauB;
+    private javax.swing.JLabel jcauC;
+    private javax.swing.JLabel jcauD;
     private javax.swing.JTextArea lbAns1;
     private javax.swing.JTextArea lbAns2;
     private javax.swing.JTextArea lbAns3;
     private javax.swing.JTextArea lbAns4;
-    private javax.swing.JLabel lbMinutes;
-    private javax.swing.JLabel lbSec;
-    private javax.swing.JRadioButton rbChoiceA;
-    private javax.swing.JRadioButton rbChoiceB;
-    private javax.swing.JRadioButton rbChoiceC;
-    private javax.swing.JRadioButton rbChoiceD;
     private javax.swing.JLabel tfDate;
     private javax.swing.JLabel tfNumOfQes;
     private javax.swing.JTextArea tfQueContent;

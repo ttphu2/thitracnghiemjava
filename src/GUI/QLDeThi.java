@@ -15,6 +15,7 @@ import DTO.MonHocDTO;
 import DTO.NguoiDungDTO;
 import Report.JasperRp;
 import Report.UtilConnect;
+import Util.SessionUser;
 import java.sql.Connection;
 
 import java.util.ArrayList;
@@ -301,7 +302,7 @@ public class QLDeThi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Ngân hàng đề không đủ số câu hỏi");
         } else {
           
-                NguoiDungDTO tacgia= SingletonBusUtil.getNguoiDungBUSInstance().findById(1);
+                NguoiDungDTO tacgia= SingletonBusUtil.getNguoiDungBUSInstance().findById(Integer.parseInt(SessionUser.getMaNguoiDung()));
                 KyThiDTO kythi=SingletonBusUtil.getKyThiBUSImplInstance().findById(getIdKyThi());
                Integer idMonHoc=getIdMonHoc();
                 MonHocDTO temp4= new MonHocDTO();
@@ -437,28 +438,16 @@ public class QLDeThi extends javax.swing.JDialog {
            //maBaiThi
          //  t.setListCauHoi(setCauHoi);
            SingletonBusUtil.getDeThiBUSInstance().saveNoiDungDeThi(setCauHoi,maBaiThi);
+           
+           DeThiDTO temp= SingletonBusUtil.getDeThiBUSInstance().findById(maBaiThi);
+           listTest.add(temp);
+           showRow();
         }
 
 
     }//GEN-LAST:event_addTestButtonActionPerformed
 
-//     public void addTable(){
-//        Test t = listTest.get(listTest.size()-1);
-//        model.addRow(new Object[]{
-//             t.getTestID(),t.getAmountQuestion() ,new GetDB().findNameSubFrTop(t.getTopicID()),
-//                new GetDB().findNameTopFrId(t.getTopicID())
-//        });
-//    }
     private void cbMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonHocActionPerformed
-
-//       String st = cbMonHoc.getSelectedItem().toString();
-//       int id=0;
-//       for(Subject s : listSj){
-//            if (s.getSubjectName().equals(st))
-//            id = s.getSubjectID();
-//        }
-//        subjectID  =id;        
-//        setCbTopic(id); 
 
     }//GEN-LAST:event_cbMonHocActionPerformed
 
@@ -595,5 +584,11 @@ public class QLDeThi extends javax.swing.JDialog {
     private javax.swing.JTextField tfTenDeThi;
     private javax.swing.JTextField tfTestTime;
     // End of variables declaration//GEN-END:variables
-
+private void showRow(){ // show mon hoc moi them 
+        DeThiDTO t = listTest.get(listTest.size()-1);
+        model.addRow(new Object[]{
+            t.getMaDeThi(), t.getSlCauHoi(), t.getMonHocDTO().getTenMonHoc(),
+                t.getDiemToiDa(),t.getThoiGian()
+        });
+    }
 }

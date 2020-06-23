@@ -53,7 +53,7 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="108" splitType="Stretch">
+		<band height="118" splitType="Stretch">
 			<staticText>
 				<reportElement x="36" y="26" width="114" height="20" uuid="1001d2f9-9123-469e-9835-bf36f3bd621e"/>
 				<textElement textAlignment="Justified">
@@ -95,6 +95,9 @@ FROM
 				<reportElement x="344" y="86" width="200" height="20" uuid="cb1c6d03-9ce6-434b-8339-cd8d359e187c"/>
 				<text><![CDATA[MSSV:.............................................]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="117" width="555" height="1" uuid="805724ca-b40d-47bc-8853-0bb329e52c0c"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>

@@ -104,9 +104,9 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         jLabel3.setText("Môn học : ");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Nhập Chủ Đề ");
+        jLabel1.setText("Nhập Chương ");
 
-        jLabel2.setText("Tên chủ đề :");
+        jLabel2.setText("Tên chương :");
 
         btThem.setText("Thêm ");
         btThem.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Danh Sách Chủ Đề");
 
-        jLabel5.setText("Mã chủ đề:");
+        jLabel5.setText("Mã chương:");
 
         cbSubject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -700,7 +700,7 @@ public class MenuGV extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel17MouseClicked
 
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
-        // TODO add your handling code here:
+        new QLKetQua(this,true).setVisible(true);
     }//GEN-LAST:event_jPanel18MouseClicked
 
     private void jAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAboutMouseClicked

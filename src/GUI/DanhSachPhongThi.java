@@ -327,7 +327,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
     private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
            dispose();
         new SLThiSinh(this, true).setVisible(true);
-        setVisible(true);
+       // setVisible(true);
       //listIdPhong=SingletonBusUtil.getPhongThiBUSInstance().findListIdPhongThi();
     //  cbPhongThi.addItem(listIdPhong.get(listIdPhong.size()-1).getMaPhong().toString());
       
