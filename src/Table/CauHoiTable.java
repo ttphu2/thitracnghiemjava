@@ -29,7 +29,7 @@ public class CauHoiTable {
    
     public static ArrayList listObj = new ArrayList();
     
-    String[] TenCot = new String[]{"ID","Câu hỏi","Đáp Án 1","Đáp án 2","Đáp án 3","Đáp án 4","Đáp án đúng","Độ khó","Loại câu hỏi","Mã tác giả"};
+    String[] TenCot = new String[]{"ID","Câu hỏi","Đáp Án 1","Đáp án 2","Đáp án 3","Đáp án 4","Đáp án đúng","Độ khó","Mã tác giả"};
    
 
     public void showTable(ArrayList<CauHoiDTO> cauHoiDTOS,JTable table) {
@@ -48,7 +48,7 @@ public class CauHoiTable {
                     item.getDapAn4(),
                     item.getDapAnDung(),
                     item.getDoKho(),
-                    item.getLoaiCauHoi(),
+                
                     item.getNguoiDungDTO().getMaNguoiDung()
                     
                     });

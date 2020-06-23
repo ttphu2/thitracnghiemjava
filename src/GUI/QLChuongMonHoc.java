@@ -39,7 +39,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     private List<ChuongMonHocDTO> list=SingletonBusUtil.getChuongMonHocBUSInstance().findAll();
      DefaultTableModel model;
      
-    public QLChuongMonHoc(java.awt.Frame parent, boolean modal) {
+    public QLChuongMonHoc(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
@@ -246,7 +246,8 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(831, 413));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
@@ -378,7 +379,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QLChuongMonHoc dialog = new QLChuongMonHoc(new javax.swing.JFrame(), true);
+                QLChuongMonHoc dialog = new QLChuongMonHoc(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

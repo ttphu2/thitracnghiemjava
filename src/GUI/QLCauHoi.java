@@ -97,8 +97,6 @@ public class QLCauHoi extends javax.swing.JDialog {
         tfMaCauHoi = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cbChuongMonHoc = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
-        cbLoaiCauHoi = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -237,18 +235,6 @@ public class QLCauHoi extends javax.swing.JDialog {
             }
         });
         jPanel2.add(cbChuongMonHoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 80, -1));
-
-        jLabel11.setText("Loại câu hỏi");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, 20));
-
-        cbLoaiCauHoi.setBackground(new java.awt.Color(250, 250, 250));
-        cbLoaiCauHoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "TRACNGHIEM", "NGHE", "HINHANH" }));
-        cbLoaiCauHoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbLoaiCauHoiActionPerformed(evt);
-            }
-        });
-        jPanel2.add(cbLoaiCauHoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 100, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 770, 140));
 
@@ -477,9 +463,7 @@ public class QLCauHoi extends javax.swing.JDialog {
              whereClause=whereClause+"AND chuongMonHocEntity.monHocEntity.tenMonHoc='"+cbMonHoc.getSelectedItem().toString()+"' ";
          }
         }
-        if(!"None".equals(cbLoaiCauHoi.getSelectedItem().toString())){
-            property.put("loaiCauHoi", cbLoaiCauHoi.getSelectedItem().toString());
-        }
+        
         String chieuSapXep = "1";
         if (!"None".equals(cbChieuSapXep.getSelectedItem().toString())) {
             chieuSapXep = Integer.toString(cbChieuSapXep.getSelectedIndex());
@@ -526,7 +510,7 @@ public class QLCauHoi extends javax.swing.JDialog {
         cbChieuSapXep.setSelectedIndex(0);
         cbMonHoc.setSelectedIndex(0);
         cbSapXep.setSelectedIndex(0);
-        cbLoaiCauHoi.setSelectedIndex(0);
+        
         tfMaTacGia.setText("");
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -550,10 +534,6 @@ public class QLCauHoi extends javax.swing.JDialog {
     private void tableFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableFocusGained
 
     }//GEN-LAST:event_tableFocusGained
-
-    private void cbLoaiCauHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLoaiCauHoiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbLoaiCauHoiActionPerformed
 
     private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
         Object[] options = {"Xóa  ", "Thôi không xóa "};
@@ -700,7 +680,6 @@ public class QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JButton buttonXoa1;
     private javax.swing.JComboBox<String> cbChieuSapXep;
     private javax.swing.JComboBox<String> cbChuongMonHoc;
-    private javax.swing.JComboBox<String> cbLoaiCauHoi;
     private javax.swing.JComboBox<String> cbMonHoc;
     private javax.swing.JComboBox<String> cbSapXep;
     private javax.swing.JButton jButton1;
@@ -708,7 +687,6 @@ public class QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

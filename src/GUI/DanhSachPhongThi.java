@@ -60,8 +60,8 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
         initComponents();
         paint_table();           
         setCbPhongThi();
-        userDTOS= SingletonBusUtil.getPhongThiBUSInstance().findSinhVienByEqualUnique("maPhong", 1);
-        
+        userDTOS= SingletonBusUtil.getPhongThiBUSInstance().findSinhVienByEqualUnique("maPhong", listIdPhong.get(0).getMaPhong());
+        setOpenClose();
         cod.showTable((ArrayList<NguoiDungDTO>) userDTOS, table);
 
     }
@@ -72,6 +72,10 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
             cbPhongThi.addItem(listIdPhong.get(i).getMaPhong().toString());
             
         }
+        
+    }
+    public void setBtnRoom(){
+    
         
     }
 
@@ -96,6 +100,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
         table = new javax.swing.JTable();
         buttonThem = new javax.swing.JButton();
         cbPhongThi = new javax.swing.JComboBox<>();
+        buttonRoom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +121,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
                 buttonXoaActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 139, 31));
+        jPanel1.add(buttonXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 139, 31));
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Danh sách phòng thi");
@@ -132,7 +137,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 151, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 151, 30));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
@@ -245,7 +250,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
                 buttonThemActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 139, 30));
+        jPanel1.add(buttonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 139, 30));
 
         cbPhongThi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +258,19 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
             }
         });
         jPanel1.add(cbPhongThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 100, 30));
+
+        buttonRoom.setBackground(new java.awt.Color(93, 200, 119));
+        buttonRoom.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRoom.setText("Khóa phòng");
+        buttonRoom.setContentAreaFilled(false);
+        buttonRoom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonRoom.setOpaque(true);
+        buttonRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRoomActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 110, 31));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 1, 830, 470));
 
@@ -327,9 +345,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
     private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
            dispose();
         new SLThiSinh(this, true).setVisible(true);
-       // setVisible(true);
-      //listIdPhong=SingletonBusUtil.getPhongThiBUSInstance().findListIdPhongThi();
-    //  cbPhongThi.addItem(listIdPhong.get(listIdPhong.size()-1).getMaPhong().toString());
+       
       
        
 
@@ -339,9 +355,28 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
        if(cbPhongThi.getSelectedItem() != null){
         Object maphong=Integer.parseInt(cbPhongThi.getSelectedItem().toString());
         userDTOS= SingletonBusUtil.getPhongThiBUSInstance().findSinhVienByEqualUnique("maPhong", maphong);
+        setOpenClose();
+            
         cod.showTable((ArrayList<NguoiDungDTO>) userDTOS, table);
     }
     }//GEN-LAST:event_cbPhongThiActionPerformed
+
+    private void buttonRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRoomActionPerformed
+       Object maphong=Integer.parseInt(cbPhongThi.getSelectedItem().toString());
+        List<PhongThiDTO> listPhongThi=SingletonBusUtil.getPhongThiBUSInstance().findByEqualUnique("maPhong",maphong);
+        if(listPhongThi.get(0).getTrangThai()==1){
+             
+             buttonRoom.setText("Mở phòng");
+             SingletonBusUtil.getPhongThiBUSInstance().updateTrangThai(listPhongThi,0);
+             
+        }else{
+            
+             SingletonBusUtil.getPhongThiBUSInstance().updateTrangThai(listPhongThi,1);
+             buttonRoom.setText("Khóa phòng");
+        }
+       
+        
+    }//GEN-LAST:event_buttonRoomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,6 +422,7 @@ public class DanhSachPhongThi extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonRoom;
     private javax.swing.JButton buttonThem;
     private javax.swing.JButton buttonXoa;
     private javax.swing.JComboBox<String> cbPhongThi;
@@ -408,5 +444,15 @@ private void paint_table() {
         //table.setShowVerticalLines(true);// de the hien duong vien doc
 
     }
-
+public void setOpenClose(){
+        Object maphong=Integer.parseInt(cbPhongThi.getSelectedItem().toString());
+        
+        List<PhongThiDTO> listPhongThi=SingletonBusUtil.getPhongThiBUSInstance().findByEqualUnique("maPhong",maphong);
+        if(listPhongThi.get(0).getTrangThai()==1){
+            buttonRoom.setText("Khóa phòng");
+            
+        }else{
+            buttonRoom.setText("Mở phòng");
+        }
+}
 }

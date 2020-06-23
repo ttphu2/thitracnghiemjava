@@ -40,6 +40,7 @@ public class VaoPhongThi extends javax.swing.JDialog {
         SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
         
         for(PhongThiDTO s : listPhongThi){
+            if(s.getTrangThai()==1){
             String date=(dt1.format(convertSQLDateToJavaDate(s.getDeThiDTO().getKyThiDTO().getNgayThi())));
             tableModel.addRow(new Object[]{
                 s.getMaPhong(),
@@ -48,6 +49,8 @@ public class VaoPhongThi extends javax.swing.JDialog {
                 s.getDeThiDTO().getKyThiDTO().getTenKyThi(),
                 date
             });
+            }
+            
         }
     }
     

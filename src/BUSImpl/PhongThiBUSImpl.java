@@ -108,4 +108,27 @@ public class PhongThiBUSImpl implements PhongThiBUS{
          }
          return dtos;
     }
+    public PhongThiDTO findById(Integer maCauHoi) {
+        PhongThiEntity entity = SingletonDaoUtil.getPhongThiDAOInstance().findbyID(maCauHoi);
+        PhongThiDTO dto = PhongThiBeanUtil.entity2Dto(entity);
+        return dto;
+
+    }
+    public void updateTrangThai(List<PhongThiDTO> dtos,Integer trangThai)
+    {
+        for(PhongThiDTO dto:dtos){
+            dto.setTrangThai(trangThai);
+            SingletonDaoUtil.getPhongThiDAOInstance().update(PhongThiBeanUtil.dto2Entity(dto));
+        }              
+        
+    }
+    public List<PhongThiDTO> findByEqualUnique(String property, Object value){
+        List<PhongThiDTO> phongThiDTOS=new ArrayList<PhongThiDTO>();
+        List<PhongThiEntity> list=SingletonDaoUtil.getPhongThiDAOInstance().findEqualUnique(property, value);       
+        for(PhongThiEntity item:list){
+          PhongThiDTO dto=PhongThiBeanUtil.entity2Dto(item);
+          phongThiDTOS.add(dto);
+       }
+        return phongThiDTOS;
+    }
 }
