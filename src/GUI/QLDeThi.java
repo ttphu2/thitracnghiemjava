@@ -255,13 +255,14 @@ public class QLDeThi extends javax.swing.JDialog {
         });
         getContentPane().add(cbKyThi, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 302, 111, -1));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Xuất đề thi");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 110, 30));
 
         setSize(new java.awt.Dimension(840, 491));
         setLocationRelativeTo(null);

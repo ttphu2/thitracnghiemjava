@@ -36,7 +36,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     /**
      * Creates new form QLChuongMonHoc
      */
-    private List<ChuongMonHocDTO> list=SingletonBusUtil.getChuongMonHocBUSInstance().findAll();
+    private List<ChuongMonHocDTO> list;
      DefaultTableModel model;
      
     public QLChuongMonHoc(java.awt.Dialog parent, boolean modal) {
@@ -45,7 +45,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         
         setCbSubject();
         model = (DefaultTableModel) jTable1.getModel();
-        addTable();
+     //   addTable();
         
     }
     public void setCbSubject(){
@@ -59,6 +59,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     }
      public void addTable(){                
         model = (DefaultTableModel) jTable1.getModel();
+       model.setRowCount(0);
         model.setColumnIdentifiers(new Object[]{
             "Mã chủ đề", "Tên chủ đề", "Môn học","Số tiết"
         });
@@ -89,7 +90,6 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         btThem = new javax.swing.JButton();
         txTopicName = new javax.swing.JTextField();
         btXoa = new javax.swing.JButton();
-        btThoat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -125,13 +125,6 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         btXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btXoaActionPerformed(evt);
-            }
-        });
-
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
             }
         });
 
@@ -204,10 +197,6 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(118, 118, 118))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btThoat)
-                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +230,7 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
                         .addComponent(btThem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btXoa)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btThoat)
-                .addContainerGap())
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(831, 413));
@@ -323,13 +310,6 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btXoaActionPerformed
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
-        MenuGV menu = new MenuGV();
-        menu.setVisible(true);
-        setVisible(false);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btThoatActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int SelectRow = jTable1.getSelectedRow();
         TableModel model = jTable1.getModel();
@@ -342,7 +322,19 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void cbSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubjectActionPerformed
-      
+       String tenMH=cbSubject.getSelectedItem().toString();
+       List <MonHocDTO> listSubjectName=SingletonBusUtil.getMonHocBUSInstance().findAll();
+       
+        int id = 0;
+        for (MonHocDTO sj: listSubjectName){
+            if(sj.getTenMonHoc().equals(tenMH)){
+            id = sj.getMaMonHoc();           
+            }
+        }
+        list=new ArrayList<ChuongMonHocDTO>();
+     list= SingletonBusUtil.getChuongMonHocBUSInstance().findByMonHoc(id);
+     addTable();
+             
     }//GEN-LAST:event_cbSubjectActionPerformed
 
     private void txSoTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txSoTietActionPerformed
@@ -393,7 +385,6 @@ public class QLChuongMonHoc extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btThem;
-    private javax.swing.JButton btThoat;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbSubject;
     private javax.swing.JLabel jLabel1;

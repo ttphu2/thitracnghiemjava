@@ -107,6 +107,7 @@ public class AbstractDao <ID extends Serializable,T> implements GenericDao<ID,T>
 
         return result;
     }
+    
 
     public Object[] findByProperty(Map<String,Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit,String whereClause) {
         List<T> list = new ArrayList<T>();

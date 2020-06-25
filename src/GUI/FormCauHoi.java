@@ -425,10 +425,10 @@ public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
         }
         //kiem tra loai cau hoi neu la HINHANH or NGHE thi add file vao
         
-                
-            dto.setNghe(tenFileAnh);
-       
-             dto.setHinhAnh(tenFileNghe);
+                if(tenFileNghe!=null)
+            dto.setNghe(tenFileNghe);
+             if(tenFileAnh!=null)
+             dto.setHinhAnh(tenFileAnh);
         
           // ket thuc them file  
           
